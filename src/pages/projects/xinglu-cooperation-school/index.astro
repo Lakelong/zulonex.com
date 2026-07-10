@@ -8,6 +8,14 @@ import BaseLayout from "@/components/BaseLayout.astro";
 import Icon from "@/components/Icon.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 import { site } from "@/data/site";
+import { cooperationAccessCookie, verifyCooperationAccessToken } from "@/lib/cooperationAccess";
+
+export const prerender = false;
+
+const accessToken = Astro.cookies.get(cooperationAccessCookie)?.value;
+if (!verifyCooperationAccessToken(accessToken)) {
+  return Astro.redirect("/cooperation/latest-model/");
+}
 
 const chapters = [
   { id: "background", number: "01", label: "背景", title: "市场机遇" },
