@@ -87,7 +87,7 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
   cookies.set(cooperationAccessCookie, token, {
     httpOnly: true,
     maxAge: cooperationAccessMaxAgeSeconds,
-    path: "/cooperation/latest-model/",
+    path: "/",
     sameSite: "lax",
     secure: new URL(request.url).protocol === "https:"
   });
@@ -95,7 +95,7 @@ export const POST: APIRoute = async ({ request, cookies, clientAddress }) => {
   return Response.json({
     ok: true,
     message: "验证通过。",
-    redirect: "/cooperation/latest-model/"
+    redirect: "/projects/xinglu-cooperation-school/"
   });
 };
 
