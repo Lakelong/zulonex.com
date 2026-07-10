@@ -1,0 +1,78 @@
+---
+import Icon from "@/components/Icon.astro";
+import logoLight from "@/assets/brand/logo-light.svg";
+import { site } from "@/data/site";
+---
+
+<footer class="border-t border-ink/10 bg-ink text-white" data-nav-theme="dark">
+  <div class="container-page grid gap-10 py-14 lg:grid-cols-[1.25fr_0.68fr_0.68fr_1.18fr] lg:gap-12">
+    <div class="max-w-md">
+      <a href="/" aria-label="逐鹿未来首页" class="inline-flex">
+        <img
+          src={logoLight.src}
+          width="1203"
+          height="183"
+          alt="逐鹿未来"
+          class="h-auto w-[210px]"
+        />
+      </a>
+      <p class="mt-6 text-lg font-semibold leading-7 text-white">{site.tagline}</p>
+      <p class="mt-4 text-sm leading-7 text-white/62">
+        连接优质 AI 教育产品与真实运营场景，推动自主学习空间稳健落地。
+      </p>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/42">Quick Links</p>
+      <h2 class="mt-2 text-base font-semibold text-white">快速访问</h2>
+      <div class="mt-5 grid gap-3 text-sm leading-6 text-white/66">
+        {site.nav.map((item) => <a class="transition hover:text-white" href={item.href}>{item.label}</a>)}
+      </div>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/42">Resources</p>
+      <h2 class="mt-2 text-base font-semibold text-white">更多信息</h2>
+      <div class="mt-5 grid gap-3 text-sm leading-6 text-white/66">
+        {site.footerNav.map((item) => <a class="transition hover:text-white" href={item.href}>{item.label}</a>)}
+      </div>
+    </div>
+
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/42">Contact</p>
+      <h2 class="mt-2 text-base font-semibold text-white">联系信息</h2>
+      <div class="mt-5 grid gap-3 text-sm leading-6 text-white/66">
+        <p class="flex items-center gap-2"><Icon name="Mail" size={16} /> {site.email}</p>
+        {site.phone && <p class="flex items-center gap-2"><Icon name="Phone" size={16} /> {site.phone}</p>}
+        <p class="flex items-start gap-2">
+          <Icon name="MapPin" size={16} class="mt-1 shrink-0" />
+          <span>{site.address}</span>
+        </p>
+        <div class="mt-3 flex items-center gap-4">
+          <img
+            src="/assets/enterprise-wechat-qr.png"
+            width="948"
+            height="948"
+            alt="逐鹿未来企业微信二维码"
+            class="h-[104px] w-[104px] rounded-md bg-white p-1.5 shadow-[0_10px_30px_rgba(0,0,0,0.18)]"
+            loading="lazy"
+          />
+          <div>
+            <p class="font-semibold text-white">企业微信咨询</p>
+            <p class="mt-1 max-w-[9rem] text-xs leading-5 text-white/50">扫码联系逐鹿未来团队</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="border-t border-white/10 py-5">
+    <div class="container-page flex flex-col gap-2 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {new Date().getFullYear()} {site.fullName}. All rights reserved.</p>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <a class="transition hover:text-white" href="/privacy/">隐私政策</a>
+        <a class="transition hover:text-white" href="/terms/">网站使用条款</a>
+        {site.icp && <p>{site.icp}</p>}
+      </div>
+    </div>
+  </div>
+</footer>

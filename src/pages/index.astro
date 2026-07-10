@@ -1,0 +1,373 @@
+---
+import learningCenter from "@/assets/editorial/learning-center-v2.webp";
+import dashboard from "@/assets/learning-dashboard.png";
+import BaseLayout from "@/components/BaseLayout.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import { site, solutionAudiences } from "@/data/site";
+
+const productHighlights = [
+  {
+    icon: "ScanSearch",
+    title: "先看懂孩子卡在哪里",
+    text: "从知识点、练习和学习路径识别当前状态。"
+  },
+  {
+    icon: "MessagesSquare",
+    title: "再把问题讲明白",
+    text: "AI 支持追问、换讲法和即时答疑。"
+  },
+  {
+    icon: "RefreshCcw",
+    title: "最后变成下一步行动",
+    text: "练习反馈、错题复盘和导学跟进连续发生。"
+  }
+];
+
+const productSignals = [
+  { label: "学习路径", text: "知道学到哪里" },
+  { label: "AI 问答", text: "问题当场讲清" },
+  { label: "练习反馈", text: "下一步有依据" }
+];
+
+const brandPrinciples = [
+  {
+    icon: "BrainCircuit",
+    label: "AI 学习系统",
+    text: "讲知识、答问题、推练习、看数据。"
+  },
+  {
+    icon: "HeartHandshake",
+    label: "真人导学服务",
+    text: "定目标、稳节奏、陪坚持、做复盘。"
+  },
+  {
+    icon: "Building2",
+    label: "机构运营场景",
+    text: "让自习室、托管和教培机构真正用起来。"
+  }
+];
+
+const collaboration = [
+  {
+    icon: "TabletSmartphone",
+    title: "学生端",
+    text: "学习路径、AI 问答、练习反馈和阶段任务。"
+  },
+  {
+    icon: "UserRoundCheck",
+    title: "导学端",
+    text: "目标管理、学习陪伴、问题追踪和复盘沟通。"
+  },
+  {
+    icon: "ChartNoAxesCombined",
+    title: "运营端",
+    text: "学情数据、服务节奏、用户反馈和机构运营动作。"
+  }
+];
+
+const keyDialogs = [
+  { icon: "Map", title: "学什么", text: "明确目标、位置和下一步任务。" },
+  { icon: "MessageCircleQuestion", title: "哪里不会", text: "通过提问和追问定位真实卡点。" },
+  { icon: "Gauge", title: "掌握多少", text: "用数据呈现掌握度和薄弱点。" },
+  { icon: "Dumbbell", title: "怎么练", text: "围绕薄弱点匹配训练，而不是只堆题量。" },
+  { icon: "NotebookTabs", title: "如何复盘", text: "把错题、笔记和反馈沉淀为行动。" },
+  { icon: "HeartHandshake", title: "如何陪伴", text: "导学老师关注动力、习惯、情绪和表达。"}
+];
+
+const operations = [
+  { icon: "BadgeCheck", title: "产品导入", text: "演示、场景评估与启动建议。" },
+  { icon: "ListChecks", title: "团队培训", text: "产品理解、导学方法与服务流程。" },
+  { icon: "Workflow", title: "运营复盘", text: "围绕数据、用户反馈和市场表现持续优化。" }
+];
+
+const launchSteps = [
+  { number: "01", title: "产品体验", text: "理解学习流程、服务边界和真实体验。" },
+  { number: "02", title: "场景评估", text: "结合城市、场地、团队和用户基础判断切入方式。" },
+  { number: "03", title: "方案确认", text: "明确产品配置、分工、节奏和沟通口径。" },
+  { number: "04", title: "培训上线", text: "完成产品操作、导学服务和运营动作训练。" },
+  { number: "05", title: "持续复盘", text: "用学习数据、用户反馈和市场表现优化运营。" }
+];
+---
+
+<BaseLayout title={site.title} description={site.description}>
+  <section class="hero-cinematic relative isolate -mt-[72px] min-h-screen overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <video
+      class="hero-video hero-video-home absolute inset-0 h-full w-full object-cover"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      aria-hidden="true"
+      data-hero-video
+      data-parallax="0.035"
+      data-parallax-max="26"
+    >
+      <source src="/assets/about%20us.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-cinematic-overlay absolute inset-0"></div>
+    <div class="hero-cinematic-vignette absolute inset-0"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink/90 to-transparent"></div>
+
+    <div class="container-page relative flex min-h-screen items-center pb-16 pt-[148px]">
+      <div class="hero-copy max-w-4xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/70">Zulonex × AI Education</p>
+        <h1 class="mt-6 max-w-4xl text-balance text-4xl font-semibold leading-[1.04] text-white sm:text-5xl md:text-7xl">
+          重塑学习<br />逐鹿未来
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-white/78 md:text-xl md:leading-9">
+          逐鹿未来连接星鹿爱学与国内市场，把 AI 学习、真人导学和运营支持带入自主学习空间。
+        </p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a class="motion-link inline-flex items-center justify-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist" href="/contact/">
+            预约演示
+            <Icon name="ArrowRight" size={20} />
+          </a>
+          <a class="inline-flex items-center justify-center gap-2 border border-white/35 bg-white/8 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/14" href="/product/">
+            查看产品
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-ink/10 bg-white py-20 md:py-28">
+    <div class="container-page">
+      <div class="max-w-5xl" data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Brand Proposition</p>
+        <h2 class="mt-6 text-balance text-4xl font-semibold leading-tight text-ink md:text-6xl">
+          AI 讲清知识<br class="hidden lg:block" />真人陪孩子学会学习
+        </h2>
+      </div>
+      <div class="mt-14 grid gap-10 border-t border-ink/12 pt-10 lg:grid-cols-[0.52fr_0.48fr] lg:items-start" data-reveal="soft" style="--reveal-delay: 80ms">
+        <p class="max-w-2xl text-xl font-semibold leading-9 text-ink md:text-2xl md:leading-10">
+          星鹿爱学负责学习系统，导学老师负责陪伴和复盘，逐鹿未来帮助机构把这套服务落到每天的运营里。
+        </p>
+        <p class="max-w-xl text-lg leading-8 text-muted">
+          对机构来说，它不是多买一套工具，而是把 AI 学习、真人服务和日常运营组合成一套新的学习服务。
+        </p>
+      </div>
+    </div>
+    <div class="container-page mt-14 grid border-y border-ink/12 md:grid-cols-3">
+      {brandPrinciples.map((item, index) => (
+        <article
+          class:list={["py-7 md:px-8", index > 0 && "border-t border-ink/12 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}
+          data-reveal="soft"
+          style={`--reveal-delay: ${index * 55}ms`}
+        >
+          <Icon name={item.icon} class="text-sea" size={30} />
+          <h3 class="mt-5 text-2xl font-semibold text-ink">{item.label}</h3>
+          <p class="mt-3 text-base leading-7 text-muted">{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page grid gap-12 xl:grid-cols-[0.86fr_1.14fr] xl:items-center">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Product Experience</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl xl:text-6xl">
+          不只会答题<br />更要知道下一步怎么学
+        </h2>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-muted">
+          星鹿爱学把学习路径、AI 问答、练习反馈和真人导学接在一起，让孩子每次学完都能知道下一步。
+        </p>
+        <div class="mt-10 grid gap-5 border-y border-ink/12 py-6">
+          {productHighlights.map((item, index) => (
+            <article class:list={["grid grid-cols-[36px_1fr] gap-4", index > 0 && "border-t border-ink/12 pt-5"]} data-reveal="soft" style={`--reveal-delay: ${index * 55}ms`}>
+              <Icon name={item.icon} class="text-sea" size={28} />
+              <div>
+                <h3 class="text-xl font-semibold text-ink">{item.title}</h3>
+                <p class="mt-2 text-base leading-7 text-muted">{item.text}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div class="relative overflow-hidden border border-ink/10 bg-[linear-gradient(135deg,#f8fbff_0%,#eaf2ff_100%)] p-4 sm:p-6 lg:p-8" data-reveal="soft" style="--reveal-delay: 120ms">
+        <div class="mb-4 flex flex-wrap items-center gap-2 text-xs font-semibold text-sea">
+          {productSignals.map((item) => (
+            <span class="border border-sea/[0.18] bg-white/78 px-3 py-1.5">{item.label}</span>
+          ))}
+        </div>
+        <div class="relative bg-white p-3 shadow-soft sm:p-4">
+          <img
+            src={dashboard.src}
+            width={dashboard.width}
+            height={dashboard.height}
+            alt="星鹿爱学学习路径、学习数据与反馈界面"
+            class="w-full"
+            loading="lazy"
+          />
+          <div class="absolute bottom-4 left-4 hidden max-w-[260px] border border-ink/10 bg-white/92 p-4 shadow-tight backdrop-blur lg:block">
+            <p class="text-sm font-semibold text-sea">学习数据持续记录</p>
+            <p class="mt-2 text-sm leading-6 text-muted">路径、提问和练习表现会回到下一次学习安排里。</p>
+          </div>
+        </div>
+        <div class="mt-5 grid gap-3 sm:grid-cols-3">
+          {productSignals.map((item, index) => (
+            <div class:list={["border-t border-ink/12 pt-4", index > 0 && "sm:border-l sm:pl-4"]}>
+              <p class="text-sm font-semibold text-ink">{item.label}</p>
+              <p class="mt-1 text-sm leading-6 text-muted">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-ink py-20 text-white md:py-24" data-nav-theme="dark">
+    <div class="container-page grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-stretch">
+      <div class="flex flex-col justify-center border-y border-white/16 py-8 lg:pr-10" data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/48">Collaboration Layer</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-white md:text-5xl">
+          一套系统<br />三端协同
+        </h2>
+      </div>
+      <div class="grid border-y border-white/16 md:grid-cols-3" data-reveal="soft">
+        {collaboration.map((item, index) => (
+          <article class:list={["py-8 md:px-7", index > 0 && "border-t border-white/16 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}>
+            <Icon name={item.icon} class="text-white" size={32} />
+            <h3 class="mt-6 text-2xl font-semibold text-white">{item.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-white/62">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+        <div data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Learning Dialogues</p>
+          <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+            六个关键对话<br />构成完整闭环
+          </h2>
+        </div>
+        <p class="max-w-2xl text-lg leading-8 text-muted" data-reveal="soft">
+          从“学什么”到“如何复盘”，把学习过程拆成孩子、家长和机构都能理解的行动。
+        </p>
+      </div>
+
+      <div class="mt-14 grid border-l border-t border-ink/12 md:grid-cols-2 lg:grid-cols-3">
+        {keyDialogs.map((item, index) => (
+          <article
+            class="border-b border-r border-ink/12 bg-white p-7 sm:p-8"
+            data-reveal="soft"
+            style={`--reveal-delay: ${(index % 3) * 55}ms`}
+          >
+            <Icon name={item.icon} class="text-sea" size={30} />
+            <h3 class="mt-7 text-2xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-3 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Who It Fits</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+          适合正在寻找<br />AI 学习服务增量的伙伴
+        </h2>
+        <p class="mt-6 max-w-xl text-lg leading-8 text-muted">
+          不同机构起点不同，关键是有没有真实场景、承接团队和长期服务意愿。
+        </p>
+        <a class="motion-link mt-8 inline-flex items-center gap-2 text-base font-semibold text-sea" href="/solutions/">
+          查看场景方案
+          <Icon name="ArrowRight" size={18} />
+        </a>
+      </div>
+
+      <div class="grid border-l border-t border-ink/12 sm:grid-cols-2" data-reveal="soft">
+        {solutionAudiences.map((item, index) => (
+          <a
+            href={`/solutions/#${item.id}`}
+            class="group border-b border-r border-ink/12 bg-white p-7 transition hover:bg-mist sm:p-8"
+            data-reveal="soft"
+            style={`--reveal-delay: ${(index % 2) * 55}ms`}
+          >
+            <div class="flex items-start justify-between gap-5">
+              <Icon name={item.icon} class="text-sea" size={32} />
+              <Icon name="ArrowUpRight" class="text-muted transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-sea" size={18} />
+            </div>
+            <h3 class="mt-7 text-2xl font-semibold text-ink">{item.label}</h3>
+            <p class="mt-3 text-base leading-7 text-muted">{item.text}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative min-h-[620px] overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <img
+      src={learningCenter.src}
+      width={learningCenter.width}
+      height={learningCenter.height}
+      alt="学生与导学老师在现代自主学习空间中学习"
+      class="absolute inset-0 h-full w-full object-cover"
+      data-parallax="0.05"
+      data-parallax-max="36"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,18,74,.94)_0%,rgba(6,18,74,.66)_48%,rgba(6,18,74,.10)_100%)]"></div>
+    <div class="container-page relative grid min-h-[620px] items-end gap-12 py-16 md:items-center lg:grid-cols-[0.78fr_1fr]">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/60">Operation Layer</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-white md:text-6xl">
+          产品力最终要变成服务力
+        </h2>
+        <p class="mt-6 max-w-xl text-lg leading-8 text-white/72">
+          逐鹿未来把产品能力转化为机构可执行、可复盘、可长期运营的服务动作。
+        </p>
+        <a class="motion-link mt-8 inline-flex items-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist" href="/cooperation/">
+          查看合作支持
+          <Icon name="ArrowRight" size={18} />
+        </a>
+      </div>
+      <div class="grid border-y border-white/16 md:grid-cols-3" data-reveal="soft">
+        {operations.map((item, index) => (
+          <article class:list={["py-8 md:px-7", index > 0 && "border-t border-white/16 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}>
+            <Icon name={item.icon} class="text-white" size={32} />
+            <h3 class="mt-6 text-2xl font-semibold text-white">{item.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-white/68">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+        <div data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Launch Process</p>
+          <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+            五步进入<br />运营现场
+          </h2>
+        </div>
+        <p class="max-w-2xl text-lg leading-8 text-muted" data-reveal="soft">
+          从体验到上线，先确认价值、场景和服务节奏，再进入长期复盘。
+        </p>
+      </div>
+
+      <div class="mt-14 border-y border-ink/12">
+        {launchSteps.map((item, index) => (
+          <article class="grid gap-5 border-b border-ink/12 py-7 sm:grid-cols-[72px_0.72fr_1fr] sm:items-start" data-reveal="soft" style={`--reveal-delay: ${index * 45}ms`}>
+            <p class="text-sm font-semibold text-sea">{item.number}</p>
+            <h3 class="text-2xl font-semibold leading-8 text-ink">{item.title}</h3>
+            <p class="text-base leading-8 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

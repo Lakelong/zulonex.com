@@ -1,0 +1,620 @@
+---
+import guideStudentScene from "@/assets/projects/xinglu-cooperation-school/guide-student-scene.webp";
+import heroComposedBg from "@/assets/projects/xinglu-cooperation-school/hero-composed-bg.webp";
+import mascotTrophy from "@/assets/projects/xinglu-cooperation-school/mascot-trophy.webp";
+import trainingGrowthPhotos from "@/assets/projects/xinglu-cooperation-school/training-growth-photos.webp";
+import trainingRoomProof from "@/assets/projects/xinglu-cooperation-school/training-room-proof.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import { site } from "@/data/site";
+
+const chapters = [
+  { id: "background", number: "01", label: "背景", title: "市场机遇" },
+  { id: "product-model", number: "02", label: "模式", title: "产品模式" },
+  { id: "enablement", number: "03", label: "赋能", title: "专业赋能" },
+  { id: "cases", number: "04", label: "案例", title: "案例分享" },
+  { id: "terms", number: "05", label: "条件", title: "合作条件" }
+];
+
+const brandPillars = [
+  "技术团队实力过硬",
+  "教研团队背景雄厚",
+  "内容生产严谨高效",
+  "AI算法前沿多元化",
+  "智能引擎铸就壁垒"
+];
+
+const marketStats = [
+  { value: "2亿+", label: "K12学生群体总量" },
+  { value: "33.1%", label: "教育培训支出占比" },
+  { value: "3500万", label: "AI+陪伴在线辅导类总量" }
+];
+
+const marketPeriods = [
+  { period: "2025-2027年", label: "规模化应用期", value: "2000亿" },
+  { period: "2028-2030年", label: "创新融合期", value: "5000亿" }
+];
+
+const policyItems = [
+  {
+    number: "01",
+    title: "基础设施升级",
+    text: "建设教育大数据中心，完善智慧校园基础设施，实现高速网络全覆盖，探索建设云端学校、智造空间、未来学习中心等新型教学场所。"
+  },
+  {
+    number: "02",
+    title: "数字资源与应用创新",
+    text: "开展教育大模型有组织攻关，开发人工智能教育专用大模型，推进智能学伴、数字导师等应用，实现大规模因材施教。"
+  },
+  {
+    number: "03",
+    title: "融合应用与模式创新",
+    text: "推动人工智能赋能教育教学全过程，探索人机协同教学新模式，完善终身学习数字化支持体系，构建人人可学、时时可学、处处可学的学习环境。"
+  }
+];
+
+const terminals = [
+  {
+    number: "1",
+    title: "学生端",
+    headline: "星鹿爱学 AI好智教",
+    text: "AI数字人老师讲知识、讲题。",
+    tool: "星鹿爱学AI学习系统"
+  },
+  {
+    number: "2",
+    title: "导学端",
+    headline: "真人导学 好服务",
+    text: "导学师一师变四师，承接1+2+1真人导学服务模式。",
+    tool: "乐连 + 导学师管理系统"
+  },
+  {
+    number: "3",
+    title: "家长端",
+    headline: "动态学情 好掌控",
+    text: "孩子动态学情和规划师反馈全掌控。",
+    tool: "手机家长端学情管理 + 阶段学情分析规划师沟通会"
+  }
+];
+
+const resourceBlocks = [
+  { title: "小初高中五大学科", text: "数学、物理、化学、语文、英语。" },
+  { title: "版本覆盖广", text: "人教版、北师版、外研版等主流教材版本。" },
+  { title: "优质资源精准适配", text: "小学四、五、六年级，初高中全学段优质资源；50万+情景化互动课件、100万+分级题库。" },
+  { title: "优质教研精准匹配新课标", text: "1000位骨干教师共建教研团队，精准匹配新课标学业成效目标，课程两周迭代一次。" }
+];
+
+const fourTutors = [
+  { title: "AI智教", text: "AI数字人老师给孩子讲知识、讲题。" },
+  { title: "学业规划师", text: "分配学习时间，效果评估及计划优化。" },
+  { title: "学情督导师", text: "监督及分配导学师，确保导学效果落地。" },
+  { title: "专属导学师", text: "陪伴、监督、鼓励、学习进度调控。" }
+];
+
+const weeklyModel = [
+  { value: "1次", label: "导学服务" },
+  { value: "2次", label: "AI自习导学" },
+  { value: "1次", label: "学情反馈" }
+];
+
+const prepSteps = ["环境软装", "人员培训", "设备就绪", "招生赋能", "资源共享"];
+const launchSteps = ["流量到店", "到店体验", "家长会议", "家校互通", "服务督导"];
+
+const operations = [
+  ["日常管理", "日常体验馆管理", "各岗位工作流程"],
+  ["品宣计划", "线上自媒体引流", "品牌联动品宣计划"],
+  ["营销招生", "年度营销计划", "年度目标制定及拆解"],
+  ["活动输出", "阶段性活动输出", "服务+营销活动等"],
+  ["运营指导", "日常运营工作指导", "一对一流程"],
+  ["落地支持", "到店支持工作", "家长会、运营赋能、周年庆活动等"],
+  ["人才计划", "根据体验馆/区域发展规划设定人才培养计划", ""],
+  ["旗舰校观摩", "沉浸式参观、体验学习", ""]
+];
+
+const caseSummaries = [
+  {
+    title: "阜南亲情高中",
+    subtitle: "学校7年规模化落地应用",
+    metric: "27.8% → 74.3%",
+    text: "一本达线率提升267%，先后培养出2位清华和3位县理科状元。"
+  },
+  {
+    title: "成都戴氏教育集团的选择",
+    subtitle: "成都深耕教培30年+",
+    metric: "100家校区",
+    text: "累计培养清北在校生1000人+，年均稳定输送40-50名清北学生，近五年合计清北人数300人+。"
+  },
+  {
+    title: "琪琪同学",
+    subtitle: "中等生的逆袭之路",
+    metric: "97 / 129 / 147",
+    text: "10月14日加入星鹿爱学，在四师一体服务模式下，数学周考从97分提升到147分。"
+  },
+  {
+    title: "小文同学",
+    subtitle: "校长点名表扬真自豪",
+    metric: "上升100名",
+    text: "第一周找回自信，第二周养成好的习惯，期中考试带来年级上升100名的喜报。"
+  },
+  {
+    title: "小汪同学",
+    subtitle: "47分到88分重塑自信",
+    metric: "47 → 88",
+    text: "4月加入星鹿，期中提升至71分，期末达到88分，总成绩排到全班第2。"
+  }
+];
+
+const schoolFeedback = [
+  "清北班对比，考试成绩除少数尖子生外，各项指标远超对方，部分科目从低10分到每门课高于对方。",
+  "首先解决学生的兴趣问题，引进产品后学生变得更自律，也重新有了学习兴趣。",
+  "高一平均分499.5超过特快班，成为年级第1名；高二48人中35人本科线进线；高三48人中29人进步明显。"
+];
+
+const zeroTerms = ["0 加盟费", "0 库存", "0 售后"];
+const youProvide = ["导学场地", "销售人员", "合作校项目履约保证金4.98万"];
+const weProvide = ["星鹿爱学项目", "三套演示样机", "配备专职导学师", "运营系统支持", "引流100个客资到店"];
+const profitModels = ["总部赠送客资转化", "双方共同招生转化", "总部正价客户交付", "自有生源拓科增收"];
+const fitInstitutions = ["书房/阅读馆", "传统教培转型", "素质类机构", "托管/自习室"];
+---
+
+<BaseLayout
+  title={`星鹿爱学联营合作校项目说明 | ${site.name}`}
+  description="星鹿爱学联营合作校项目说明，按品牌背景、市场机遇、产品模式、专业赋能、案例分享与合作条件展示。"
+  path="/projects/xinglu-cooperation-school/"
+>
+  <section class="relative -mt-[72px] overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <img
+      src={heroComposedBg.src}
+      width={heroComposedBg.width}
+      height={heroComposedBg.height}
+      alt=""
+      class="absolute inset-0 hidden h-full w-full object-cover object-center md:block"
+      loading="eager"
+      data-parallax="0.025"
+      data-parallax-max="18"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,18,74,1)_0%,rgba(6,18,74,.98)_46%,rgba(6,18,74,.70)_72%,rgba(6,18,74,.18)_100%)]"></div>
+    <div class="absolute inset-y-0 right-0 hidden w-[48%] bg-[linear-gradient(180deg,rgba(6,18,74,.10)_0%,rgba(6,18,74,0)_42%,rgba(6,18,74,.18)_100%)] md:block"></div>
+    <div class="absolute inset-x-0 bottom-0 h-px bg-white/16"></div>
+    <div class="container-page relative flex min-h-[720px] items-center pb-16 pt-[136px]">
+      <div class="max-w-3xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/62">星鹿爱学 · 联营合作校项目说明</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-[1.05] sm:text-5xl md:text-7xl">
+          与您携手 共创AI教育服务新场景
+        </h1>
+        <p class="mt-7 max-w-2xl text-xl leading-9 text-white/76">
+          赋能陪跑共创可持续价值，围绕三端导学AI成长系统，帮助合作校把AI学习、真人导学和本地运营落到真实服务。
+        </p>
+        <div class="mt-10 grid border-y border-white/16 sm:grid-cols-3">
+          <div class="py-5 sm:pr-6">
+            <p class="text-sm font-semibold text-white/48">项目定位</p>
+            <p class="mt-2 text-2xl font-semibold">联营合作校</p>
+          </div>
+          <div class="border-t border-white/16 py-5 sm:border-l sm:border-t-0 sm:px-6">
+            <p class="text-sm font-semibold text-white/48">核心系统</p>
+            <p class="mt-2 text-2xl font-semibold">三端导学</p>
+          </div>
+          <div class="border-t border-white/16 py-5 sm:border-l sm:border-t-0 sm:pl-6">
+            <p class="text-sm font-semibold text-white/48">服务模型</p>
+            <p class="mt-2 text-2xl font-semibold">四师一体</p>
+          </div>
+        </div>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a class="motion-link inline-flex items-center justify-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist" href="#terms">
+            查看合作条件
+            <Icon name="ArrowRight" size={19} />
+          </a>
+          <a class="inline-flex items-center justify-center gap-2 border border-white/32 bg-white/5 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/12" href="/contact/">
+            预约项目沟通
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="no-scrollbar sticky top-[72px] z-40 overflow-x-auto border-y border-ink/10 bg-white/95 backdrop-blur-xl" aria-label="合作校项目章节导航">
+    <div class="container-page flex min-w-max items-center gap-8 py-4 text-sm font-semibold text-muted">
+      {chapters.map((item) => (
+        <a class="inline-flex items-center gap-2 transition hover:text-sea" href={`#${item.id}`}>
+          <span class="text-sea">{item.number}</span>
+          {item.title}
+        </a>
+      ))}
+      <a class="inline-flex items-center gap-2 text-sea" href="/contact/">
+        预约沟通
+        <Icon name="ArrowUpRight" size={15} />
+      </a>
+    </div>
+  </nav>
+
+  <section id="background" class="page-band scroll-mt-32 bg-white py-20 md:py-28">
+    <div class="container-page grid gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:items-start">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Background</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-6xl">
+          银河智学品牌背景
+        </h2>
+        <p class="mt-6 text-lg leading-8 text-muted">
+          银河智学由原字节跳动大力教育CEO陈林和原科大讯飞教育事业群副总裁王卓领衔创立，是一家面向AI时代的教育科技公司，定位是培养AI时代的问题解决者。
+        </p>
+      </div>
+      <div class="grid border-y border-ink/12 sm:grid-cols-2 lg:grid-cols-5">
+        {brandPillars.map((item, index) => (
+          <article class:list={["interactive-card py-7 sm:px-5", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0", index === 2 && "sm:border-l-0 lg:border-l", index === 0 && "sm:pl-0"]} data-reveal="soft">
+            <p class="text-sm font-semibold text-sea">0{index + 1}</p>
+            <h3 class="mt-5 text-xl font-semibold leading-7 text-ink">{item}</h3>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Market Opportunity"
+        title="市场机遇 AI时代黄金赛道"
+        description="AI教育全面融入教育体系核心环节，线下合作校可以承接新的学习服务需求。"
+      />
+      <div class="mt-14 grid border-y border-ink/12 sm:grid-cols-3">
+        {marketStats.map((item, index) => (
+          <article class:list={["py-8 sm:px-8", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0", index === 0 && "sm:pl-0"]} data-reveal="soft">
+            <p class="text-5xl font-semibold text-sea md:text-6xl">{item.value}</p>
+            <p class="mt-4 text-base font-semibold text-ink">{item.label}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mt-12 grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+        <div data-reveal="soft">
+          <h3 class="text-balance text-3xl font-semibold leading-tight text-ink md:text-4xl">
+            AI教育全面融入教育体系核心环节
+          </h3>
+          <p class="mt-5 text-lg leading-8 text-muted">
+            2030年市场规模预计突破5000亿元，年复合增长率长期维持在25%以上，成为教育产业第一大增长极。
+          </p>
+        </div>
+        <div class="grid border-y border-ink/12 md:grid-cols-2">
+          {marketPeriods.map((item, index) => (
+            <article class:list={["py-8 md:px-8", index > 0 && "border-t border-ink/12 md:border-l md:border-t-0", index === 0 && "md:pl-0"]} data-reveal="soft">
+              <p class="text-base font-semibold text-muted">{item.period} {item.label}</p>
+              <p class="mt-4 text-5xl font-semibold text-ink">{item.value}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page grid gap-12 lg:grid-cols-[0.75fr_1.25fr]">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Policy Background</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+          国家十五五教育数字化战略
+        </h2>
+        <p class="mt-6 text-lg leading-8 text-muted">智能赋能与融合创新，让AI教育从工具应用进入教学服务全过程。</p>
+      </div>
+      <div class="border-t border-ink/12">
+        {policyItems.map((item) => (
+          <article class="interactive-card grid gap-5 border-b border-ink/12 py-8 md:grid-cols-[72px_0.55fr_1fr] md:items-start" data-reveal="soft">
+            <p class="text-sm font-semibold text-sea">{item.number}</p>
+            <h3 class="text-2xl font-semibold text-ink">{item.title}</h3>
+            <p class="text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="product-model" class="page-band scroll-mt-32 bg-ink py-20 text-white md:py-28" data-nav-theme="dark">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Product Model"
+        title="三端导学AI成长系统"
+        description="学生端、导学端、家长端共同构成持续自主学习成长的场景体系服务，重塑孩子自主学习力。"
+        tone="dark"
+      />
+      <div class="mt-14 grid border-y border-white/16 lg:grid-cols-3">
+        {terminals.map((item, index) => (
+          <article class:list={["interactive-card bg-white/[0.03] py-9 lg:px-8", index > 0 && "border-t border-white/16 lg:border-l lg:border-t-0", index === 0 && "lg:pl-0"]} data-reveal="soft">
+            <p class="text-7xl font-semibold leading-none text-white/16">{item.number}</p>
+            <h3 class="mt-4 text-3xl font-semibold text-white">{item.title}</h3>
+            <p class="mt-4 text-xl font-semibold text-white/86">{item.headline}</p>
+            <p class="mt-4 text-base leading-7 text-white/64">{item.text}</p>
+            <p class="mt-6 border-t border-white/14 pt-4 text-sm font-semibold leading-6 text-white/52">承载工具：{item.tool}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page grid gap-14 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Resource System</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+          打造原子化资源体系
+        </h2>
+        <p class="mt-6 text-lg leading-8 text-muted">优质、丰富、精准的资源体系，为学生端AI学习和导学端服务提供基础。</p>
+        <img
+          src={mascotTrophy.src}
+          width={mascotTrophy.width}
+          height={mascotTrophy.height}
+          alt="星鹿爱学吉祥物"
+          class="mt-8 w-64 max-w-full"
+          loading="lazy"
+        />
+      </div>
+      <div class="grid border-l border-t border-ink/12 sm:grid-cols-2">
+        {resourceBlocks.map((item) => (
+          <article class="border-b border-r border-ink/12 bg-mist p-7" data-reveal="soft">
+            <Icon name="CheckCircle2" class="text-sea" size={28} />
+            <h3 class="mt-5 text-2xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-4 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Four Tutor Service Model"
+        title="四师服务模型"
+        description="AI智教、学业规划师、学情督导师和专属导学师分工协同，把系统能力转化为线下服务。"
+      />
+      <div class="mt-14 grid border-y border-ink/12 lg:grid-cols-4">
+        {fourTutors.map((item, index) => (
+          <article class:list={["interactive-card py-9 lg:px-7", index > 0 && "border-t border-ink/12 lg:border-l lg:border-t-0", index === 0 && "lg:pl-0"]} data-reveal="soft">
+            <p class="text-sm font-semibold text-sea">0{index + 1}</p>
+            <h3 class="mt-6 text-3xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-4 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mt-16 grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+        <div data-reveal="soft">
+          <h3 class="text-balance text-3xl font-semibold leading-tight text-ink md:text-4xl">
+            线下 1+2+1 每周导学服务模型
+          </h3>
+          <p class="mt-5 text-lg leading-8 text-muted">
+            线下教育网络门店专属导学师，手把手导学，交付好成效。
+          </p>
+          <div class="mt-9 grid border-y border-ink/12 sm:grid-cols-3">
+            {weeklyModel.map((item, index) => (
+              <div class:list={["py-6 sm:px-6", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0", index === 0 && "sm:pl-0"]}>
+                <p class="text-4xl font-semibold text-ink">{item.value}</p>
+                <p class="mt-2 text-base font-semibold text-muted">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <img
+          src={guideStudentScene.src}
+          width={guideStudentScene.width}
+          height={guideStudentScene.height}
+          alt="导学师陪伴学生学习"
+          class="w-full border border-ink/12 bg-white p-3 shadow-tight"
+          loading="lazy"
+          data-reveal="soft"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="enablement" class="page-band scroll-mt-32 bg-white py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Professional Empowerment"
+        title="总部赋能陪跑 实现长久发展"
+        description="帮助合作校建立AI教育事业，实现长久发展、长久盈利。"
+      />
+      <div class="mt-14 grid gap-12 lg:grid-cols-[1fr_0.9fr] lg:items-start">
+        <div>
+          <h3 class="text-2xl font-semibold text-ink">项目筹备</h3>
+          <div class="mt-6 grid border-y border-ink/12 sm:grid-cols-5">
+            {prepSteps.map((item, index) => (
+              <div class:list={["py-5 text-base font-semibold text-ink sm:min-h-[104px] sm:px-4 sm:text-center", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0"]}>
+                {item}
+              </div>
+            ))}
+          </div>
+          <h3 class="mt-12 text-2xl font-semibold text-ink">开班阶段</h3>
+          <div class="mt-6 grid border-y border-ink/12 sm:grid-cols-5">
+            {launchSteps.map((item, index) => (
+              <div class:list={["py-5 text-base font-semibold text-ink sm:min-h-[104px] sm:px-4 sm:text-center", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0"]}>
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
+        <img
+          src={trainingRoomProof.src}
+          width={trainingRoomProof.width}
+          height={trainingRoomProof.height}
+          alt="戴氏教育星鹿爱学AI项目导学师培训会议"
+          class="w-full border border-ink/12 bg-mist p-3 shadow-tight"
+          loading="lazy"
+        />
+      </div>
+      <div class="mt-16 grid gap-10 lg:grid-cols-[0.75fr_1.25fr]">
+        <div data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Daily Operation</p>
+          <h3 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+            日常运营全链路闭环
+          </h3>
+          <p class="mt-6 text-lg leading-8 text-muted">高效管理、品牌传播、业务增长与团队能力提升同步推进。</p>
+        </div>
+        <div class="border-t border-ink/12">
+          {operations.map((item) => (
+            <article class="interactive-card grid gap-4 border-b border-ink/12 py-5 sm:grid-cols-[0.42fr_1fr_1fr] sm:items-center" data-reveal="soft">
+              <h4 class="text-xl font-semibold text-ink">{item[0]}</h4>
+              <p class="text-base leading-7 text-muted">{item[1]}</p>
+              <p class="text-base leading-7 text-muted">{item[2]}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+      <div class="mt-12 grid gap-8 border-y border-ink/12 py-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-center" data-reveal="soft">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Growth Camp</p>
+          <h3 class="mt-4 text-3xl font-semibold leading-tight text-ink">C端全链路增长训练营</h3>
+          <p class="mt-5 text-base leading-7 text-muted">
+            围绕招生转化、团队训练、家长沟通和现场运营复盘，帮助合作校把增长动作拆解到每一步。
+          </p>
+        </div>
+        <img
+          src={trainingGrowthPhotos.src}
+          width={trainingGrowthPhotos.width}
+          height={trainingGrowthPhotos.height}
+          alt="C端全链路增长训练营现场"
+          class="w-full border border-ink/12 bg-mist p-3 shadow-tight"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section id="cases" class="page-band scroll-mt-32 bg-mist py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Case Sharing"
+        title="案例分享"
+        description="物质资源终会枯竭，唯有创新才能生生不息。以下按原项目资料中的案例顺序呈现。"
+      />
+      <div class="mt-14 grid border-l border-t border-ink/12 md:grid-cols-2">
+        {caseSummaries.map((item) => (
+          <article class="border-b border-r border-ink/12 bg-white p-7" data-reveal="soft">
+            <p class="text-sm font-semibold text-sea">{item.subtitle}</p>
+            <h3 class="mt-4 text-2xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-6 text-4xl font-semibold text-amber">{item.metric}</p>
+            <p class="mt-4 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mt-14 grid gap-12 lg:grid-cols-[0.65fr_1.35fr]">
+        <div data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Feedback</p>
+          <h3 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+            来自全国各地校长的反馈
+          </h3>
+        </div>
+        <div class="border-t border-ink/12">
+          {schoolFeedback.map((item, index) => (
+            <blockquote class="border-b border-ink/12 py-7 text-lg font-semibold leading-8 text-ink" data-reveal="soft">
+              <span class="mr-4 text-sm text-sea">0{index + 1}</span>{item}
+            </blockquote>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="terms" class="page-band scroll-mt-32 bg-white py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Cooperation Terms"
+        title="合作条件"
+        description="不挑品类、不挑规模、轻松转型、持续盈利。"
+      />
+      <div class="mt-14 grid border-y border-ink/12 md:grid-cols-3">
+        {zeroTerms.map((item, index) => (
+          <article class:list={["py-8 text-center md:px-8", index > 0 && "border-t border-ink/12 md:border-l md:border-t-0"]} data-reveal="soft">
+            <p class="text-6xl font-semibold text-amber">0</p>
+            <p class="mt-4 text-2xl font-semibold text-ink">{item.replace("0 ", "")}</p>
+          </article>
+        ))}
+      </div>
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <article class="border border-ink/12 bg-mist p-8" data-reveal="soft">
+          <h3 class="text-3xl font-semibold text-ink">您来提供</h3>
+          <ul class="mt-7 space-y-4">
+            {youProvide.map((item) => (
+              <li class="flex items-start gap-3 text-lg font-semibold leading-8 text-muted">
+                <Icon name="CheckCircle2" class="mt-1 text-sea" size={22} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+        <article class="border border-ink/12 bg-ink p-8 text-white" data-reveal="soft">
+          <h3 class="text-3xl font-semibold text-white">我来提供</h3>
+          <ul class="mt-7 space-y-4">
+            {weProvide.map((item) => (
+              <li class="flex items-start gap-3 text-lg font-semibold leading-8 text-white/72">
+                <Icon name="CheckCircle2" class="mt-1 text-white" size={22} />
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-20 md:py-28">
+    <div class="container-page grid gap-12 lg:grid-cols-[0.82fr_1.18fr]">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Profit Sharing</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+          合作校多维分润
+        </h2>
+        <p class="mt-6 text-lg leading-8 text-muted">围绕客资转化、共同招生、客户交付和自有生源拓科，形成多维收益空间。</p>
+      </div>
+      <div class="grid gap-10">
+        <div class="grid border-l border-t border-ink/12 sm:grid-cols-2">
+          {profitModels.map((item) => (
+            <div class="border-b border-r border-ink/12 bg-white p-6 text-xl font-semibold text-ink shadow-tight">{item}</div>
+          ))}
+        </div>
+        <div>
+          <h3 class="text-2xl font-semibold text-ink">适合合作的机构</h3>
+          <div class="mt-6 grid border-y border-ink/12 sm:grid-cols-4">
+            {fitInstitutions.map((item, index) => (
+              <div class:list={["py-5 text-base font-semibold text-muted sm:px-5 sm:text-center", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0"]}>{item}</div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden bg-ink py-20 text-white md:py-28" data-nav-theme="dark">
+    <div class="absolute inset-0 bg-[linear-gradient(135deg,rgba(31,97,255,.34)_0%,rgba(6,18,74,0)_52%),linear-gradient(180deg,rgba(255,106,47,.10)_0%,rgba(6,18,74,0)_62%)]"></div>
+    <div class="container-page relative grid gap-12 lg:grid-cols-[0.94fr_1.06fr] lg:items-center">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/52">Start Together</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight md:text-6xl">
+          全国甄选1万家联营合作校
+        </h2>
+        <p class="mt-6 max-w-xl text-lg leading-8 text-white/68">
+          抢占AI教育新赛道，共赢千亿蓝海市场。先机就是利润，合作就是未来。
+        </p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a class="motion-link inline-flex items-center justify-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist" href="/contact/">
+            预约项目咨询
+            <Icon name="ArrowRight" size={19} />
+          </a>
+          <a class="inline-flex items-center justify-center gap-2 border border-white/32 bg-white/5 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/12" href="tel:18122441931">
+            181 2244 1931
+          </a>
+        </div>
+      </div>
+      <div class="grid border-y border-white/16 sm:grid-cols-2" data-reveal="soft">
+        {[
+          "AI赋能教育降本增效",
+          "真实效果家长口碑爆发",
+          "轻资运营创造持续价值",
+          "教育刚需市场空间巨大"
+        ].map((item, index) => (
+          <div class:list={["py-7 sm:px-7", index > 1 && "border-t border-white/16", index % 2 === 1 && "sm:border-l", index === 0 && "sm:pl-0"]}>
+            <Icon name="Sparkles" class="text-white" size={28} />
+            <p class="mt-5 text-xl font-semibold leading-8 text-white">{item}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

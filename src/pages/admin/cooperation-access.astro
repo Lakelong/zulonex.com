@@ -1,0 +1,115 @@
+---
+import BaseLayout from "@/components/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import { site } from "@/data/site";
+
+export const prerender = false;
+---
+
+<BaseLayout
+  title={`合作资料访问历史 | ${site.name}`}
+  description="合作模式资料访问历史后台查看页。"
+  path="/admin/cooperation-access/"
+  noindex={true}
+>
+  <section class="relative -mt-[72px] min-h-[460px] overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_78%_18%,rgba(31,97,255,.42)_0%,rgba(31,97,255,0)_32%),linear-gradient(112deg,#06124a,#102b77)]"></div>
+    <div class="container-page relative flex min-h-[460px] items-center pb-14 pt-[136px]">
+      <div class="max-w-3xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/62">Access Logs</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-tight text-white md:text-6xl">
+          合作资料访问历史
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-white/70">
+          输入后台口令后查看手机号验证访问记录。该页面不在官网导航中展示。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-16 md:py-20">
+    <div class="container-page">
+      <form class="grid gap-4 border-y border-ink/12 py-8 md:grid-cols-[1fr_auto]" data-log-form>
+        <label>
+          <span class="text-sm font-semibold text-ink">后台访问口令</span>
+          <input class="field mt-2" name="token" type="password" autocomplete="off" placeholder="请输入 COOPERATION_ACCESS_ADMIN_TOKEN" required />
+        </label>
+        <button class="motion-link mt-auto inline-flex items-center justify-center gap-2 bg-ink px-6 py-3.5 text-base font-semibold text-white transition hover:bg-sea" type="submit">
+          <Icon name="Search" size={18} />
+          查看历史
+        </button>
+      </form>
+
+      <p class="mt-5 min-h-6 text-sm leading-6 text-muted" data-log-message>访问历史由 `/api/cooperation-access` 读取，部署时需配置后台口令。</p>
+
+      <div class="mt-8 overflow-hidden border border-ink/12 bg-white" data-log-result hidden>
+        <table class="w-full min-w-[960px] border-collapse text-left text-sm">
+          <thead class="bg-ink text-white">
+            <tr>
+              <th class="px-5 py-4 font-semibold">时间</th>
+              <th class="px-5 py-4 font-semibold">手机号</th>
+              <th class="px-5 py-4 font-semibold">来源</th>
+              <th class="px-5 py-4 font-semibold">IP</th>
+              <th class="px-5 py-4 font-semibold">浏览器</th>
+            </tr>
+          </thead>
+          <tbody data-log-body></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const form = document.querySelector("[data-log-form]");
+    const message = document.querySelector("[data-log-message]");
+    const result = document.querySelector("[data-log-result]");
+    const body = document.querySelector("[data-log-body]");
+
+    const escapeHtml = (value: unknown) =>
+      String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!(event.currentTarget instanceof HTMLFormElement)) return;
+
+      const token = new FormData(event.currentTarget).get("token");
+      if (message) message.textContent = "正在读取访问历史...";
+
+      try {
+        const response = await fetch("/api/cooperation-access?limit=200", {
+          headers: {
+            Authorization: `Bearer ${String(token ?? "")}`,
+            "Cache-Control": "no-store"
+          }
+        });
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "读取失败。");
+
+        const logs = Array.isArray(data.logs) ? data.logs : [];
+        if (body) {
+          body.innerHTML = logs
+            .map(
+              (item: Record<string, unknown>) => `
+                <tr class="border-b border-ink/10 last:border-b-0">
+                  <td class="px-5 py-4 text-muted">${escapeHtml(item.createdAt)}</td>
+                  <td class="px-5 py-4 font-semibold text-ink">${escapeHtml(item.maskedPhone || item.phone)}</td>
+                  <td class="px-5 py-4 text-muted">${escapeHtml(item.source)}</td>
+                  <td class="px-5 py-4 text-muted">${escapeHtml(item.ip)}</td>
+                  <td class="max-w-[360px] truncate px-5 py-4 text-muted">${escapeHtml(item.userAgent)}</td>
+                </tr>
+              `
+            )
+            .join("");
+        }
+        if (result instanceof HTMLElement) result.hidden = false;
+        if (message) message.textContent = logs.length ? `共读取 ${logs.length} 条访问记录。` : "暂无访问记录。";
+      } catch (error) {
+        if (message) message.textContent = error instanceof Error ? error.message : "读取失败。";
+      }
+    });
+  </script>
+</BaseLayout>

@@ -1,0 +1,66 @@
+---
+import brandBg from "@/assets/brand/brand-bg-blue.webp";
+import heroStudent from "@/assets/editorial/hero-student-v2.webp";
+import learningCenter from "@/assets/editorial/learning-center-v2.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import { site } from "@/data/site";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const articles = await getCollection("insights");
+  return articles
+    .filter((article) => article.data.published)
+    .map((article) => ({
+      params: { slug: article.id.replace(/\.md$/, "") },
+      props: { article }
+    }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const images: Record<string, typeof heroStudent> = {
+  "xinglu-product-overview.md": heroStudent,
+  "ai-learning-space-operation.md": learningCenter,
+  "partner-launch-process.md": learningCenter,
+  "zulonex-company-intro.md": brandBg
+};
+const image = images[article.id] ?? brandBg;
+const coverSrc = article.data.cover ?? image.src;
+const formatDate = (date: Date | string) =>
+  new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date(date));
+---
+
+<BaseLayout title={`${article.data.title} | ${site.name}`} description={article.data.summary}>
+  <article class="bg-white pb-20 pt-14 md:pb-28 md:pt-20">
+    <div class="container-page">
+      <a class="inline-flex items-center gap-2 text-base font-semibold text-sea hover:text-ink" href="/insights/">
+        <Icon name="ArrowLeft" size={19} />
+        返回案例与洞察
+      </a>
+      <div class="mt-12 max-w-5xl" data-reveal="soft">
+        <p class="text-base font-semibold text-sea">{article.data.type}</p>
+        <h1 class="mt-5 text-balance text-4xl font-semibold leading-[1.08] text-ink sm:text-5xl md:text-7xl">
+          {article.data.title}
+        </h1>
+        <p class="mt-6 text-base text-muted">{formatDate(article.data.date)}</p>
+      </div>
+      <img
+        src={coverSrc}
+        width={article.data.cover ? undefined : image.width}
+        height={article.data.cover ? undefined : image.height}
+        alt=""
+        class="mt-12 aspect-[16/8] w-full object-cover"
+        data-reveal="soft"
+        loading="eager"
+      />
+      <div class="prose prose-lg prose-slate mx-auto mt-14 max-w-3xl prose-headings:text-ink prose-p:leading-9 prose-p:text-muted prose-a:text-sea prose-strong:text-ink">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

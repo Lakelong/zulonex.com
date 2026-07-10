@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="zh-CN" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>逐鹿未来 | AI 教育智能运营服务</title>
+    <meta
+      name="description"
+      content="逐鹿未来连接星鹿爱学 AI 智能学习系统与真实教育场景，为自主学习空间、教培机构与区域伙伴提供产品导入、导学服务和运营支持。"
+    />
+    <meta name="theme-color" content="#050505" />
+    <meta property="og:title" content="逐鹿未来 | AI 教育智能运营服务" />
+    <meta
+      property="og:description"
+      content="以 AI 学习系统、真人导学和运营服务，帮助教育机构建立更清晰、更稳定、更可持续的自主学习场景。"
+    />
+    <meta property="og:type" content="website" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              ink: "#050505",
+              panel: "#0b0b0d",
+              line: "rgba(255,255,255,0.1)",
+              muted: "#a3a3a3",
+              electric: "#22d3ee",
+              violet: "#6366f1"
+            },
+            boxShadow: {
+              glow: "0 0 80px rgba(34, 211, 238, 0.18)",
+              button: "0 18px 56px rgba(99, 102, 241, 0.28)"
+            }
+          }
+        }
+      };
+    </script>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        background: #050505;
+        color: #ffffff;
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        text-rendering: geometricPrecision;
+      }
+
+      .gradient-text {
+        background: linear-gradient(to right, #ffffff, #a3a3a3);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .ambient {
+        position: absolute;
+        border-radius: 9999px;
+        filter: blur(82px);
+        opacity: 0.32;
+        animation: ambient-drift 10s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+
+      .ambient-two {
+        animation-duration: 13s;
+        animation-delay: -4s;
+      }
+
+      .grid-line {
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 82%);
+      }
+
+      .glass {
+        background: rgba(5, 5, 5, 0.72);
+        border-color: rgba(255, 255, 255, 0.1);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      }
+
+      .card-surface {
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.03)),
+          rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .card-surface:hover {
+        border-color: rgba(255, 255, 255, 0.22);
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.035)),
+          rgba(255, 255, 255, 0.03);
+      }
+
+      .orb-ring {
+        background:
+          radial-gradient(circle at center, rgba(34, 211, 238, 0.18), transparent 42%),
+          conic-gradient(from 180deg, rgba(34, 211, 238, 0.08), rgba(99, 102, 241, 0.34), rgba(255, 255, 255, 0.12), rgba(34, 211, 238, 0.08));
+        animation: rotate-slow 18s linear infinite;
+      }
+
+      @keyframes ambient-drift {
+        from {
+          transform: translate3d(-18px, 0, 0) scale(1);
+        }
+        to {
+          transform: translate3d(28px, 22px, 0) scale(1.12);
+        }
+      }
+
+      @keyframes rotate-slow {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ambient,
+        .orb-ring {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-ink text-white antialiased">
+    <header class="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-ink/80 backdrop-blur-md">
+      <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8" aria-label="主导航">
+        <a href="#top" class="flex items-center gap-3 transition-all duration-300 hover:opacity-80" aria-label="逐鹿未来首页">
+          <img src="assets/logo-light.svg" alt="逐鹿未来" class="h-8 w-auto" />
+        </a>
+        <div class="hidden items-center gap-8 text-sm font-medium text-white/64 md:flex">
+          <a href="#platform" class="transition-all duration-300 hover:text-white">平台能力</a>
+          <a href="#workflow" class="transition-all duration-300 hover:text-white">学习闭环</a>
+          <a href="#specs" class="transition-all duration-300 hover:text-white">交付规格</a>
+          <a href="#contact" class="transition-all duration-300 hover:text-white">预约演示</a>
+        </div>
+        <a
+          href="#contact"
+          class="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white px-5 py-2.5 text-sm font-semibold text-black shadow-button transition-all duration-300 hover:scale-[1.03] hover:bg-cyan-50"
+        >
+          商务沟通
+          <i data-lucide="arrow-up-right" class="h-4 w-4 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"></i>
+        </a>
+      </nav>
+    </header>
+
+    <main id="top" class="overflow-hidden">
+      <section class="relative min-h-screen px-6 pt-36 lg:px-8">
+        <div class="ambient left-[8%] top-24 h-72 w-72 bg-indigo-500/50"></div>
+        <div class="ambient ambient-two right-[10%] top-44 h-80 w-80 bg-cyan-400/35"></div>
+        <div class="grid-line absolute inset-0"></div>
+
+        <div class="relative mx-auto grid max-w-7xl items-center gap-16 py-24 lg:grid-cols-[1.04fr_0.96fr] lg:py-32">
+          <div class="text-center lg:text-left">
+            <div class="mx-auto inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-white/68 backdrop-blur lg:mx-0">
+              <span class="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_22px_rgba(34,211,238,0.85)]"></span>
+              AI Learning Operations for Modern Education
+            </div>
+            <h1 class="mt-8 text-balance text-5xl font-semibold leading-[0.98] tracking-tight sm:text-6xl lg:text-7xl xl:text-8xl">
+              <span class="gradient-text">让 AI 智慧学习</span><br />
+              进入真实教育场景
+            </h1>
+            <p class="mx-auto mt-8 max-w-2xl text-lg font-light leading-8 tracking-wide text-white/64 lg:mx-0 lg:text-xl lg:leading-9">
+              逐鹿未来连接星鹿爱学 AI 智能学习系统与国内教育市场，以产品、导学和运营能力，帮助自主学习空间建立更清晰、更稳定的长期服务。
+            </p>
+            <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
+              <a
+                href="#contact"
+                class="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-base font-semibold text-black shadow-button transition-all duration-300 hover:scale-[1.03] hover:bg-cyan-50 sm:w-auto"
+              >
+                预约产品演示
+                <i data-lucide="arrow-right" class="h-5 w-5 transition-all duration-300 group-hover:translate-x-1"></i>
+              </a>
+              <a
+                href="#platform"
+                class="inline-flex w-full items-center justify-center gap-3 rounded-full border border-white/10 bg-white/[0.04] px-7 py-4 text-base font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:border-white/22 hover:bg-white/[0.08] sm:w-auto"
+              >
+                查看平台能力
+              </a>
+            </div>
+          </div>
+
+          <div class="relative">
+            <div class="orb-ring absolute -inset-8 rounded-[3rem] opacity-60 blur-3xl"></div>
+            <div class="card-surface relative overflow-hidden rounded-[2rem] p-3 shadow-glow backdrop-blur-xl">
+              <div class="relative overflow-hidden rounded-[1.55rem] bg-zinc-950">
+                <img
+                  src="assets/product-hero-autonomous-learning.webp"
+                  alt="学生使用星鹿爱学学习平板进行自主学习"
+                  class="h-[560px] w-full object-cover opacity-88"
+                />
+                <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,5,5,0)_36%,rgba(5,5,5,.86)_100%)]"></div>
+                <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                  <div class="grid gap-3 sm:grid-cols-3">
+                    <div class="rounded-2xl border border-white/10 bg-black/50 p-4 backdrop-blur-md">
+                      <p class="text-xs uppercase tracking-[0.22em] text-cyan-200/70">AI Engine</p>
+                      <p class="mt-2 text-lg font-semibold">个性化路径</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-black/50 p-4 backdrop-blur-md">
+                      <p class="text-xs uppercase tracking-[0.22em] text-cyan-200/70">Human Guide</p>
+                      <p class="mt-2 text-lg font-semibold">真人导学</p>
+                    </div>
+                    <div class="rounded-2xl border border-white/10 bg-black/50 p-4 backdrop-blur-md">
+                      <p class="text-xs uppercase tracking-[0.22em] text-cyan-200/70">Operation</p>
+                      <p class="mt-2 text-lg font-semibold">伙伴赋能</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-y border-white/10 bg-white/[0.025] px-6 py-12 lg:px-8">
+        <div class="mx-auto grid max-w-7xl gap-8 text-center sm:grid-cols-3">
+          <div>
+            <p class="gradient-text text-4xl font-semibold tracking-tight">AI + 真人</p>
+            <p class="mt-3 text-sm font-light tracking-wide text-white/56">知识效率与教育温度协同</p>
+          </div>
+          <div class="border-white/10 sm:border-x">
+            <p class="gradient-text text-4xl font-semibold tracking-tight">三端闭环</p>
+            <p class="mt-3 text-sm font-light tracking-wide text-white/56">学生端、导学端、机构端连续反馈</p>
+          </div>
+          <div>
+            <p class="gradient-text text-4xl font-semibold tracking-tight">长期运营</p>
+            <p class="mt-3 text-sm font-light tracking-wide text-white/56">从产品导入到市场复盘持续支持</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="platform" class="relative px-6 py-32 lg:px-8 lg:py-40">
+        <div class="ambient right-[-6rem] top-40 h-96 w-96 bg-indigo-600/30"></div>
+        <div class="mx-auto max-w-7xl">
+          <div class="mx-auto max-w-3xl text-center">
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-200/70">Platform Bento</p>
+            <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+              <span class="gradient-text">不是工具拼接，</span><br />而是一套面向交付的 AI 学习系统
+            </h2>
+            <p class="mt-6 text-lg font-light leading-8 text-white/58">
+              星鹿爱学负责学习路径、知识讲解与即时反馈；逐鹿未来负责场景落地、团队训练与运营支持，让系统能力真正进入机构日常。
+            </p>
+          </div>
+
+          <div class="mt-20 grid gap-5 lg:grid-cols-3">
+            <article class="card-surface group rounded-[2rem] p-8 transition-all duration-300 hover:-translate-y-1 lg:col-span-2">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200">
+                <i data-lucide="brain-circuit" class="h-6 w-6"></i>
+              </div>
+              <h3 class="mt-10 text-3xl font-semibold tracking-tight">AI 学习闭环</h3>
+              <p class="mt-4 max-w-2xl text-base font-light leading-7 text-white/58">
+                以诊断、学习、练习、反馈和复盘构成连续过程，把每一次学习行为转化为可理解、可调整、可追踪的成长线索。
+              </p>
+              <div class="mt-10 grid gap-3 sm:grid-cols-4">
+                <span class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/72">学情识别</span>
+                <span class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/72">路径推荐</span>
+                <span class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/72">即时答疑</span>
+                <span class="rounded-full border border-white/10 bg-white/[0.04] px-4 py-3 text-sm text-white/72">阶段复盘</span>
+              </div>
+            </article>
+
+            <article class="card-surface group rounded-[2rem] p-8 transition-all duration-300 hover:-translate-y-1">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-300/10 text-indigo-200">
+                <i data-lucide="user-round-check" class="h-6 w-6"></i>
+              </div>
+              <h3 class="mt-10 text-3xl font-semibold tracking-tight">真人导学</h3>
+              <p class="mt-4 text-base font-light leading-7 text-white/58">
+                导学老师关注目标、习惯、动力和表达，让孩子不仅完成任务，也逐步形成自主学习能力。
+              </p>
+            </article>
+
+            <article class="card-surface group min-h-[420px] overflow-hidden rounded-[2rem] transition-all duration-300 hover:-translate-y-1">
+              <img src="assets/learning-dashboard.png" alt="星鹿爱学学习数据看板" class="h-56 w-full object-cover object-left-top opacity-90" />
+              <div class="p-8">
+                <h3 class="text-3xl font-semibold tracking-tight">数据看板</h3>
+                <p class="mt-4 text-base font-light leading-7 text-white/58">
+                  用清晰的阶段反馈呈现学了什么、卡在哪里、下一步如何安排，降低沟通成本。
+                </p>
+              </div>
+            </article>
+
+            <article class="card-surface group rounded-[2rem] p-8 transition-all duration-300 hover:-translate-y-1">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-white">
+                <i data-lucide="building-2" class="h-6 w-6"></i>
+              </div>
+              <h3 class="mt-10 text-3xl font-semibold tracking-tight">空间运营</h3>
+              <p class="mt-4 text-base font-light leading-7 text-white/58">
+                面向自习室、托管班、教培机构与区域伙伴，提供产品导入、服务流程和市场素材支持。
+              </p>
+            </article>
+
+            <article class="card-surface group rounded-[2rem] p-8 transition-all duration-300 hover:-translate-y-1 lg:col-span-1">
+              <div class="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200">
+                <i data-lucide="shield-check" class="h-6 w-6"></i>
+              </div>
+              <h3 class="mt-10 text-3xl font-semibold tracking-tight">合规表达</h3>
+              <p class="mt-4 text-base font-light leading-7 text-white/58">
+                聚焦真实产品能力、服务流程和交付标准，不做结果承诺，用长期服务建立信任。
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="workflow" class="relative border-y border-white/10 bg-white/[0.025] px-6 py-32 lg:px-8 lg:py-40">
+        <div class="mx-auto max-w-7xl">
+          <div class="grid gap-16 lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-200/70">Learning Workflow</p>
+              <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+                <span class="gradient-text">从一次学习，</span><br />到一套可持续的成长系统
+              </h2>
+              <p class="mt-6 text-lg font-light leading-8 text-white/58">
+                系统不只记录结果，而是把学习过程拆解为可以被看见、被理解、被调整的连续动作，帮助机构形成标准化服务体验。
+              </p>
+            </div>
+
+            <div class="relative">
+              <div class="absolute left-6 top-8 hidden h-[calc(100%-4rem)] w-px bg-gradient-to-b from-cyan-300/0 via-cyan-300/35 to-cyan-300/0 md:block"></div>
+              <div class="grid gap-5">
+                <div class="card-surface rounded-[1.5rem] p-6 transition-all duration-300 hover:-translate-y-1">
+                  <div class="flex gap-5">
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-cyan-300 text-sm font-bold text-black">01</span>
+                    <div>
+                      <h3 class="text-2xl font-semibold">识别起点</h3>
+                      <p class="mt-2 text-base font-light leading-7 text-white/58">通过学习行为和练习表现识别薄弱点，让孩子和老师先看清当前位置。</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-surface rounded-[1.5rem] p-6 transition-all duration-300 hover:-translate-y-1">
+                  <div class="flex gap-5">
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-sm font-bold text-black">02</span>
+                    <div>
+                      <h3 class="text-2xl font-semibold">生成路径</h3>
+                      <p class="mt-2 text-base font-light leading-7 text-white/58">围绕目标、掌握度和任务节奏安排学习内容，让每次学习更有方向。</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-surface rounded-[1.5rem] p-6 transition-all duration-300 hover:-translate-y-1">
+                  <div class="flex gap-5">
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-indigo-300 text-sm font-bold text-black">03</span>
+                    <div>
+                      <h3 class="text-2xl font-semibold">即时反馈</h3>
+                      <p class="mt-2 text-base font-light leading-7 text-white/58">AI 完成知识讲解、答疑和练习反馈，导学老师关注习惯、动力和表达。</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-surface rounded-[1.5rem] p-6 transition-all duration-300 hover:-translate-y-1">
+                  <div class="flex gap-5">
+                    <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-zinc-200 text-sm font-bold text-black">04</span>
+                    <div>
+                      <h3 class="text-2xl font-semibold">复盘调整</h3>
+                      <p class="mt-2 text-base font-light leading-7 text-white/58">机构用数据和服务记录复盘每周进展，持续优化学习安排和用户沟通。</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="specs" class="px-6 py-32 lg:px-8 lg:py-40">
+        <div class="mx-auto max-w-7xl">
+          <div class="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+            <div>
+              <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-200/70">Enterprise Delivery</p>
+              <h2 class="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-5xl">
+                面向合作伙伴的<br /><span class="gradient-text">系统化交付能力</span>
+              </h2>
+            </div>
+            <p class="text-lg font-light leading-8 text-white/58">
+              从产品演示、合作评估、团队培训到运营陪跑，逐鹿未来把 AI 教育产品转化为可被机构执行的流程、内容和服务标准。
+            </p>
+          </div>
+
+          <div class="mt-16 overflow-hidden rounded-[2rem] border border-white/10">
+            <div class="grid bg-white/[0.035] text-sm font-semibold text-white/52 md:grid-cols-[1fr_1.2fr_1.2fr]">
+              <div class="border-b border-white/10 p-5 md:border-b-0">能力维度</div>
+              <div class="border-b border-white/10 p-5 md:border-b-0 md:border-l">传统工具式交付</div>
+              <div class="p-5 md:border-l">逐鹿未来运营式交付</div>
+            </div>
+            <div class="grid md:grid-cols-[1fr_1.2fr_1.2fr]">
+              <div class="border-t border-white/10 p-6 text-lg font-semibold">产品导入</div>
+              <div class="border-t border-white/10 p-6 text-white/52 md:border-l">提供系统账号和基础说明，由机构自行摸索场景。</div>
+              <div class="border-t border-white/10 p-6 text-white/78 md:border-l">结合场地、用户和团队结构，完成演示、定位和启动建议。</div>
+              <div class="border-t border-white/10 p-6 text-lg font-semibold">服务训练</div>
+              <div class="border-t border-white/10 p-6 text-white/52 md:border-l">仅培训功能操作，难以沉淀服务标准。</div>
+              <div class="border-t border-white/10 p-6 text-white/78 md:border-l">围绕导学方法、家长沟通、数据复盘和岗位协作进行系统培训。</div>
+              <div class="border-t border-white/10 p-6 text-lg font-semibold">市场支持</div>
+              <div class="border-t border-white/10 p-6 text-white/52 md:border-l">素材零散，表达口径不稳定。</div>
+              <div class="border-t border-white/10 p-6 text-white/78 md:border-l">提供合规品牌内容、招生工具、活动方案和区域触达建议。</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="relative px-6 pb-12 lg:px-8">
+        <div class="ambient left-1/2 top-8 h-96 w-96 -translate-x-1/2 bg-cyan-400/25"></div>
+        <div class="relative mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/[0.045] p-8 text-center shadow-glow backdrop-blur md:p-16 lg:p-20">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-cyan-200/70">Next Step</p>
+          <h2 class="mx-auto mt-5 max-w-4xl text-balance text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
+            <span class="gradient-text">让星鹿爱学进入你的运营场景</span>
+          </h2>
+          <p class="mx-auto mt-6 max-w-2xl text-lg font-light leading-8 text-white/60">
+            预约一次产品演示，了解 AI 学习系统、真人导学方法和合作支持如何匹配你的城市、场地与团队。
+          </p>
+          <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <a
+              href="mailto:contact@zulonex.com"
+              class="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-white px-8 py-4 text-base font-semibold text-black shadow-button transition-all duration-300 hover:scale-[1.03] hover:bg-cyan-50 sm:w-auto"
+            >
+              contact@zulonex.com
+              <i data-lucide="send" class="h-5 w-5 transition-all duration-300 group-hover:translate-x-1"></i>
+            </a>
+            <a
+              href="tel:4000000000"
+              class="inline-flex w-full items-center justify-center gap-3 rounded-full border border-white/10 bg-black/30 px-8 py-4 text-base font-semibold text-white transition-all duration-300 hover:scale-[1.03] hover:border-white/22 hover:bg-white/[0.08] sm:w-auto"
+            >
+              商务热线咨询
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="border-t border-white/10 px-6 py-10 lg:px-8">
+      <div class="mx-auto flex max-w-7xl flex-col gap-6 text-sm text-white/42 md:flex-row md:items-center md:justify-between">
+        <div class="flex items-center gap-3">
+          <img src="assets/logo-light.svg" alt="逐鹿未来" class="h-7 w-auto opacity-90" />
+          <span>重塑学习，逐鹿未来</span>
+        </div>
+        <div class="flex flex-wrap gap-5">
+          <span>© <span id="year"></span> 安徽逐鹿未来智能科技有限公司</span>
+          <a href="mailto:contact@zulonex.com" class="transition-all duration-300 hover:text-white">联系商务</a>
+          <a href="#top" class="transition-all duration-300 hover:text-white">返回顶部</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      if (window.lucide) {
+        lucide.createIcons({
+          attrs: {
+            "stroke-width": 1.8
+          }
+        });
+      }
+      const year = document.getElementById("year");
+      if (year) {
+        year.textContent = new Date().getFullYear();
+      }
+    </script>
+  </body>
+</html>

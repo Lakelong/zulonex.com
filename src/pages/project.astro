@@ -1,0 +1,151 @@
+---
+import learningCenter from "@/assets/editorial/learning-center-v2.webp";
+import productHero from "@/assets/editorial/product-hero-autonomous-learning.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import { site } from "@/data/site";
+
+const threeEnds = [
+  { icon: "Tablet", title: "学生端", text: "自主学习、AI 问答、自适应练习、错题复盘。" },
+  { icon: "UserRoundCheck", title: "导学端", text: "任务查看、过程提醒、阶段复盘、服务跟进。" },
+  { icon: "ChartNoAxesCombined", title: "家长端", text: "周度月度报告，让学习过程被看见。" }
+];
+
+const model = [
+  { number: "01", title: "产品导入", text: "讲清星鹿爱学的能力、边界和适用场景。" },
+  { number: "02", title: "场景启动", text: "匹配场地、团队、用户基础和服务节奏。" },
+  { number: "03", title: "运营交付", text: "把导学、反馈、活动和复盘变成日常动作。" },
+  { number: "04", title: "持续优化", text: "围绕数据、家长反馈和市场表现迭代。" }
+];
+
+const support = [
+  { icon: "BadgeCheck", title: "授权与素材", text: "提供合规项目介绍、产品演示和传播素材。" },
+  { icon: "GraduationCap", title: "团队培训", text: "帮助合作团队理解产品、岗位和服务方法。" },
+  { icon: "Workflow", title: "流程工具", text: "沉淀启动、导学、家长沟通和复盘模板。" },
+  { icon: "Network", title: "市场协同", text: "围绕本地化推广和线索承接建立协同机制。" }
+];
+---
+
+<BaseLayout
+  title={`项目介绍 | ${site.name}`}
+  description="逐鹿未来围绕星鹿爱学 AI 智慧学习方案，面向自主学习空间组织产品、导学、运营与用户交付服务。"
+>
+  <section class="relative -mt-[72px] min-h-[680px] overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <img
+      src={productHero.src}
+      width={productHero.width}
+      height={productHero.height}
+      alt="学生手持学习平板，在自主学习空间中专注学习"
+      class="absolute inset-0 h-full w-full object-cover object-[66%_center]"
+      data-parallax="0.055"
+      data-parallax-max="38"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,18,74,.97)_0%,rgba(6,18,74,.80)_44%,rgba(6,18,74,.18)_100%)]"></div>
+    <div class="container-page relative flex min-h-[680px] items-center py-16">
+      <div class="max-w-3xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/66">Project</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-[1.06] text-white sm:text-5xl md:text-7xl">
+          星鹿爱学项目面向自主学习空间落地
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-white/78 md:text-xl md:leading-9">
+          项目的核心不是采购一套系统，而是把 AI 学习、真人导学和运营服务组合成一套可持续的学习空间方案。
+        </p>
+        <a class="motion-link mt-9 inline-flex items-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist" href="/contact/">
+          预约项目沟通
+          <Icon name="ArrowRight" size={20} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page grid gap-12 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Three Ends</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-6xl">
+          三端导学让学习服务可视化
+        </h2>
+        <p class="mt-6 text-lg leading-8 text-muted">
+          学生、导学老师、家长围绕同一学习过程协同，机构才能把 AI 能力转化为稳定服务。
+        </p>
+      </div>
+      <div class="grid border-y border-ink/12 md:grid-cols-3" data-reveal="soft">
+        {threeEnds.map((item, index) => (
+          <article class:list={["py-9 md:px-8", index > 0 && "border-t border-ink/12 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}>
+            <Icon name={item.icon} class="text-sea" size={38} />
+            <h3 class="mt-7 text-3xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-4 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="relative min-h-[600px] overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <img
+      src={learningCenter.src}
+      width={learningCenter.width}
+      height={learningCenter.height}
+      alt="现代自主学习空间中的学生与导学老师"
+      class="absolute inset-0 h-full w-full object-cover"
+      data-parallax="0.05"
+      data-parallax-max="36"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,18,74,.94)_0%,rgba(6,18,74,.60)_52%,rgba(6,18,74,.10)_100%)]"></div>
+    <div class="container-page relative grid min-h-[600px] items-end gap-12 py-16 md:items-center lg:grid-cols-[0.78fr_1fr]">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/60">Operating Model</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-white md:text-6xl">
+          从产品引入到日常经营
+        </h2>
+      </div>
+      <div class="grid border-y border-white/16 md:grid-cols-2" data-reveal="soft">
+        {model.map((item, index) => (
+          <article class:list={["py-8 md:px-7", index > 1 && "border-t border-white/16", index % 2 === 1 && "md:border-l", index === 0 && "md:pl-0"]}>
+            <p class="text-sm font-semibold text-white/46">{item.number}</p>
+            <h3 class="mt-5 text-2xl font-semibold text-white">{item.title}</h3>
+            <p class="mt-3 text-base leading-7 text-white/68">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Enablement"
+        title="合作伙伴需要的是一套启动能力"
+        description="逐鹿未来提供产品、培训、流程和市场协同支持，帮助项目进入真实运营。"
+      />
+      <div class="mt-14 grid border-l border-t border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
+        {support.map((item, index) => (
+          <article
+            class="border-b border-r border-ink/12 bg-white p-7 md:p-8"
+            data-reveal="soft"
+            style={`--reveal-delay: ${(index % 4) * 55}ms`}
+          >
+            <Icon name={item.icon} class="text-sea" size={36} />
+            <h3 class="mt-7 text-2xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-4 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-16 md:py-20">
+    <div class="container-page grid gap-6 border-y border-ink/12 py-9 md:grid-cols-[0.72fr_1.28fr] md:items-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Boundary</p>
+      <p class="text-lg leading-8 text-muted">
+        本页用于项目公开介绍。产品功能、授权范围、合作政策、服务边界和费用安排，以正式授权材料、实际交付版本及双方签署文件为准。
+      </p>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

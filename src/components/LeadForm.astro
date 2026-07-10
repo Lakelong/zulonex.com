@@ -1,0 +1,281 @@
+---
+import Icon from "@/components/Icon.astro";
+
+const roles = ["机构负责人", "区域渠道", "校区运营", "投资/创业者", "其他"];
+const cooperationTypes = ["产品演示", "机构合作", "区域合作", "运营咨询", "资料索取"];
+---
+
+<form class="lead-form grid gap-6 border border-ink/10 bg-white p-6 shadow-tight md:p-9" data-lead-form novalidate>
+  <div class="lead-success" data-success-panel hidden tabindex="-1">
+    <div class="grid h-12 w-12 shrink-0 place-items-center bg-sea text-white">
+      <Icon name="Check" size={25} />
+    </div>
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Submitted</p>
+      <h3 class="mt-1 text-2xl font-semibold text-ink">预约已提交</h3>
+      <p class="mt-2 text-base leading-7 text-muted">
+        我们已收到你的预约信息，运营顾问会结合城市、机构类型和合作诉求安排后续沟通。
+      </p>
+    </div>
+  </div>
+
+  <div class="grid gap-5 md:grid-cols-2">
+    <label class="grid gap-2 text-base font-medium text-ink">
+      姓名
+      <input class="field" name="name" required placeholder="请输入姓名" autocomplete="name" />
+    </label>
+    <label class="grid gap-2 text-base font-medium text-ink">
+      手机号
+      <input class="field" name="phone" required inputmode="tel" placeholder="用于演示沟通" autocomplete="tel" />
+    </label>
+    <label class="grid gap-2 text-base font-medium text-ink">
+      机构名称
+      <input class="field" name="organization" required placeholder="机构/公司/团队名称" />
+    </label>
+    <label class="grid gap-2 text-base font-medium text-ink">
+      所在城市
+      <input class="field" name="city" required placeholder="例如：杭州" />
+    </label>
+    <label class="grid gap-2 text-base font-medium text-ink">
+      身份角色
+      <select class="field" name="role" required>
+        <option value="">请选择</option>
+        {roles.map((role) => <option value={role}>{role}</option>)}
+      </select>
+    </label>
+    <label class="grid gap-2 text-base font-medium text-ink">
+      合作类型
+      <select class="field" name="cooperationType" required>
+        <option value="">请选择</option>
+        {cooperationTypes.map((type) => <option value={type}>{type}</option>)}
+      </select>
+    </label>
+  </div>
+
+  <label class="grid gap-2 text-base font-medium text-ink">
+    需求描述
+    <textarea
+      class="field min-h-28 resize-y"
+      name="message"
+      required
+      placeholder="请简单说明你的场景、规模、希望了解的问题"
+    ></textarea>
+  </label>
+
+  <label class="flex items-start gap-3 text-sm leading-6 text-muted">
+    <input class="mt-1 h-4 w-4 rounded border-ink/20 text-sea focus:ring-sea" type="checkbox" name="privacy" required />
+    <span>
+      我已阅读并同意<a class="font-semibold text-sea hover:text-ink" href="/privacy/" target="_blank">《隐私政策》</a>，授权逐鹿未来为预约演示和合作沟通目的联系我，并知悉产品功能与服务以正式资料和实际版本为准。
+    </span>
+  </label>
+
+  <div class="lead-feedback lead-feedback-neutral" role="status" aria-live="polite" data-form-status>
+    <Icon name="Info" size={18} />
+    <span data-status-text>提交后我们会尽快与你联系</span>
+  </div>
+
+  <div class="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <button
+      class="lead-submit inline-flex w-fit items-center justify-center gap-2 bg-sea px-6 py-3.5 text-base font-semibold text-white transition hover:bg-ink disabled:cursor-wait disabled:bg-sea/70"
+      type="submit"
+      data-submit-button
+    >
+      <span class="inline-flex items-center gap-2" data-submit-idle>
+        <Icon name="Send" size={17} />
+        提交预约
+      </span>
+      <span class="hidden items-center gap-2" data-submit-loading>
+        <span class="lead-spinner" aria-hidden="true"></span>
+        正在提交
+      </span>
+    </button>
+    <p class="text-sm leading-6 text-muted">通常会在 1 个工作日内完成初步联系。</p>
+  </div>
+</form>
+
+<script>
+  const forms = document.querySelectorAll<HTMLFormElement>("[data-lead-form]");
+  const phonePattern = /^1[3-9]\d{9}$/;
+
+  forms.forEach((form) => {
+    const status = form.querySelector<HTMLElement>("[data-form-status]");
+    const statusText = form.querySelector("[data-status-text]");
+    const button = form.querySelector<HTMLButtonElement>("[data-submit-button]");
+    const idle = form.querySelector("[data-submit-idle]");
+    const loading = form.querySelector("[data-submit-loading]");
+    const successPanel = form.querySelector<HTMLElement>("[data-success-panel]");
+    const phoneField = form.querySelector<HTMLInputElement>('input[name="phone"]');
+    const privacyField = form.querySelector<HTMLInputElement>('input[name="privacy"]');
+
+    const setStatus = (type: "neutral" | "loading" | "success" | "error", message: string) => {
+      status?.classList.remove("lead-feedback-neutral", "lead-feedback-loading", "lead-feedback-success", "lead-feedback-error");
+      status?.classList.add(`lead-feedback-${type}`);
+      if (statusText) statusText.textContent = message;
+    };
+
+    const setLoading = (isLoading: boolean) => {
+      if (button) button.disabled = isLoading;
+      idle?.classList.toggle("hidden", isLoading);
+      idle?.classList.toggle("inline-flex", !isLoading);
+      loading?.classList.toggle("hidden", !isLoading);
+      loading?.classList.toggle("inline-flex", isLoading);
+      form.dataset.state = isLoading ? "loading" : "idle";
+    };
+
+    const validateRequiredFields = () => {
+      const firstInvalid = Array.from(form.elements).find((element) => {
+        if (!(element instanceof HTMLInputElement || element instanceof HTMLSelectElement || element instanceof HTMLTextAreaElement)) return false;
+        return element.required && !element.value.trim() && element.type !== "checkbox";
+      });
+
+      if (firstInvalid instanceof HTMLElement) {
+        firstInvalid.focus();
+        setStatus("error", "请先完整填写预约信息");
+        return false;
+      }
+
+      return true;
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      successPanel?.setAttribute("hidden", "");
+
+      if (!validateRequiredFields()) return;
+
+      const data = Object.fromEntries(new FormData(form));
+      const phone = String(data.phone ?? "").trim();
+
+      if (!phonePattern.test(phone)) {
+        setStatus("error", "请填写有效的中国大陆手机号");
+        phoneField?.focus();
+        return;
+      }
+
+      if (!data.privacy) {
+        setStatus("error", "请先确认隐私与沟通授权");
+        privacyField?.focus();
+        return;
+      }
+
+      setLoading(true);
+      setStatus("loading", "正在安全提交预约信息");
+
+      try {
+        const response = await fetch("/api/leads", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result?.message || "提交失败");
+        }
+
+        form.reset();
+        successPanel?.removeAttribute("hidden");
+        successPanel?.focus({ preventScroll: true });
+        successPanel?.scrollIntoView({ behavior: "smooth", block: "center" });
+        setStatus("success", result?.message || "预约已提交 我们会尽快联系你");
+      } catch (error) {
+        setStatus("error", error instanceof Error ? error.message : "提交失败 请稍后再试");
+      } finally {
+        setLoading(false);
+      }
+    });
+  });
+</script>
+
+<style>
+  .lead-form {
+    position: relative;
+  }
+
+  .lead-success {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    border: 1px solid rgba(31, 97, 255, 0.18);
+    background:
+      radial-gradient(circle at 0% 0%, rgba(31, 97, 255, 0.12), rgba(31, 97, 255, 0) 34%),
+      #f8fbff;
+    padding: 22px;
+    box-shadow: 0 18px 52px rgba(6, 18, 74, 0.08);
+  }
+
+  .lead-success[hidden] {
+    display: none;
+  }
+
+  .lead-feedback {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    border: 1px solid rgba(6, 18, 74, 0.10);
+    padding: 13px 15px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.6;
+    transition:
+      border-color 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .lead-feedback-neutral {
+    background: #f6f9ff;
+    color: #52646c;
+  }
+
+  .lead-feedback-loading {
+    border-color: rgba(31, 97, 255, 0.24);
+    background: rgba(31, 97, 255, 0.07);
+    color: #0c3fb4;
+  }
+
+  .lead-feedback-success {
+    border-color: rgba(31, 97, 255, 0.28);
+    background: rgba(31, 97, 255, 0.08);
+    color: #06124a;
+  }
+
+  .lead-feedback-error {
+    border-color: rgba(210, 57, 57, 0.24);
+    background: rgba(210, 57, 57, 0.07);
+    color: #9a1c1c;
+  }
+
+  .lead-submit {
+    min-width: 136px;
+  }
+
+  .lead-spinner {
+    width: 17px;
+    height: 17px;
+    border: 2px solid rgba(255, 255, 255, 0.42);
+    border-top-color: #ffffff;
+    border-radius: 999px;
+    animation: lead-spin 820ms linear infinite;
+  }
+
+  @keyframes lead-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .lead-success {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lead-spinner {
+      animation: none;
+    }
+  }
+</style>

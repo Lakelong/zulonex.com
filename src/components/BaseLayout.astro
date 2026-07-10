@@ -1,0 +1,125 @@
+---
+import "../styles/global.css";
+import brandBg from "@/assets/brand/brand-bg-blue.webp";
+import logoBlue from "@/assets/brand/logo-blue.svg";
+import SiteFooter from "@/components/SiteFooter.astro";
+import SiteHeader from "@/components/SiteHeader.astro";
+import { site } from "@/data/site";
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  path = Astro.url.pathname,
+  noindex = false
+} = Astro.props;
+
+const canonical = new URL(path, Astro.site ?? "https://zulonex.com").toString();
+const socialImage = new URL(brandBg.src, Astro.site ?? "https://zulonex.com").toString();
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: "https://zulonex.com",
+  logo: new URL(logoBlue.src, Astro.site ?? "https://zulonex.com").toString(),
+  description: site.description,
+  email: site.email,
+  slogan: site.tagline,
+  brand: [
+    {
+      "@type": "Brand",
+      name: "星鹿爱学"
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={site.keywords} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:site_name" content={site.name} />
+    <meta name="twitter:card" content="summary_large_image" />
+    {noindex && <meta name="robots" content="noindex,nofollow" />}
+    <meta name="theme-color" content="#f6f9ff" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <SiteHeader />
+    <main class="pt-[72px]">
+      <slot />
+    </main>
+    <SiteFooter />
+    <script>
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (!reduceMotion) {
+        document.documentElement.classList.add("motion-ready");
+
+        const revealObserver = new IntersectionObserver(
+          (entries, observer) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.08 }
+        );
+
+        document.querySelectorAll("[data-reveal]").forEach((element) => revealObserver.observe(element));
+
+        const parallaxItems = Array.from(document.querySelectorAll<HTMLElement>("[data-parallax]"));
+        if (parallaxItems.length && window.matchMedia("(min-width: 768px)").matches) {
+          let parallaxFrame = 0;
+
+          const updateParallax = () => {
+            parallaxItems.forEach((element) => {
+              const rect = element.getBoundingClientRect();
+              if (rect.bottom < -120 || rect.top > window.innerHeight + 120) return;
+
+              const speed = Number(element.dataset.parallax || 0.06);
+              const max = Number(element.dataset.parallaxMax || 44);
+              const distance = rect.top + rect.height / 2 - window.innerHeight / 2;
+              const offset = Math.max(-max, Math.min(max, distance * -speed));
+              element.style.setProperty("--parallax-y", `${offset.toFixed(2)}px`);
+            });
+            parallaxFrame = 0;
+          };
+
+          const scheduleParallax = () => {
+            if (parallaxFrame) return;
+            parallaxFrame = window.requestAnimationFrame(updateParallax);
+          };
+
+          updateParallax();
+          window.addEventListener("scroll", scheduleParallax, { passive: true });
+          window.addEventListener("resize", scheduleParallax);
+        }
+      } else {
+        document.querySelectorAll("[data-reveal]").forEach((element) => element.classList.add("is-visible"));
+        document.querySelectorAll<HTMLVideoElement>("[data-hero-video]").forEach((video) => {
+          video.pause();
+          video.removeAttribute("autoplay");
+        });
+      }
+    </script>
+  </body>
+</html>

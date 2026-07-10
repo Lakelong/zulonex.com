@@ -1,0 +1,114 @@
+---
+import brandBg from "@/assets/brand/brand-bg-blue.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import { site } from "@/data/site";
+
+const roles = [
+  {
+    icon: "Store",
+    title: "经销商",
+    text: "进入合作业务、运营支持与授权资料空间。"
+  },
+  {
+    icon: "UsersRound",
+    title: "交付中心",
+    text: "进入交付协同、学习服务与团队工作台。"
+  },
+  {
+    icon: "Building2",
+    title: "总部",
+    text: "进入总部运营与系统管理应用。"
+  }
+];
+---
+
+<BaseLayout
+  title={`商家登录 | ${site.name}`}
+  description="逐鹿未来统一商家工作台入口，根据账户角色、合作状态与当前设备进入对应业务应用。"
+  noindex={true}
+>
+  <section
+    class="relative -mt-[72px] min-h-[620px] overflow-hidden bg-ink pb-20 pt-[144px] text-white md:pb-28 md:pt-[168px]"
+    data-nav-theme="dark"
+    style={`background-image: linear-gradient(112deg, rgba(6,18,74,.97), rgba(31,97,255,.72)), url(${brandBg.src}); background-size: cover; background-position: center;`}
+  >
+    <div class="container-page grid gap-14 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+      <div class="max-w-3xl" data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/60">Zulonex Business</p>
+        <h1 class="mt-5 text-balance text-4xl font-semibold leading-[1.06] sm:text-5xl md:text-7xl">
+          一个入口<br />进入你的工作台
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-white/76 md:text-xl">
+          登录后由业务系统识别组织、角色与合作状态，并根据当前设备进入对应工作空间。
+        </p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a
+            href={site.businessLoginUrl}
+            class="motion-link inline-flex items-center justify-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist"
+            data-business-login
+          >
+            进入商家工作台
+            <Icon name="ArrowUpRight" size={19} />
+          </a>
+          <a
+            href="/contact/"
+            class="inline-flex items-center justify-center gap-2 border border-white/30 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/10"
+          >
+            登录遇到问题
+          </a>
+        </div>
+      </div>
+
+      <div class="border-y border-white/18" data-reveal="soft">
+        {roles.map((role, index) => (
+          <div class:list={["grid grid-cols-[42px_1fr] gap-4 py-6", index > 0 && "border-t border-white/18"]}>
+            <Icon name={role.icon} class="text-white" size={28} />
+            <div>
+              <h2 class="text-xl font-semibold text-white">{role.title}</h2>
+              <p class="mt-2 text-sm leading-6 text-white/62">{role.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-16 md:py-20">
+    <div class="container-page grid border-y border-ink/12 md:grid-cols-3">
+      {[
+        { icon: "ScanFace", title: "账户识别角色", text: "无需在官网手动选择身份，避免进入错误系统。" },
+        { icon: "MonitorSmartphone", title: "自动适配终端", text: "电脑进入桌面工作台，手机进入移动体验。" },
+        { icon: "ShieldCheck", title: "权限统一管理", text: "菜单、数据与资料权限均由业务系统实时校验。" }
+      ].map((item, index) => (
+        <article class:list={["py-8 md:px-8", index > 0 && "border-t border-ink/12 md:border-l md:border-t-0", index === 0 && "md:pl-0"]} data-reveal="soft">
+          <Icon name={item.icon} class="text-sea" size={30} />
+          <h2 class="mt-5 text-xl font-semibold text-ink">{item.title}</h2>
+          <p class="mt-2 text-sm leading-6 text-muted">{item.text}</p>
+        </article>
+      ))}
+    </div>
+    <p class="container-page mt-7 text-sm leading-6 text-muted">
+      账户开通、角色调整、合作状态与访问范围由 ZULONEX 业务系统统一管理。
+    </p>
+  </section>
+
+  <script is:inline define:vars={{ businessLoginUrl: site.businessLoginUrl }}>
+    const loginLinks = Array.from(document.querySelectorAll("[data-business-login]"));
+
+    loginLinks.forEach((loginLink) => {
+      if (!(loginLink instanceof HTMLAnchorElement)) return;
+
+      try {
+        const target = new URL(businessLoginUrl, window.location.origin);
+        const mobile = window.matchMedia("(max-width: 767px)").matches;
+        target.searchParams.set("source", "zulonex.com");
+        target.searchParams.set("terminal", mobile ? "mobile" : "desktop");
+        target.searchParams.set("target", "auto");
+        loginLink.href = target.toString();
+      } catch {
+        loginLink.href = businessLoginUrl;
+      }
+    });
+  </script>
+</BaseLayout>

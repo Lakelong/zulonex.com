@@ -1,0 +1,477 @@
+---
+import brandBg from "@/assets/brand/brand-bg-blue.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import { cooperationModel as model } from "@/data/cooperationModel";
+import { site } from "@/data/site";
+import { cooperationAccessCookie, verifyCooperationAccessToken } from "@/lib/cooperationAccess";
+
+export const prerender = false;
+
+const accessToken = Astro.cookies.get(cooperationAccessCookie)?.value;
+const unlocked = Boolean(verifyCooperationAccessToken(accessToken));
+const tableHead = ["套餐", "套餐售价", "机构收入", "总部收入", "机构比例/说明"];
+const annualTotal = model.annualModel.reduce((sum, item) => {
+  const numeric = Number(item.partnerIncome.replace(/[^\d.]/g, ""));
+  return sum + (Number.isFinite(numeric) ? numeric : 0);
+}, 0);
+---
+
+<BaseLayout
+  title={`最新合作模式 | ${site.name}`}
+  description="星鹿爱学机构合作方案访问验证页，完成手机号验证后查看最新合作模式。"
+  path="/cooperation/latest-model/"
+  noindex={true}
+>
+  <section
+    class="relative -mt-[72px] min-h-[560px] overflow-hidden bg-ink text-white md:min-h-[620px]"
+    data-nav-theme="dark"
+    style={`background-image: linear-gradient(112deg, rgba(6,18,74,.98), rgba(31,97,255,.62)), url(${brandBg.src}); background-size: cover; background-position: center;`}
+  >
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_76%_24%,rgba(255,255,255,.18)_0%,rgba(255,255,255,0)_28%)]"></div>
+    <div class:list={["container-page relative grid min-h-[560px] gap-12 pb-16 pt-[128px] md:min-h-[620px]", unlocked ? "items-center lg:grid-cols-[1fr_0.36fr]" : "items-center lg:grid-cols-[0.9fr_0.72fr]"]}>
+      <div class="max-w-4xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/64">Partner Mode · 受控合作资料</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-7xl">
+          {model.title}
+        </h1>
+        <p class="mt-6 max-w-2xl text-xl font-semibold leading-8 text-white/86">{model.subtitle}</p>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-white/70">{model.summary}</p>
+      </div>
+
+      {unlocked ? (
+        <div class="border-y border-white/18 py-7 text-sm leading-7 text-white/70 lg:mt-12" data-reveal="soft" style="--reveal-delay: 100ms">
+          <p class="font-semibold text-white">合作资料</p>
+          <p class="mt-1">资料版本：{model.version}</p>
+          <p class="mt-1">具体政策以正式协议及最新授权文件为准。</p>
+        </div>
+      ) : (
+        <form
+          class="surface border-white/18 bg-white/94 p-6 text-ink shadow-[0_24px_80px_rgba(3,10,42,.22)] sm:p-8"
+          data-access-form
+          data-reveal="soft"
+          style="--reveal-delay: 100ms"
+        >
+          <div class="flex items-start gap-4">
+            <span class="grid h-12 w-12 shrink-0 place-items-center bg-sea text-white">
+              <Icon name="ShieldCheck" size={26} />
+            </span>
+            <div>
+              <h2 class="text-2xl font-semibold text-ink">手机安全验证</h2>
+              <p class="mt-2 text-sm leading-6 text-muted">输入手机号后可查看机构合作方案。系统会记录访问时间、手机号、IP 与浏览器信息，用于内部资料访问审计。</p>
+            </div>
+          </div>
+          <label class="mt-7 block">
+            <span class="text-sm font-semibold text-ink">手机号</span>
+            <input class="field mt-2" type="tel" name="phone" inputmode="numeric" autocomplete="tel" placeholder="请输入中国大陆手机号" required />
+          </label>
+          <button class="motion-link mt-5 inline-flex w-full items-center justify-center gap-2 bg-ink px-6 py-3.5 text-base font-semibold text-white transition hover:bg-sea" type="submit">
+            查看合作方案
+            <Icon name="ArrowRight" size={18} />
+          </button>
+          <p class="mt-4 min-h-6 text-sm leading-6 text-muted" data-access-message>资料仅供合作沟通使用，请勿外传。</p>
+        </form>
+      )}
+    </div>
+  </section>
+
+  {unlocked && (
+    <>
+      <nav class="no-scrollbar sticky top-[72px] z-40 overflow-x-auto border-y border-ink/10 bg-white/95 backdrop-blur-xl" aria-label="合作模式资料导航">
+        <div class="container-page no-scrollbar overflow-x-auto py-4">
+          <div class="flex min-w-max items-center gap-8 text-sm font-semibold text-muted">
+            <a class="transition hover:text-sea" href="#overview">模式概览</a>
+            <a class="transition hover:text-sea" href="#packages">套餐价格</a>
+            <a class="transition hover:text-sea" href="#revenue">分成场景</a>
+            <a class="transition hover:text-sea" href="#requirements">门槛扶持</a>
+            <a class="transition hover:text-sea" href="#timeline">合作流程</a>
+          </div>
+        </div>
+      </nav>
+
+      <section id="overview" class="page-band scroll-mt-32 bg-white py-20 md:py-28">
+        <div class="container-page">
+          <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+            <div data-reveal="soft">
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Cooperation Model</p>
+              <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+                4.98 万履约保证金进入联合运营模式
+              </h2>
+            </div>
+            <p class="max-w-2xl text-lg leading-8 text-muted" data-reveal="soft">
+              这不是单纯卖设备或加盟授权，而是用产品、导学、客源、运营和本地机构服务共同完成交付。
+            </p>
+          </div>
+
+          <div class="mt-14 grid border-l border-t border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
+            {model.highlights.map((item, index) => (
+              <article class="border-b border-r border-ink/12 p-7 sm:p-8" data-reveal="soft" style={`--reveal-delay: ${(index % 4) * 55}ms`}>
+                <p class="text-sm font-semibold text-sea">{item.label}</p>
+                <h3 class="mt-4 text-3xl font-semibold text-ink">{item.value}</h3>
+                <p class="mt-4 text-sm leading-7 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div class="mt-16 grid gap-6 md:grid-cols-3">
+            {model.overview.map((item) => (
+              <article class="interactive-card border border-ink/12 bg-mist p-7 sm:p-8" data-reveal="soft">
+                <h3 class="text-2xl font-semibold text-ink">{item.title}</h3>
+                <p class="mt-4 text-base leading-8 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div class="mt-16 grid gap-8 lg:grid-cols-2">
+            <article class="border-y border-ink/12 py-8" data-reveal="soft">
+              <div class="flex items-center gap-3">
+                <Icon name="PackageCheck" class="text-sea" size={30} />
+                <h3 class="text-2xl font-semibold text-ink">总部提供</h3>
+              </div>
+              <ul class="mt-7 grid gap-4 text-base leading-7 text-muted">
+                {model.headquartersProvides.map((item) => (
+                  <li class="grid grid-cols-[20px_1fr] gap-3">
+                    <Icon name="Check" class="mt-1 text-sea" size={18} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+            <article class="border-y border-ink/12 py-8" data-reveal="soft" style="--reveal-delay: 80ms">
+              <div class="flex items-center gap-3">
+                <Icon name="Building2" class="text-sea" size={30} />
+                <h3 class="text-2xl font-semibold text-ink">机构提供</h3>
+              </div>
+              <ul class="mt-7 grid gap-4 text-base leading-7 text-muted">
+                {model.partnerProvides.map((item) => (
+                  <li class="grid grid-cols-[20px_1fr] gap-3">
+                    <Icon name="Check" class="mt-1 text-sea" size={18} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </div>
+
+          <div class="mt-16 border-y border-ink/12">
+            {model.startSteps.map((item, index) => (
+              <article class="grid gap-4 border-b border-ink/12 py-7 sm:grid-cols-[72px_0.72fr_1fr] sm:items-start" data-reveal="soft" style={`--reveal-delay: ${index * 45}ms`}>
+                <p class="text-sm font-semibold text-sea">0{index + 1}</p>
+                <h3 class="text-2xl font-semibold text-ink">{item.title}</h3>
+                <p class="text-base leading-8 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="packages" class="page-band scroll-mt-32 bg-mist py-20 md:py-28">
+        <div class="container-page">
+          <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+            <div data-reveal="soft">
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Packages</p>
+              <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+                三档课程包对应不同服务周期
+              </h2>
+            </div>
+            <p class="max-w-2xl text-lg leading-8 text-muted" data-reveal="soft">
+              套餐价格由系统服务、学习终端、账号、导学服务和运维成本共同构成。
+            </p>
+          </div>
+
+          <div class="mt-14 grid gap-5 lg:grid-cols-3">
+            {model.packages.map((item, index) => (
+              <article class="interactive-card border border-ink/12 bg-white p-7 sm:p-8" data-reveal="soft" style={`--reveal-delay: ${index * 60}ms`}>
+                <p class="text-sm font-semibold text-sea">{item.plan}</p>
+                <h3 class="mt-3 text-2xl font-semibold text-ink">{item.name}</h3>
+                <p class="mt-6 text-4xl font-semibold text-ink">{item.price}</p>
+                <div class="mt-7 grid grid-cols-2 border-y border-ink/12 py-5 text-sm">
+                  <p>
+                    <span class="block text-muted">服务周期</span>
+                    <span class="mt-1 block font-semibold text-ink">{item.period}</span>
+                  </p>
+                  <p class="border-l border-ink/12 pl-5">
+                    <span class="block text-muted">在线支持</span>
+                    <span class="mt-1 block font-semibold text-ink">{item.support}</span>
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="mt-12 max-w-full overflow-x-auto border border-ink/12 bg-white" data-reveal="soft">
+            <table class="w-full min-w-[760px] border-collapse text-left text-sm">
+              <thead class="bg-ink text-white">
+                <tr>
+                  {["套餐", "售价", "系统服务费", "交付总费用", "可分配收益"].map((head) => (
+                    <th class="px-5 py-4 font-semibold">{head}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {model.costStructure.map((item) => (
+                  <tr class="border-b border-ink/10 last:border-b-0">
+                    <td class="px-5 py-4 font-semibold text-ink">{item.plan}</td>
+                    <td class="px-5 py-4 text-muted">{item.price}</td>
+                    <td class="px-5 py-4 text-muted">{item.system}</td>
+                    <td class="px-5 py-4 text-muted">{item.delivery}</td>
+                    <td class="px-5 py-4 font-semibold text-sea">{item.gross}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-10 grid gap-5 md:grid-cols-3">
+            {model.trialCourse.map((item, index) => (
+              <article class="border-y border-ink/12 py-7 md:px-6" data-reveal="soft" style={`--reveal-delay: ${index * 55}ms`}>
+                <p class="text-sm font-semibold text-sea">39.9 体验课 · 0{index + 1}</p>
+                <h3 class="mt-3 text-2xl font-semibold text-ink">{item.title}</h3>
+                <p class="mt-3 text-base leading-7 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="revenue" class="page-band scroll-mt-32 bg-white py-20 md:py-28">
+        <div class="container-page">
+          <div class="max-w-3xl" data-reveal="soft">
+            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Revenue Logic</p>
+            <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+              谁贡献客资谁获得更高收益
+            </h2>
+            <p class="mt-6 text-lg leading-8 text-muted">
+              分成核心取决于客资来源：机构自有生源收益最高，总部推流客资按对应场景结算。
+            </p>
+          </div>
+
+          <div class="mt-14 max-w-full overflow-x-auto border border-ink/12 bg-white" data-reveal="soft">
+            <table class="w-full min-w-[860px] border-collapse text-left text-sm">
+              <thead class="bg-mist text-ink">
+                <tr>
+                  {["客源渠道", "引流主体", "转化主体", "对应场景", "机构收益"].map((head) => (
+                    <th class="px-5 py-4 font-semibold">{head}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {model.channels.map((item) => (
+                  <tr class="border-b border-ink/10 last:border-b-0">
+                    <td class="px-5 py-4 font-semibold text-ink">{item.channel}</td>
+                    <td class="px-5 py-4 text-muted">{item.owner}</td>
+                    <td class="px-5 py-4 text-muted">{item.conversion}</td>
+                    <td class="px-5 py-4 text-muted">{item.scenario}</td>
+                    <td class="px-5 py-4 font-semibold text-sea">{item.revenue}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div class="mt-14 grid min-w-0 gap-6 lg:grid-cols-2">
+            {model.revenueScenarios.map((scenario, index) => (
+              <article class="interactive-card min-w-0 border border-ink/12 bg-mist p-6 sm:p-7" data-reveal="soft" style={`--reveal-delay: ${(index % 2) * 70}ms`}>
+                <p class="text-sm font-semibold text-sea">Scenario 0{index + 1}</p>
+                <h3 class="mt-3 text-2xl font-semibold text-ink">{scenario.title}</h3>
+                <p class="mt-3 text-sm leading-7 text-muted">{scenario.desc}</p>
+                <div class="mt-6 max-w-full overflow-x-auto border border-ink/10 bg-white">
+                  <table class="w-full min-w-[560px] border-collapse text-left text-xs">
+                    <thead class="bg-ink text-white">
+                      <tr>{tableHead.map((head) => <th class="px-3 py-3 font-semibold">{head}</th>)}</tr>
+                    </thead>
+                    <tbody>
+                      {scenario.rows.map((row) => (
+                        <tr class="border-b border-ink/10 last:border-b-0">
+                          {row.map((cell, cellIndex) => (
+                            <td class:list={["px-3 py-3 text-muted", cellIndex === 0 && "font-semibold text-ink", cellIndex === 2 && "font-semibold text-sea"]}>{cell}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="mt-16 grid min-w-0 gap-10 lg:grid-cols-[0.62fr_1.38fr] lg:items-start">
+            <div class="border-y border-ink/12 py-8" data-reveal="soft">
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Example Model</p>
+              <h3 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink">单店全年收益测算</h3>
+              <p class="mt-5 text-base leading-8 text-muted">
+                以 C 套餐为基础的示例模型，机构实际结果受城市、团队、客资、转化和交付质量影响。
+              </p>
+              <p class="mt-7 text-5xl font-semibold text-sea">{annualTotal} 万</p>
+              <p class="mt-2 text-sm font-semibold text-muted">示例机构全年收益合计</p>
+            </div>
+            <div class="min-w-0 max-w-full overflow-x-auto border border-ink/12 bg-white" data-reveal="soft">
+              <table class="w-full min-w-[820px] border-collapse text-left text-sm">
+                <thead class="bg-ink text-white">
+                  <tr>
+                    {["客资来源", "全年订单量", "单生收益", "总流水", "机构实际收益"].map((head) => (
+                      <th class="px-5 py-4 font-semibold">{head}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {model.annualModel.map((item) => (
+                    <tr class="border-b border-ink/10 last:border-b-0">
+                      <td class="px-5 py-4 font-semibold text-ink">{item.source}</td>
+                      <td class="px-5 py-4 text-muted">{item.orders}</td>
+                      <td class="px-5 py-4 text-muted">{item.perStudent}</td>
+                      <td class="px-5 py-4 text-muted">{item.volume}</td>
+                      <td class="px-5 py-4 font-semibold text-sea">{item.partnerIncome}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="mt-12 grid gap-5 md:grid-cols-3">
+            {model.renewalRules.map((item) => (
+              <article class="border-y border-ink/12 py-7 md:px-6" data-reveal="soft">
+                <h3 class="text-2xl font-semibold text-ink">{item.title}</h3>
+                <p class="mt-4 text-base leading-8 text-muted">{item.text}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="requirements" class="page-band scroll-mt-32 bg-ink py-20 text-white md:py-28" data-nav-theme="dark">
+        <div class="container-page">
+          <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+            <div data-reveal="soft">
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/52">Requirements</p>
+              <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-white md:text-5xl">
+                合作门槛与总部扶持
+              </h2>
+            </div>
+            <p class="max-w-2xl text-lg leading-8 text-white/70" data-reveal="soft">
+              满足签约、场地、人员和运营条件后，进入授权交付中心联营校区的落地扶持流程。
+            </p>
+          </div>
+
+          <div class="mt-14 grid gap-6 lg:grid-cols-[0.62fr_1.38fr]">
+            <article class="border border-white/16 bg-white/[0.04] p-7 sm:p-8" data-reveal="soft">
+              <Icon name="Medal" class="text-white" size={36} />
+              <h3 class="mt-7 text-3xl font-semibold text-white">授权与区域保护</h3>
+              <p class="mt-5 text-base leading-8 text-white/68">
+                签约并满足条件后，可申请星鹿爱学线下交付中心授权挂牌，并享有以校区为圆心的半径 700 米区域保护权益。
+              </p>
+            </article>
+            <div class="grid border-l border-t border-white/16 sm:grid-cols-2" data-reveal="soft">
+              {model.thresholds.map((item, index) => (
+                <article class="border-b border-r border-white/16 p-6">
+                  <p class="text-sm font-semibold text-white/46">0{index + 1}</p>
+                  <h3 class="mt-3 text-xl font-semibold text-white">{item[0]}</h3>
+                  <p class="mt-3 text-sm leading-7 text-white/64">{item[1]}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div class="mt-14 grid border-y border-white/16 md:grid-cols-5" data-reveal="soft">
+            {model.support.map((item, index) => (
+              <article class:list={["py-7 md:px-5", index > 0 && "border-t border-white/16 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}>
+                <p class="text-sm font-semibold text-white/42">0{index + 1}</p>
+                <p class="mt-4 text-lg font-semibold leading-7 text-white">{item}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline" class="page-band scroll-mt-32 bg-white py-20 md:py-28">
+        <div class="container-page">
+          <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+            <div data-reveal="soft">
+              <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Launch Timeline</p>
+              <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+                从签约到稳定运营
+              </h2>
+            </div>
+            <div class="border-t border-ink/12">
+              {model.timeline.map((item, index) => (
+                <article class="grid gap-4 border-b border-ink/12 py-7 sm:grid-cols-[120px_0.6fr_1fr] sm:items-start" data-reveal="soft" style={`--reveal-delay: ${index * 45}ms`}>
+                  <p class="text-sm font-semibold text-sea">{item.time}</p>
+                  <h3 class="text-2xl font-semibold text-ink">{item.event}</h3>
+                  <p class="text-base leading-8 text-muted">{item.note}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div class="mt-16 grid gap-5 md:grid-cols-3">
+            {model.faq.map((item) => (
+              <article class="interactive-card border border-ink/12 bg-mist p-7 sm:p-8" data-reveal="soft">
+                <h3 class="text-xl font-semibold leading-7 text-ink">{item.q}</h3>
+                <p class="mt-4 text-base leading-8 text-muted">{item.a}</p>
+              </article>
+            ))}
+          </div>
+
+          <div class="mt-14 border-y border-ink/12 py-8" data-reveal="soft">
+            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Important Notice</p>
+            <p class="mt-4 text-base leading-8 text-muted">{model.notice}</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-band bg-sea py-16 text-white md:py-20" data-nav-theme="dark">
+        <div class="container-page grid gap-8 md:grid-cols-[1fr_auto] md:items-end" data-reveal="soft">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/56">Next Step</p>
+            <h2 class="mt-4 text-4xl font-semibold leading-tight md:text-5xl">预约沟通最新合作模式</h2>
+            <p class="mt-5 max-w-2xl text-lg leading-8 text-white/72">
+              结合你的城市、场地、团队和用户基础，进一步判断合作适配度。
+            </p>
+          </div>
+          <a href="/contact/" class="motion-link inline-flex w-fit items-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist">
+            <Icon name="CalendarCheck" size={18} />
+            预约合作沟通
+            <Icon name="ArrowRight" size={18} />
+          </a>
+        </div>
+      </section>
+    </>
+  )}
+
+  <script>
+    const accessForm = document.querySelector("[data-access-form]");
+    const message = document.querySelector("[data-access-message]");
+
+    accessForm?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const form = event.currentTarget;
+      if (!(form instanceof HTMLFormElement)) return;
+
+      const button = form.querySelector("button");
+      const phone = new FormData(form).get("phone");
+      if (button instanceof HTMLButtonElement) button.disabled = true;
+      if (message) message.textContent = "正在验证，请稍候...";
+
+      try {
+        const response = await fetch("/api/cooperation-access", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ phone, source: "cooperation-latest-model" })
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.message || "验证失败，请稍后再试。");
+        }
+
+        if (message) message.textContent = "验证通过，正在打开资料...";
+        window.location.href = result.redirect || "/cooperation/latest-model/";
+      } catch (error) {
+        if (message) message.textContent = error instanceof Error ? error.message : "验证失败，请稍后再试。";
+      } finally {
+        if (button instanceof HTMLButtonElement) button.disabled = false;
+      }
+    });
+  </script>
+</BaseLayout>

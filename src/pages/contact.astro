@@ -1,0 +1,61 @@
+---
+import brandBg from "@/assets/brand/brand-bg-blue.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import LeadForm from "@/components/LeadForm.astro";
+import { site } from "@/data/site";
+
+const nextSteps = [
+  { icon: "MessageSquareText", title: "了解场景", text: "确认机构类型、城市与合作诉求。" },
+  { icon: "MonitorPlay", title: "安排演示", text: "介绍产品逻辑、三端体验和服务流程。" },
+  { icon: "ClipboardCheck", title: "评估合作", text: "讨论场景适配和下一步计划。" }
+];
+---
+
+<BaseLayout
+  title={`预约演示 | ${site.name}`}
+  description="预约星鹿爱学产品演示，了解逐鹿未来面向自主学习空间的 AI 教育运营合作方案。"
+>
+  <section
+    class="-mt-[72px] bg-sea pb-20 pt-[152px] text-white md:pb-28 md:pt-[184px]"
+    data-nav-theme="dark"
+    style={`background-image: linear-gradient(112deg, rgba(6,18,74,.94), rgba(31,97,255,.68)), url(${brandBg.src}); background-size: cover; background-position: center;`}
+  >
+    <div class="container-page" data-reveal="soft">
+      <div class="max-w-5xl">
+        <p class="text-base font-semibold text-white/60">Contact</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-[1.06] text-white sm:text-5xl md:text-7xl">
+          预约产品演示<br />和合作沟通
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-white/74 md:text-xl">
+          留下你的城市、机构与场景，运营顾问会基于实际情况安排演示与合作评估。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-16 md:py-24">
+    <div class="container-page grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">What Happens Next</p>
+        <h2 class="mt-5 text-4xl font-semibold leading-tight text-ink md:text-5xl">提交后我们会做什么</h2>
+        <div class="mt-10 border-t border-ink/12">
+          {nextSteps.map((item) => (
+            <div class="grid grid-cols-[42px_1fr] gap-4 border-b border-ink/12 py-6" data-reveal="soft">
+              <Icon name={item.icon} class="text-sea" size={28} />
+              <div>
+                <h3 class="text-xl font-semibold text-ink">{item.title}</h3>
+                <p class="mt-2 text-base leading-7 text-muted">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div class="mt-9 text-base leading-8 text-muted">
+          <p class="flex items-center gap-3"><Icon name="Mail" size={19} /> {site.email}</p>
+          <p class="mt-2 flex items-center gap-3"><Icon name="MapPin" size={19} /> {site.address}</p>
+        </div>
+      </div>
+      <LeadForm />
+    </div>
+  </section>
+</BaseLayout>

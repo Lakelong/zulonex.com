@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/components/BaseLayout.astro";
+import { site } from "@/data/site";
+---
+
+<BaseLayout
+  title={`网站使用条款 | ${site.name}`}
+  description="逐鹿未来网站使用条款，说明网站内容、产品信息、知识产权与责任边界。"
+>
+  <article class="bg-white pb-20 pt-14 md:pb-28 md:pt-20">
+    <div class="container-page">
+      <div class="max-w-4xl" data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Terms</p>
+        <h1 class="mt-5 text-4xl font-semibold leading-tight text-ink md:text-6xl">网站使用条款</h1>
+        <p class="mt-5 text-base text-muted">更新日期：2026 年 6 月 29 日</p>
+      </div>
+
+      <div class="prose prose-lg prose-slate mt-14 max-w-4xl prose-headings:text-ink prose-p:leading-9 prose-p:text-muted prose-a:text-sea prose-strong:text-ink">
+        <p>访问或使用本网站，即表示你已阅读并理解以下条款。若你不同意相关内容，请停止使用对应功能。</p>
+
+        <h2>一、网站用途</h2>
+        <p>
+          本网站用于介绍逐鹿未来、星鹿爱学相关产品能力、应用场景、合作服务和运营观点，并提供预约演示和合作咨询入口。
+        </p>
+
+        <h2>二、产品与服务信息</h2>
+        <p>
+          网站内容用于一般性介绍，不构成提分、升学、经营收益或其他结果承诺。产品功能、适用范围、合作条件和交付内容以正式协议、授权资料和实际版本为准。
+        </p>
+
+        <h2>三、内容准确性</h2>
+        <p>
+          我们会尽合理努力维护信息准确性和时效性，但产品功能、服务范围和合作安排可能随实际情况更新。发现信息需要修订时，我们会及时调整。
+        </p>
+
+        <h2>四、知识产权</h2>
+        <p>
+          网站中的品牌标识、文字、图片、页面设计和其他内容受相关法律保护。未经权利人书面许可，不得擅自复制、改编、发布或用于商业宣传。
+        </p>
+
+        <h2>五、商家工作台</h2>
+        <p>
+          商家工作台的账户、角色、合作状态、菜单、数据和资料权限由 ZULONEX 业务系统统一管理。用户不得转借账户、绕过访问控制或传播超出授权范围的资料。
+        </p>
+
+        <h2>六、外部链接</h2>
+        <p>
+          网站可能跳转至业务系统或第三方服务。外部服务由其运营方负责，使用前请阅读对应规则与隐私说明。
+        </p>
+
+        <h2>七、联系我们</h2>
+        <p>
+          对网站内容、品牌使用或相关条款有疑问，可发送邮件至 <a href={`mailto:${site.email}`}>{site.email}</a>。
+        </p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

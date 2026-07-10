@@ -1,0 +1,87 @@
+---
+import brandBg from "@/assets/brand/brand-bg-blue.webp";
+import heroStudent from "@/assets/editorial/hero-student-v2.webp";
+import learningCenter from "@/assets/editorial/learning-center-v2.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import { site } from "@/data/site";
+import { getCollection } from "astro:content";
+
+const articles = (await getCollection("insights"))
+  .filter((article) => article.data.published)
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const images: Record<string, typeof heroStudent> = {
+  "xinglu-product-overview.md": heroStudent,
+  "ai-learning-space-operation.md": learningCenter,
+  "zulonex-company-intro.md": brandBg
+};
+
+const slugFor = (id: string) => id.replace(/\.md$/, "");
+const formatDate = (date: Date | string) =>
+  new Intl.DateTimeFormat("zh-CN", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).format(new Date(date));
+---
+
+<BaseLayout
+  title={`案例与洞察 | ${site.name}`}
+  description="逐鹿未来案例与洞察，沉淀星鹿爱学产品介绍、AI教育运营方法和自主学习空间落地观察。"
+>
+  <section class="bg-white py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Insights"
+        title="案例产品与运营实践"
+        description="只发布经过核验或获得授权的内容，持续记录 AI 教育如何进入真实场景。"
+        level={1}
+      />
+      <div class="mt-14 grid gap-6 lg:grid-cols-12">
+        {articles.map((article, index) => {
+          const image = images[article.id] ?? brandBg;
+          const coverSrc = article.data.cover ?? image.src;
+          return (
+            <article
+              class:list={[
+                "group overflow-hidden border border-ink/10 bg-mist",
+                index === 0 ? "lg:col-span-8 lg:row-span-2" : "lg:col-span-4"
+              ]}
+              data-reveal="soft"
+              style={`--reveal-delay: ${Math.min(index, 3) * 70}ms`}
+            >
+              <a href={`/insights/${slugFor(article.id)}/`} class="block">
+                <div class:list={["overflow-hidden bg-line", index === 0 ? "aspect-[16/9]" : "aspect-[16/8]"]}>
+                  <img
+                    src={coverSrc}
+                    width={article.data.cover ? undefined : image.width}
+                    height={article.data.cover ? undefined : image.height}
+                    alt=""
+                    class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.025]"
+                    loading={index === 0 ? "eager" : "lazy"}
+                  />
+                </div>
+                <div class:list={["p-7", index === 0 && "md:p-9"]}>
+                  <div class="flex items-center justify-between gap-4 text-sm">
+                    <span class="font-semibold text-sea">{article.data.type}</span>
+                    <span class="text-muted">{formatDate(article.data.date)}</span>
+                  </div>
+                  <h2 class:list={["mt-5 font-semibold leading-tight text-ink", index === 0 ? "text-3xl md:text-4xl" : "text-2xl"]}>
+                    {article.data.title}
+                  </h2>
+                  {index === 0 && <p class="mt-4 max-w-2xl text-lg leading-8 text-muted">{article.data.summary}</p>}
+                  <span class="motion-link mt-7 inline-flex items-center gap-2 text-base font-semibold text-sea">
+                    阅读文章
+                    <Icon name="ArrowRight" size={18} />
+                  </span>
+                </div>
+              </a>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

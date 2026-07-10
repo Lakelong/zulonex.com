@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+data/*.jsonl
+*.log
+.DS_Store
+tmp/
+docs/.DS_Store
+docs/*.pptx
+docs/微信图片_*.jpg
+release/*
+!release/zulonex-website-2026-07-09-2258.zip
+!release/zulonex-website-2026-07-09-2258.zip.sha256

@@ -1,0 +1,65 @@
+---
+import BaseLayout from "@/components/BaseLayout.astro";
+import { site } from "@/data/site";
+---
+
+<BaseLayout
+  title={`隐私政策 | ${site.name}`}
+  description="逐鹿未来官网隐私政策，说明预约咨询过程中个人信息的收集、使用、保护与权利。"
+>
+  <article class="bg-white pb-20 pt-14 md:pb-28 md:pt-20">
+    <div class="container-page">
+      <div class="max-w-4xl" data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Privacy</p>
+        <h1 class="mt-5 text-4xl font-semibold leading-tight text-ink md:text-6xl">隐私政策</h1>
+        <p class="mt-5 text-base text-muted">更新日期：2026 年 6 月 29 日</p>
+      </div>
+
+      <div class="prose prose-lg prose-slate mt-14 max-w-4xl prose-headings:text-ink prose-p:leading-9 prose-p:text-muted prose-a:text-sea prose-strong:text-ink">
+        <p>
+          逐鹿未来（以下简称“我们”）重视访问者的个人信息与隐私。本政策说明你在使用本网站、提交预约演示或合作咨询时，我们如何处理相关信息。
+        </p>
+
+        <h2>一、我们收集的信息</h2>
+        <p>
+          当你主动提交预约或合作表单时，我们可能收集姓名、手机号、机构名称、所在城市、身份角色、合作类型和需求描述。我们还可能记录提交时间、来源页面和必要的网络日志，用于保障服务安全和排查异常。
+        </p>
+
+        <h2>二、处理目的</h2>
+        <p>
+          上述信息仅用于回应产品演示和合作咨询、判断服务场景、安排后续沟通、改善网站体验以及履行必要的安全和合规义务。我们不会将信息用于与上述目的无关的用途。
+        </p>
+
+        <h2>三、保存与保护</h2>
+        <p>
+          我们将在实现处理目的所需的合理期限内保存信息，并采取访问控制、传输保护和必要的内部管理措施。目的完成、保存期限届满或你依法提出删除请求后，我们将按适用规则处理。
+        </p>
+
+        <h2>四、共享与委托处理</h2>
+        <p>
+          为完成消息通知、网站托管或安全运维，我们可能使用受托服务商。我们会要求其仅在约定目的和必要范围内处理信息。除法律法规要求、履行合同所必需或获得你的单独同意外，我们不会向无关第三方提供个人信息。
+        </p>
+
+        <h2>五、你的权利</h2>
+        <p>
+          你可以依法请求查询、更正、补充或删除个人信息，也可以撤回已作出的同意。撤回同意不影响撤回前基于同意已经进行的处理。
+        </p>
+
+        <h2>六、未成年人信息</h2>
+        <p>
+          本网站的预约与合作表单面向具备相应行为能力的机构人员或成年人。未成年人请在监护人指导下使用本网站，不应自行提交联系方式或其他个人信息。
+        </p>
+
+        <h2>七、联系我们</h2>
+        <p>
+          如需行使个人信息相关权利，或对本政策有疑问，可发送邮件至 <a href={`mailto:${site.email}`}>{site.email}</a>。我们会在核验请求后依法处理。
+        </p>
+
+        <h2>八、政策更新</h2>
+        <p>
+          当网站功能、信息处理方式或适用规则发生变化时，我们可能更新本政策，并在本页面公布新的版本和更新日期。
+        </p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

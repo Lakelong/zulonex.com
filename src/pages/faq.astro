@@ -1,0 +1,118 @@
+---
+import heroStudent from "@/assets/editorial/hero-student-v2.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import FaqAccordion from "@/components/FaqAccordion.astro";
+import Icon from "@/components/Icon.astro";
+import { faqCategories, faqItems } from "@/data/faqs";
+import { site } from "@/data/site";
+
+const faqGroups = faqCategories.map((category) => ({
+  ...category,
+  items: faqItems.filter((item) => item.category === category.id)
+}));
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title={`常见问题 | ${site.name}`}
+  description="了解星鹿爱学产品、课程、学习设备、合作方式、运营支持和数据隐私等常见问题。"
+>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+  <section class="relative -mt-[72px] min-h-[540px] overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <img
+      src={heroStudent.src}
+      width={heroStudent.width}
+      height={heroStudent.height}
+      alt="学生使用学习平板进行自主学习"
+      class="absolute inset-0 h-full w-full object-cover object-[66%_center]"
+      data-parallax="0.035"
+      data-parallax-max="24"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,18,74,.98)_0%,rgba(6,18,74,.86)_45%,rgba(6,18,74,.24)_100%)]"></div>
+    <div class="container-page relative flex min-h-[540px] items-center pb-14 pt-[136px]">
+      <div class="max-w-3xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/62">FAQ · Help Center</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-7xl">
+          常见问题答疑
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-white/76 md:text-xl">
+          从产品、学习到合作与隐私，快速找到你关心的问题。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <nav class="page-band bg-white" aria-label="常见问题分类">
+    <div class="container-page grid sm:grid-cols-2 lg:grid-cols-4">
+      {faqGroups.map((category, index) => (
+        <a
+          href={`#${category.id}`}
+          class:list={[
+            "group flex items-center justify-between gap-4 py-6 text-base font-semibold text-ink transition hover:text-sea sm:px-6",
+            index > 0 && "border-t border-ink/10 sm:border-l sm:border-t-0",
+            index === 0 && "sm:pl-0"
+          ]}
+        >
+          {category.label}
+          <Icon name="ArrowDown" class="text-muted transition group-hover:translate-y-1 group-hover:text-sea" size={17} />
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-20">
+        {faqGroups.map((category) => (
+          <section id={category.id} class="scroll-mt-28">
+            <div class="grid gap-10 lg:grid-cols-[0.62fr_1.38fr]">
+              <div data-reveal="soft">
+                <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">{category.id}</p>
+                <h2 class="mt-4 text-3xl font-semibold text-ink md:text-4xl">{category.label}</h2>
+                <p class="mt-4 max-w-sm text-base leading-7 text-muted">{category.description}</p>
+              </div>
+              <FaqAccordion
+                items={category.items}
+                groupName={`faq-${category.id}`}
+                openFirst={category.id === "product"}
+              />
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-ink py-16 text-white md:py-20" data-nav-theme="dark">
+    <div class="container-page grid gap-8 md:grid-cols-[1fr_auto] md:items-end" data-reveal="soft">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/50">Still Have Questions</p>
+        <h2 class="mt-4 text-4xl font-semibold leading-tight text-white md:text-5xl">仍有疑问直接和我们聊聊</h2>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-white/68">
+          无论是了解产品细节，还是评估合作场景，我们都会结合你的实际情况详细解答。
+        </p>
+      </div>
+      <a
+        href="/contact/"
+        class="motion-link inline-flex w-fit items-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist"
+      >
+        联系我们
+        <Icon name="ArrowRight" size={18} />
+      </a>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,479 @@
+---
+import brandBg from "@/assets/brand/brand-bg-blue.webp";
+import aboutBeliefImage from "@/assets/editorial/about-belief-ai-team.png";
+import portraitBaoNana from "@/assets/team/portraits/bao-nana.webp";
+import portraitChengXiaozhong from "@/assets/team/portraits/cheng-xiaozhong.webp";
+import portraitJiaBin from "@/assets/team/portraits/jia-bin.webp";
+import portraitLanJian from "@/assets/team/portraits/lan-jian.webp";
+import portraitLiHanzhong from "@/assets/team/portraits/li-hanzhong.webp";
+import portraitLiJun from "@/assets/team/portraits/li-jun.webp";
+import portraitLiYuanyuan from "@/assets/team/portraits/li-yuanyuan.webp";
+import portraitLongWeihu from "@/assets/team/portraits/long-weihu.webp";
+import portraitMeiCaiyuan from "@/assets/team/portraits/mei-caiyuan.webp";
+import portraitQiJunfei from "@/assets/team/portraits/qi-junfei.webp";
+import portraitTangYun from "@/assets/team/portraits/tang-yun.webp";
+import portraitTuZhonghui from "@/assets/team/portraits/tu-zhonghui.webp";
+import portraitXuanJinmei from "@/assets/team/portraits/xuan-jinmei.webp";
+import portraitZhaoTaidong from "@/assets/team/portraits/zhao-taidong.webp";
+import portraitZhaoZhi from "@/assets/team/portraits/zhao-zhi.webp";
+import BaseLayout from "@/components/BaseLayout.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import { relationship, site } from "@/data/site";
+
+const purpose = [
+  {
+    number: "01",
+    label: "使命",
+    icon: "Sparkles",
+    title: "让技术真正服务于人的成长",
+    text: "把 AI 的效率与人的判断、鼓励和陪伴结合起来，让每个孩子逐步形成持续学习的能力。"
+  },
+  {
+    number: "02",
+    label: "愿景",
+    icon: "Telescope",
+    title: "让更多孩子自信走向智能世界",
+    text: "推动 AI 学习产品进入真实教育场景，帮助孩子理解 AI、使用 AI，并成为主动学习者。"
+  },
+  {
+    number: "03",
+    label: "核心理念",
+    icon: "BrainCircuit",
+    title: "以学习力为中心",
+    text: "不止关注一次知识传递，更关注目标、方法、习惯、表达与问题解决能力的长期形成。"
+  }
+];
+
+const values = [
+  {
+    icon: "HeartHandshake",
+    title: "用户价值",
+    text: "从学生成长、家长知情和伙伴服务的真实需求出发。"
+  },
+  {
+    icon: "BadgeCheck",
+    title: "专业真实",
+    text: "用产品能力、过程数据和实际交付建立长期信任。"
+  },
+  {
+    icon: "Clock3",
+    title: "长期主义",
+    text: "重视持续服务、阶段复盘和可积累的用户关系。"
+  },
+  {
+    icon: "Network",
+    title: "协同共创",
+    text: "连接研发、运营与机构伙伴，把专业能力组织成结果。"
+  }
+];
+
+const teamMembers = [
+  {
+    number: "01",
+    name: "鲍娜娜",
+    role: "创始人、董事长",
+    text: "负责公司战略、合作布局与全国运营体系。",
+    image: portraitBaoNana
+  },
+  {
+    number: "02",
+    name: "贾彬",
+    role: "产品运营总监",
+    text: "负责项目结构化设计、产品运营与用户运营。",
+    image: portraitJiaBin
+  },
+  {
+    number: "03",
+    name: "赵智",
+    role: "品牌总顾问",
+    text: "负责品牌战略、品牌体系建设与对外传播。",
+    image: portraitZhaoZhi
+  },
+  {
+    number: "04",
+    name: "兰剑",
+    role: "研发总监",
+    text: "负责技术研发、软硬件协同与智能终端建设。",
+    image: portraitLanJian
+  },
+  {
+    number: "05",
+    name: "李骏",
+    role: "产品总监",
+    text: "负责产品规划、系统产品建设与产品国际化运营。",
+    image: portraitLiJun
+  },
+  {
+    number: "06",
+    name: "李汉中",
+    role: "自媒体运营总监",
+    text: "负责新媒体内容、短视频增长与教育 IP 运营。",
+    image: portraitLiHanzhong
+  },
+  {
+    number: "07",
+    name: "龙伟湖",
+    role: "设计总监",
+    text: "负责产品设计标准化、品牌视觉与数字化体验建设。",
+    image: portraitLongWeihu
+  },
+  {
+    number: "08",
+    name: "程孝忠",
+    role: "渠道部总监",
+    text: "负责渠道拓展、区域协同与合作伙伴开发。",
+    image: portraitChengXiaozhong
+  },
+  {
+    number: "09",
+    name: "梅才远",
+    role: "市场部总监",
+    text: "负责市场运营、区域协同与合作伙伴拓展。",
+    image: portraitMeiCaiyuan
+  },
+  {
+    number: "10",
+    name: "齐俊飞",
+    role: "C 端销售总监",
+    text: "负责 C 端教育产品销售、用户转化与团队增长。",
+    image: portraitQiJunfei
+  },
+  {
+    number: "11",
+    name: "赵太东",
+    role: "教研部总监",
+    text: "负责数学教研、分层适配与教研流程标准化。",
+    image: portraitZhaoTaidong
+  },
+  {
+    number: "12",
+    name: "唐云",
+    role: "交付部总监",
+    text: "负责导学服务、交付流程与团队培训。",
+    image: portraitTangYun
+  },
+  {
+    number: "13",
+    name: "涂钟辉",
+    role: "市场运营总监",
+    text: "负责市场运营、校区管理与用户服务体系建设。",
+    image: portraitTuZhonghui
+  },
+  {
+    number: "14",
+    name: "宣进梅",
+    role: "市场运营总监",
+    text: "负责门店赋能、培训体系与市场运营管理。",
+    image: portraitXuanJinmei
+  },
+  {
+    number: "15",
+    name: "李媛媛",
+    role: "培训部总监",
+    text: "负责运营培训、团队服务与门店赋能培训。",
+    image: portraitLiYuanyuan
+  },
+  {
+    number: "16",
+    name: "邓启辉",
+    role: "核心团队成员",
+    text: "参与公司运营、项目协同与服务落地支持。"
+  }
+];
+
+const teamCapabilities = [
+  {
+    label: "产品与技术",
+    text: "理解 AI 学习系统、智能终端和真实教育场景之间的连接方式。"
+  },
+  {
+    label: "教研与交付",
+    text: "把学习方法、导学服务和机构运营流程组织成可执行标准。"
+  },
+  {
+    label: "市场与增长",
+    text: "面向区域伙伴、门店场景和家庭用户建立长期可信的市场沟通。"
+  }
+];
+
+const responsibility = [
+  {
+    icon: "GraduationCap",
+    title: "AI 学习普及",
+    text: "通过产品、门店和合作网络，帮助更多青少年理解并使用 AI，培养面向智能时代的自主学习能力。"
+  },
+  {
+    icon: "BriefcaseBusiness",
+    title: "人才与就业",
+    text: "围绕运营、导学、市场与技术服务培养专业人才，让教育从业者获得数字化能力与新的职业发展空间。"
+  },
+  {
+    icon: "ShieldCheck",
+    title: "儿童健康公益",
+    text: "关注学龄儿童食品安全与健康成长，探索通过学习终端、内容传播和线下网络开展公益科普。"
+  }
+];
+
+const showValues = false;
+---
+
+<BaseLayout
+  title={`关于逐鹿未来 | ${site.name}`}
+  description="安徽逐鹿未来智能科技有限公司专注 AI+教育数字化场景，围绕星鹿爱学 AI 智慧学习方案提供运营与落地服务。"
+>
+  <section
+    class="hero-cinematic relative -mt-[72px] min-h-[680px] overflow-hidden bg-ink text-white"
+    data-nav-theme="dark"
+    style={`background-image: linear-gradient(112deg, rgba(6,18,74,.96), rgba(31,97,255,.64)), url(${brandBg.src}); background-size: cover; background-position: center;`}
+  >
+    <video
+      class="hero-video hero-video-about absolute inset-0 h-full w-full object-cover"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+      poster={brandBg.src}
+      aria-hidden="true"
+      data-hero-video
+      data-parallax="0.03"
+      data-parallax-max="24"
+    >
+      <source src="/assets/about%20us.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-cinematic-overlay absolute inset-0"></div>
+    <div class="hero-cinematic-vignette absolute inset-0"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink/88 to-transparent"></div>
+    <div class="container-page relative flex min-h-[680px] items-center py-16">
+      <div class="hero-copy max-w-4xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/64">About Zulonex</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-[1.06] text-white sm:text-5xl md:text-7xl">
+          把 AI 学习系统<br />带进真实教育场景
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-white/76 md:text-xl">
+          逐鹿未来围绕星鹿爱学 AI 智慧学习方案，连接研发产品、机构伙伴和家庭用户，让技术真正服务于人的成长。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-ink/10 bg-white">
+    <div class="container-page grid md:grid-cols-3">
+      {relationship.map((item, index) => (
+        <article
+          class:list={["py-7 md:px-8", index > 0 && "border-t border-ink/10 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}
+          data-reveal="soft"
+          style={`--reveal-delay: ${index * 60}ms`}
+        >
+          <p class="text-sm font-semibold text-sea">{item.role}</p>
+          <h2 class="mt-2 text-2xl font-semibold text-ink">{item.name}</h2>
+          <p class="mt-2 text-base leading-7 text-muted">{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-12 lg:grid-cols-[0.72fr_1.28fr]">
+        <div data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Purpose</p>
+          <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+            我们为什么做<br />AI 教育这件事
+          </h2>
+          <p class="mt-6 max-w-md text-lg leading-8 text-muted">
+            技术改变学习效率，教育决定孩子如何理解自己、理解世界。
+          </p>
+        </div>
+        <div class="border-t border-ink/12">
+          {purpose.map((item) => (
+            <article class="grid gap-6 border-b border-ink/12 py-8 sm:grid-cols-[56px_0.72fr_1.28fr] sm:items-start" data-reveal="soft">
+              <Icon name={item.icon} class="text-sea" size={34} />
+              <div>
+                <p class="text-sm font-semibold text-sea">{item.number} · {item.label}</p>
+                <h3 class="mt-2 text-2xl font-semibold leading-8 text-ink">{item.title}</h3>
+              </div>
+              <p class="text-base leading-8 text-muted">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {showValues && (
+    <section class="page-band bg-ink py-20 text-white md:py-28" data-nav-theme="dark">
+      <div class="container-page">
+        <div class="max-w-3xl" data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/48">Our Values</p>
+          <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-white md:text-5xl">
+            价值观不是口号<br />而是每天如何做选择
+          </h2>
+        </div>
+        <div class="mt-14 grid border-l border-t border-white/16 sm:grid-cols-2 lg:grid-cols-4">
+          {values.map((item, index) => (
+            <article
+              class="border-b border-r border-white/16 p-7 sm:p-8"
+              data-reveal="soft"
+              style={`--reveal-delay: ${(index % 4) * 55}ms`}
+            >
+              <Icon name={item.icon} class="text-white" size={34} />
+              <h3 class="mt-7 text-2xl font-semibold text-white">{item.title}</h3>
+              <p class="mt-4 text-base leading-7 text-white/64">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section id="team" class="page-band scroll-mt-24 bg-[#f5f5f7] py-24 md:py-32">
+    <div class="container-page">
+      <div class="mx-auto max-w-4xl text-center" data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Leadership Team</p>
+        <h2 class="mt-5 text-balance text-5xl font-semibold leading-tight text-ink md:text-6xl">
+          核心团队
+        </h2>
+        <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-muted md:text-xl md:leading-9">
+          团队覆盖产品、技术、教研、交付、市场与品牌，让 AI 教育产品进入真实运营场景。
+        </p>
+      </div>
+
+      <div class="mt-16 grid gap-x-7 gap-y-16 sm:grid-cols-2 lg:grid-cols-4">
+        {teamMembers.map((member, index) => (
+          <article
+            class="group"
+            data-reveal="soft"
+            style={`--reveal-delay: ${(index % 4) * 55}ms`}
+          >
+            {member.image ? (
+              <div class="relative overflow-hidden rounded-lg bg-white ring-1 ring-ink/8">
+                <img
+                  src={member.image.src}
+                  width={member.image.width}
+                  height={member.image.height}
+                  alt={`${member.name}，${member.role}`}
+                  class="aspect-[4/5] w-full scale-[1.02] object-cover object-top transition-transform duration-500 group-hover:scale-[1.055]"
+                  loading={index < 4 ? "eager" : "lazy"}
+                />
+              </div>
+            ) : (
+              <div class="flex aspect-[4/5] flex-col justify-between rounded-lg border border-ink/10 bg-white p-7 shadow-[0_18px_46px_rgba(6,18,74,0.06)]">
+                <span class="text-sm font-semibold text-sea">{member.number}</span>
+                <div>
+                  <p class="text-5xl font-semibold leading-none text-ink">{member.name.slice(0, 1)}</p>
+                  <p class="mt-4 text-sm font-semibold uppercase tracking-[0.16em] text-muted/70">Core Team</p>
+                </div>
+              </div>
+            )}
+            <div class="mt-6 border-t border-ink/12 pt-5">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h3 class="text-2xl font-semibold leading-none text-ink">{member.name}</h3>
+                  <p class="mt-3 text-base font-semibold text-muted">{member.role}</p>
+                </div>
+                <span class="text-sm font-semibold text-sea">{member.number}</span>
+              </div>
+              <p class="mt-5 text-sm leading-7 text-muted">{member.text}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <div class="mt-20 grid border-y border-ink/12 md:grid-cols-3" data-reveal="soft">
+        {teamCapabilities.map((item, index) => (
+          <article class:list={["py-8 md:px-8", index > 0 && "border-t border-ink/12 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}>
+            <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">0{index + 1}</p>
+            <h3 class="mt-4 text-2xl font-semibold text-ink">{item.label}</h3>
+            <p class="mt-4 text-base leading-8 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page grid gap-14 lg:grid-cols-[0.72fr_1.28fr]">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Company</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+          不止卖系统更让系统被真正用起来
+        </h2>
+      </div>
+      <div data-reveal="soft">
+        <p class="text-2xl leading-10 text-ink md:text-3xl md:leading-[1.55]">
+          我们把 AI 学习产品、真人导学、门店运营和家长沟通组织在一起，帮助合作伙伴从“引入工具”走向“建立学习服务能力”。
+        </p>
+        <div class="mt-10 grid border-y border-ink/12 sm:grid-cols-3">
+          {[
+            { value: "AI 教育", label: "产品理解" },
+            { value: "线下空间", label: "场景运营" },
+            { value: "长期服务", label: "伙伴协同" }
+          ].map((item, index) => (
+            <div class:list={["py-6 sm:px-6", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0", index === 0 && "sm:pl-0"]}>
+              <p class="text-xl font-semibold text-ink">{item.value}</p>
+              <p class="mt-2 text-sm text-muted">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative min-h-[620px] overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <img
+      src={aboutBeliefImage.src}
+      width={aboutBeliefImage.width}
+      height={aboutBeliefImage.height}
+      alt="逐鹿未来团队围绕 AI 学习数据进行运营复盘"
+      class="absolute inset-0 h-full w-full object-cover"
+      data-parallax="0.05"
+      data-parallax-max="36"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,18,74,.94)_0%,rgba(6,18,74,.60)_54%,rgba(6,18,74,.10)_100%)]"></div>
+    <div class="container-page relative flex min-h-[620px] items-end py-16 md:items-center">
+      <div class="max-w-2xl" data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/60">Belief</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-white md:text-6xl">
+          AI 越强大 教育越需要人的判断鼓励和陪伴
+        </h2>
+        <p class="mt-6 text-lg leading-8 text-white/72">
+          逐鹿未来希望帮助孩子理解 AI、使用 AI，也在真实学习服务中保留人与人之间的关注和温度。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="responsibility" class="page-band scroll-mt-24 bg-white py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Social Responsibility"
+        title="让科技进步也成为更广泛的社会价值"
+        description="教育不仅关乎学习效率，也关乎成长机会、人才发展与儿童健康。"
+      />
+      <div class="mt-14 grid border-y border-ink/12 md:grid-cols-3">
+        {responsibility.map((item, index) => (
+          <article
+            class:list={["py-9 md:px-9", index > 0 && "border-t border-ink/12 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}
+            data-reveal="soft"
+          >
+            <Icon name={item.icon} class="text-sea" size={36} />
+            <h3 class="mt-7 text-2xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-4 text-base leading-8 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-16 md:py-20">
+    <div class="container-page grid gap-6 border-y border-ink/12 py-9 md:grid-cols-[0.72fr_1.28fr] md:items-center">
+      <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Boundary</p>
+      <p class="text-lg leading-8 text-muted">
+        官网公开信息用于介绍公司、产品场景与运营服务。产品功能、授权范围和合作政策，以正式资料、实际交付版本及双方签署文件为准。
+      </p>
+    </div>
+  </section>
+</BaseLayout>

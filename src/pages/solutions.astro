@@ -1,0 +1,279 @@
+---
+import solutionsHeroImage from "@/assets/editorial/solutions-ai-learning-space.png";
+import BaseLayout from "@/components/BaseLayout.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import { site, solutionAudiences } from "@/data/site";
+
+const scenes = [
+  {
+    id: "learning-space",
+    icon: "Building2",
+    label: "自主学习空间",
+    title: "从提供场地走向提供学习服务",
+    challenge: "有空间和人员，但学习产品、导学流程和家长反馈尚未稳定。",
+    fit: "已有固定场地和驻店团队，希望建立学习服务的自习室或共享空间。",
+    model: "学生用星鹿爱学完成学习与练习，导学师跟进目标、习惯和复盘，家长接收阶段反馈。",
+    setup: "安静学习区、学习终端、稳定网络和日常导学人员。",
+    workflow: ["到店与目标确认", "自主学习与提问", "真人导学与复盘", "阶段反馈与调整"],
+    support: "提供产品导入、导学培训、服务节奏和家长沟通支持。",
+    outcomes: ["服务流程更稳定", "学习过程可观察", "家长沟通有依据"]
+  },
+  {
+    id: "training-transformation",
+    icon: "School",
+    label: "教培机构转型",
+    title: "保留教育能力升级服务方式",
+    challenge: "有学科和用户基础，但缺少与原团队匹配的 AI 服务模型。",
+    fit: "具备教师、班主任或学习管理团队，希望验证 AI 自主学习业务的机构。",
+    model: "将星鹿爱学嵌入原有链路，重组体验、导学、计划和家长沟通。",
+    setup: "由现有教室改造学习区，并明确顾问、导学师和运营负责人。",
+    workflow: ["存量用户筛选", "产品体验与诊断", "导学服务试运行", "数据复盘与迭代"],
+    support: "协助理解产品、设计试运行节奏，提供传播与复盘支持。",
+    outcomes: ["复用原有团队", "降低转型试错", "逐步验证新业务"]
+  },
+  {
+    id: "care-center",
+    icon: "House",
+    label: "托管与成长中心",
+    title: "从完成作业走向培养自主学习",
+    challenge: "服务集中在看管和作业完成，难以持续识别缺口与习惯变化。",
+    fit: "已有稳定到店学生和课后服务人员，希望提升服务深度的托管或成长中心。",
+    model: "用诊断、路径和自适应练习承接学习，真人导学跟进计划、专注和复盘。",
+    setup: "在现有空间设置自主学习时段，配备终端和熟悉学生的导学人员。",
+    workflow: ["作业与任务分流", "系统学习与练习", "错因反馈与巩固", "家长阶段沟通"],
+    support: "提供导入建议、导学培训和托管转学习服务的流程支持。",
+    outcomes: ["任务安排更清晰", "薄弱点更易识别", "服务价值更具体"]
+  },
+  {
+    id: "regional-channel",
+    icon: "MapPinned",
+    label: "区域渠道伙伴",
+    title: "连接本地资源建立长期运营能力",
+    challenge: "有本地机构和市场资源，但需要稳定的产品理解与落地承接。",
+    fit: "熟悉本地教育市场、拥有机构资源，并愿意长期服务区域伙伴的团队。",
+    model: "围绕目标伙伴画像拓展，协同产品演示、场景评估、启动培训与复盘。",
+    setup: "明确区域负责人、拓展人员和服务接口，建立持续跟进机制。",
+    workflow: ["区域与伙伴筛选", "联合演示与评估", "启动培训与交付", "持续服务与复盘"],
+    support: "提供标准介绍、产品培训、合规素材和机构落地支持。",
+    outcomes: ["伙伴画像更明确", "推进动作更标准", "区域服务可持续"]
+  }
+];
+
+const decisionCards = [
+  { icon: "Building2", label: "自主学习空间", base: "场地与驻店团队", focus: "建立日常学习服务" },
+  { icon: "School", label: "教培机构转型", base: "教师与存量用户", focus: "验证新的服务模型" },
+  { icon: "House", label: "托管成长中心", base: "稳定到店学生", focus: "提升学习服务深度" },
+  { icon: "MapPinned", label: "区域渠道伙伴", base: "本地机构资源", focus: "建立区域服务能力" }
+];
+
+const assessment = [
+  { icon: "MapPin", label: "所在城市", text: "区域、客群和市场基础" },
+  { icon: "PanelsTopLeft", label: "现有场景", text: "场地、业务与服务时段" },
+  { icon: "UsersRound", label: "团队配置", text: "岗位、经验与承接能力" },
+  { icon: "Target", label: "启动目标", text: "希望解决的问题与节奏" }
+];
+---
+
+<BaseLayout
+  title={`AI教育解决方案 | ${site.name}`}
+  description="逐鹿未来面向自主学习空间、教培机构、托管成长中心和区域渠道伙伴提供星鹿爱学场景落地方案。"
+>
+  <section class="relative -mt-[72px] min-h-[680px] overflow-hidden bg-[#eef6ff] text-ink">
+    <img
+      src={solutionsHeroImage.src}
+      width={solutionsHeroImage.width}
+      height={solutionsHeroImage.height}
+      alt="现代自主学习空间中的学生使用 AI 学习系统"
+      class="absolute inset-y-0 right-0 h-full w-full object-cover object-[64%_center] lg:w-[72%]"
+      data-parallax="0.05"
+      data-parallax-max="36"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,#eef6ff_0%,rgba(238,246,255,.96)_34%,rgba(238,246,255,.58)_62%,rgba(238,246,255,.16)_100%)]"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-[linear-gradient(180deg,rgba(238,246,255,0)_0%,#eef6ff_100%)]"></div>
+    <div class="container-page relative flex min-h-[680px] items-center pb-16 pt-[136px]">
+      <div class="max-w-3xl" data-reveal="soft">
+        <p class="text-base font-semibold text-sea">Solutions · 场景适配</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-[1.06] sm:text-5xl md:text-7xl">
+          从你的场景出发<br />设计 AI 学习服务
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-muted md:text-xl">
+          场地、团队和用户基础不同，启动方式也应不同。
+        </p>
+        <div class="mt-9 flex flex-wrap gap-3 text-sm font-semibold text-ink">
+          {["先评估场景", "再设计流程", "最后进入试运行"].map((item) => (
+            <span class="border border-sea/[0.18] bg-white/[0.78] px-4 py-2 shadow-[0_10px_30px_rgba(6,18,74,.07)] backdrop-blur">
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <nav class="page-band bg-[#eef6ff]" aria-label="解决方案场景导航">
+    <div class="container-page grid sm:grid-cols-2 lg:grid-cols-4">
+      {solutionAudiences.map((item, index) => (
+        <a
+          href={`#${item.id}`}
+          class:list={[
+            "interactive-card group flex items-center justify-between gap-4 border border-ink/10 bg-white/82 px-5 py-6 text-base font-semibold text-ink transition hover:text-sea sm:px-6",
+            index > 0 && "border-t border-ink/10 sm:border-l sm:border-t-0",
+            index === 0 && "sm:pl-0"
+          ]}
+        >
+          <span class="flex items-center gap-3">
+            <Icon name={item.icon} class="text-sea" size={23} />
+            {item.label}
+          </span>
+          <Icon name="ArrowDown" class="text-muted transition group-hover:translate-y-1 group-hover:text-sea" size={17} />
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <section class="page-band bg-[#f8fbff] py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Four Scenarios"
+        title="先判断适不适合再讨论如何落地"
+        description="从真实经营基础出发，明确人员、空间、流程和支持边界。"
+      />
+
+      <div class="mt-14 grid gap-6">
+        {scenes.map((scene, index) => (
+          <article
+            id={scene.id}
+            class="interactive-card scroll-mt-28 border border-ink/12 bg-white p-7 sm:p-9 md:p-12"
+            data-reveal="soft"
+          >
+            <div class="grid gap-10 lg:grid-cols-[0.72fr_1.28fr]">
+              <div>
+                <div class="flex items-center justify-between gap-5">
+                  <Icon name={scene.icon} class="text-sea" size={40} />
+                  <span class="text-sm font-semibold text-sea">0{index + 1}</span>
+                </div>
+                <p class="mt-8 text-sm font-semibold text-sea">{scene.label}</p>
+                <h2 class="mt-2 text-balance text-3xl font-semibold leading-tight text-ink md:text-4xl">{scene.title}</h2>
+                <div class="mt-7 border-t border-ink/12 pt-6">
+                  <p class="text-sm font-semibold text-muted">常见起点</p>
+                  <p class="mt-2 text-base leading-7 text-ink">{scene.challenge}</p>
+                </div>
+              </div>
+
+              <div class="grid border-l border-t border-ink/12 sm:grid-cols-2">
+                <div class="border-b border-r border-ink/12 p-6">
+                  <p class="flex items-center gap-2 text-sm font-semibold text-sea">
+                    <Icon name="Target" size={18} />
+                    适合谁
+                  </p>
+                  <p class="mt-3 text-base leading-7 text-muted">{scene.fit}</p>
+                </div>
+                <div class="border-b border-r border-ink/12 p-6">
+                  <p class="flex items-center gap-2 text-sm font-semibold text-sea">
+                    <Icon name="Workflow" size={18} />
+                    如何嵌入
+                  </p>
+                  <p class="mt-3 text-base leading-7 text-muted">{scene.model}</p>
+                </div>
+                <div class="border-b border-r border-ink/12 p-6">
+                  <p class="flex items-center gap-2 text-sm font-semibold text-sea">
+                    <Icon name="LayoutGrid" size={18} />
+                    基础配置
+                  </p>
+                  <p class="mt-3 text-base leading-7 text-muted">{scene.setup}</p>
+                </div>
+                <div class="border-b border-r border-ink/12 p-6">
+                  <p class="flex items-center gap-2 text-sm font-semibold text-sea">
+                    <Icon name="Handshake" size={18} />
+                    逐鹿支持
+                  </p>
+                  <p class="mt-3 text-base leading-7 text-muted">{scene.support}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-9 grid gap-6 border-t border-ink/12 pt-8 lg:grid-cols-[0.78fr_1.22fr] lg:items-center">
+              <div>
+                <p class="text-sm font-semibold text-muted">日常服务流程</p>
+                <div class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-3 text-sm font-semibold text-ink">
+                  {scene.workflow.map((step, stepIndex) => (
+                    <span class="inline-flex items-center gap-3">
+                      {step}
+                      {stepIndex < scene.workflow.length - 1 && <Icon name="ArrowRight" class="text-sea" size={16} />}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div class="grid sm:grid-cols-3">
+                {scene.outcomes.map((outcome, outcomeIndex) => (
+                  <p class:list={["border-ink/12 py-3 text-sm font-semibold text-sea sm:px-5 sm:text-center", outcomeIndex > 0 && "border-t sm:border-l sm:border-t-0"]}>
+                    {outcome}
+                  </p>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-[linear-gradient(135deg,#06124a_0%,#103a8f_54%,#1f61ff_100%)] py-20 text-white md:py-28" data-nav-theme="dark">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Choose Your Starting Point"
+        title="不同基础对应不同启动重点"
+        description="不套模板，先选择与你最接近的起点。"
+        tone="dark"
+      />
+      <div class="mt-14 grid border-l border-t border-white/16 sm:grid-cols-2 lg:grid-cols-4">
+        {decisionCards.map((item) => (
+          <article class="interactive-card border-b border-r border-white/16 bg-white/[0.03] p-7 sm:p-8" data-reveal="soft">
+            <Icon name={item.icon} class="text-white" size={34} />
+            <h2 class="mt-7 text-2xl font-semibold text-white">{item.label}</h2>
+            <div class="mt-7 border-t border-white/16 pt-5">
+              <p class="text-xs font-semibold text-white/42">已有基础</p>
+              <p class="mt-2 text-base text-white/74">{item.base}</p>
+            </div>
+            <div class="mt-5">
+              <p class="text-xs font-semibold text-white/42">启动重点</p>
+              <p class="mt-2 text-base font-semibold text-white">{item.focus}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page grid gap-14 lg:grid-cols-[0.72fr_1.28fr]">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Start With Fit</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+          带着四项信息开始一次有效沟通
+        </h2>
+        <p class="mt-6 text-lg leading-8 text-muted">
+          先完成场景与团队评估，再安排演示、判断和启动建议。
+        </p>
+        <a class="motion-link mt-8 inline-flex items-center gap-2 text-base font-semibold text-sea" href="/cooperation/">
+          了解合作支持
+          <Icon name="ArrowRight" size={18} />
+        </a>
+      </div>
+      <div class="grid border-l border-t border-ink/12 sm:grid-cols-2" data-reveal="soft">
+        {assessment.map((item) => (
+          <div class="interactive-card border-b border-r border-ink/12 p-7 sm:p-8">
+            <Icon name={item.icon} class="text-sea" size={30} />
+            <p class="mt-6 text-xl font-semibold text-ink">{item.label}</p>
+            <p class="mt-2 text-base leading-7 text-muted">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

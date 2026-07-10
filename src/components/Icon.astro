@@ -1,0 +1,22 @@
+---
+import * as icons from "lucide-static";
+
+interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+  ariaHidden?: boolean | string;
+}
+
+const { name, size = 24, ariaHidden = true } = Astro.props;
+const className = Astro.props.class ?? "";
+const raw = (icons as Record<string, string>)[name] ?? icons.Circle;
+const hidden = ariaHidden === true || ariaHidden === "true";
+const svg = raw
+  .replace(/width="24"/, `width="${size}"`)
+  .replace(/height="24"/, `height="${size}"`)
+  .replace(/class="[^"]*"/, `class="lucide-icon ${className}"`)
+  .replace("<svg", `<svg aria-hidden="${hidden ? "true" : "false"}"`);
+---
+
+<Fragment set:html={svg} />

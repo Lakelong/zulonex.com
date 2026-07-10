@@ -1,0 +1,474 @@
+---
+import productHumanAiGuidance from "@/assets/editorial/product-human-ai-guidance.png";
+import productHero from "@/assets/editorial/product-hero-autonomous-learning.webp";
+import dashboard from "@/assets/learning-dashboard.png";
+import BaseLayout from "@/components/BaseLayout.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import { site } from "@/data/site";
+
+const productFacts = [
+  { label: "产品形态", value: "AI 原生学习系统" },
+  { label: "服务角色", value: "学生 · 导学师 · 家长" },
+  { label: "应用场景", value: "线上与线下自主学习" }
+];
+
+const learningFlow = [
+  { icon: "ScanSearch", label: "诊断", text: "看清起点" },
+  { icon: "BookOpenCheck", label: "学习", text: "主动建构" },
+  { icon: "Dumbbell", label: "练习", text: "动态匹配" },
+  { icon: "ChartSpline", label: "反馈", text: "持续调整" }
+];
+
+const features = [
+  {
+    number: "01",
+    icon: "Map",
+    title: "学科地图",
+    text: "可视化章节、知识点和进度，让学生知道自己在哪里。"
+  },
+  {
+    number: "02",
+    icon: "MessageCircleQuestion",
+    title: "AI 问一问",
+    text: "理解课程上下文，支持追问、换讲法和引导思考。"
+  },
+  {
+    number: "03",
+    icon: "Gauge",
+    title: "掌握度圆环",
+    text: "把学习行为和练习表现转化为直观的阶段反馈。"
+  },
+  {
+    number: "04",
+    icon: "RefreshCcw",
+    title: "自适应练习",
+    text: "依据连续表现调整难度，让练习始终靠近学生当前能力。"
+  },
+  {
+    number: "05",
+    icon: "NotebookTabs",
+    title: "错题与笔记",
+    text: "错题入库、相似题巩固、结构化笔记与遮挡复习连续完成。"
+  },
+  {
+    number: "06",
+    icon: "UsersRound",
+    title: "人机协同导学",
+    text: "AI 处理知识与数据，真人导学关注习惯、情绪和长期路径。"
+  }
+];
+
+const methodologies = [
+  {
+    number: "01",
+    icon: "Route",
+    title: "GROW 引导",
+    ability: "培养自主规划力",
+    lead: "把目标、现状、选择和行动，变成孩子能说清、能执行的计划。",
+    steps: ["目标 Goal", "现状 Reality", "选择 Options", "行动 Will"],
+    method: "导学师用提问帮助孩子澄清目标、现状和选择，再转成一周行动。",
+    growth: "孩子从“等安排”走向会定目标、会做计划，并对选择负责。"
+  },
+  {
+    number: "02",
+    icon: "Gauge",
+    title: "精熟导学",
+    ability: "积累胜任感与信心",
+    lead: "不急着赶进度，先确认孩子真正理解、练会、能验证。",
+    steps: ["即时检测", "定位缺口", "补充理解", "再次验证"],
+    method: "系统定位缺口，导学师带孩子完成理解、练习和验证后再进入下一阶段。",
+    growth: "减少知识夹生，让看得见的小进步积累学习信心。"
+  },
+  {
+    number: "03",
+    icon: "Dumbbell",
+    title: "刻意练习",
+    ability: "形成有效训练习惯",
+    lead: "把刷题变成有目标的训练，每次练习都围绕具体薄弱点。",
+    steps: ["定位薄弱点", "匹配挑战", "即时反馈", "反复修正"],
+    method: "围绕错因匹配适度挑战，通过反馈、修正和相似题检验迁移。",
+    growth: "从盲目刷题转向目标训练，形成修正和专注的习惯。"
+  },
+  {
+    number: "04",
+    icon: "MessageSquareText",
+    title: "费曼学习",
+    ability: "提升理解与表达力",
+    lead: "把“我听懂了”变成“我能讲清楚”，用表达暴露盲点。",
+    steps: ["自己讲述", "追问盲点", "补充理解", "再次讲清"],
+    method: "孩子用自己的话讲知识、步骤和理由；导学师追问盲点，再补充理解。",
+    growth: "把听懂变成会讲、会用，同步训练理解、表达和反思。"
+  }
+];
+---
+
+<BaseLayout
+  title={`星鹿爱学 AI原生学习系统 | ${site.name}`}
+  description="了解星鹿爱学的学习闭环、核心产品能力、三端协同和真人导学方法。"
+>
+  <section
+    class="relative -mt-[72px] min-h-[680px] overflow-hidden bg-ink text-white md:min-h-[700px]"
+    data-nav-theme="dark"
+  >
+    <img
+      src={productHero.src}
+      width={productHero.width}
+      height={productHero.height}
+      alt="学生手持学习平板，在自主学习空间中专注学习"
+      class="absolute inset-0 h-full w-full object-cover object-[68%_center]"
+      data-parallax="0.035"
+      data-parallax-max="24"
+      loading="eager"
+    />
+    <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,18,74,.96)_0%,rgba(6,18,74,.84)_40%,rgba(6,18,74,.34)_64%,rgba(6,18,74,.08)_100%)]"></div>
+    <div class="container-page relative flex min-h-[680px] items-center pb-16 pt-[136px] md:min-h-[700px]">
+      <div class="max-w-3xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/66">星鹿爱学 · AI Native Learning</p>
+        <h1 class="mt-6 text-balance text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-7xl">
+          让每一次学习<br />都能被理解和调整
+        </h1>
+        <p class="mt-7 max-w-2xl text-lg leading-8 text-white/76 md:text-xl">
+          让学习平板成为理解知识、主动提问、持续练习和看见成长的伙伴。
+        </p>
+        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+          <a
+            class="motion-link inline-flex items-center justify-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist"
+            href="/contact/"
+          >
+            预约产品演示
+            <Icon name="ArrowRight" size={19} />
+          </a>
+          <a
+            class="inline-flex items-center justify-center gap-2 border border-white/32 bg-white/5 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/12"
+            href="#learning-loop"
+          >
+            查看学习闭环
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-ink/10 bg-white">
+    <div class="container-page grid md:grid-cols-3">
+      {productFacts.map((item, index) => (
+        <div class:list={["py-7 md:px-8", index > 0 && "border-t border-ink/10 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}>
+          <p class="text-sm font-semibold text-sea">{item.label}</p>
+          <p class="mt-2 text-xl font-semibold text-ink md:text-2xl">{item.value}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <nav class="no-scrollbar sticky top-[72px] z-40 overflow-x-auto border-y border-ink/10 bg-white/95 backdrop-blur-xl" aria-label="产品页章节导航">
+    <div class="container-page flex min-w-max items-center gap-8 py-4 text-sm font-semibold text-muted">
+      <a class="transition hover:text-sea" href="#learning-loop">学习闭环</a>
+      <a class="transition hover:text-sea" href="#capabilities">核心能力</a>
+      <a class="transition hover:text-sea" href="#three-views">三端协同</a>
+      <a class="transition hover:text-sea" href="#guidance-methods">导学方法</a>
+      <a class="inline-flex items-center gap-2 text-sea" href="/contact/">
+        预约演示
+        <Icon name="ArrowUpRight" size={15} />
+      </a>
+    </div>
+  </nav>
+
+  <section id="learning-loop" class="page-band scroll-mt-32 bg-white py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Learning Loop"
+        title="学问练评 在同一条学习流里完成"
+        description="AI 不只回答问题，也理解学习发生的过程。"
+      />
+      <div class="mt-14 grid border-y border-ink/12 sm:grid-cols-2 lg:grid-cols-4">
+        {learningFlow.map((item, index) => (
+          <article
+            class:list={["interactive-card py-9 sm:px-7", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0", index === 2 && "sm:border-l-0 lg:border-l", index === 0 && "sm:pl-0"]}
+            data-reveal="soft"
+            style={`--reveal-delay: ${index * 65}ms`}
+          >
+            <Icon name={item.icon} class="text-sea" size={38} />
+            <h2 class="mt-8 text-3xl font-semibold text-ink">{item.label}</h2>
+            <p class="mt-2 text-lg text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+      <figure class="mt-14 overflow-hidden border border-ink/12 bg-mist p-4 sm:p-7" data-reveal="soft">
+        <img
+          src={dashboard.src}
+          width={dashboard.width}
+          height={dashboard.height}
+          alt="星鹿爱学学习路径、学习数据与反馈界面"
+          class="w-full bg-white shadow-soft"
+          loading="lazy"
+        />
+        <figcaption class="grid gap-3 border-t border-ink/10 px-1 pb-1 pt-5 text-sm leading-6 text-muted md:grid-cols-[0.42fr_1fr]">
+          <span class="font-semibold text-sea">同一条学习路径</span>
+          <span>课程上下文、AI 问答、练习表现与掌握状态连续记录，为下一步学习和导学提供依据。</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section id="capabilities" class="page-band scroll-mt-32 bg-mist py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Product Experience"
+        title="六个关键能力构成完整闭环"
+        description="保留真正影响学习过程的能力，减少无效入口。"
+      />
+      <div class="mt-14 border-t border-ink/12">
+        {features.map((item) => (
+          <article class="interactive-card grid gap-6 border-b border-ink/12 py-9 md:grid-cols-[80px_72px_0.7fr_1fr] md:items-center" data-reveal="soft">
+            <p class="text-sm font-semibold text-sea">{item.number}</p>
+            <Icon name={item.icon} class="text-sea" size={36} />
+            <h3 class="text-2xl font-semibold text-ink md:text-3xl">{item.title}</h3>
+            <p class="text-base leading-7 text-muted md:text-lg md:leading-8">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="three-views" class="page-band scroll-mt-32 bg-ink py-20 text-white md:py-28" data-nav-theme="dark">
+    <div class="container-page grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-center">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/52">Three Views</p>
+        <h2 class="mt-5 text-4xl font-semibold leading-tight md:text-6xl">一个学习过程 三种清晰视角</h2>
+      </div>
+      <div class="grid border-y border-white/16 md:grid-cols-3">
+        {[
+          { icon: "Tablet", title: "学生端", text: "学习、提问、练习" },
+          { icon: "UserRoundCheck", title: "导学端", text: "任务、数据、复盘" },
+          { icon: "ChartNoAxesCombined", title: "家长端", text: "报告、趋势、知情" }
+        ].map((item, index) => (
+          <article
+            class:list={["interactive-card bg-white/[0.03] py-9 md:px-7", index > 0 && "border-t border-white/16 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}
+            data-reveal="soft"
+            style={`--reveal-delay: ${index * 70}ms`}
+          >
+            <Icon name={item.icon} class="text-white" size={38} />
+            <h3 class="mt-8 text-2xl font-semibold text-white">{item.title}</h3>
+            <p class="mt-3 text-base text-white/62">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="guidance-methods" class="page-band scroll-mt-32 bg-white py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:items-center">
+        <div class="overflow-hidden" data-reveal="soft">
+          <img
+            src={productHumanAiGuidance.src}
+            width={productHumanAiGuidance.width}
+            height={productHumanAiGuidance.height}
+            alt="学生在导学老师支持下使用 AI 学习系统"
+            class="aspect-[8/6] w-full object-cover transition duration-700 hover:scale-[1.025]"
+            loading="lazy"
+          />
+        </div>
+        <div data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Human + AI</p>
+          <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-6xl">AI 提升效率 真人守住教育温度</h2>
+          <p class="mt-7 text-lg leading-8 text-muted">
+            AI 负责知识、诊断与反馈，真人导学负责提问、鼓励和陪伴。四大方法贯穿导学，让孩子逐步学会如何学习。
+          </p>
+          <div class="mt-9 grid grid-cols-3 border-y border-ink/12 py-5">
+            {["自主规划", "深度理解", "迁移表达"].map((item, index) => (
+              <p class:list={["text-center text-sm font-semibold text-ink sm:text-base", index > 0 && "border-l border-ink/12"]}>{item}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-20 md:mt-24">
+        <div class="max-w-3xl" data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Four Guiding Methods</p>
+          <h3 class="mt-4 text-balance text-3xl font-semibold leading-tight text-ink md:text-5xl">
+            四种方法把外部引导<br class="hidden sm:block" />逐步变成孩子自己的能力
+          </h3>
+        </div>
+
+        <div class="mt-12 grid gap-4 lg:grid-cols-2" data-methods>
+          {methodologies.map((item, index) => (
+            <article
+              class:list={[
+                "method-card interactive-card group border border-ink/12 bg-white",
+                index === 0 && "is-open"
+              ]}
+              data-method-card
+              data-reveal="soft"
+              style={`--reveal-delay: ${(index % 2) * 70}ms`}
+            >
+              <button
+                class="method-trigger focus-ring flex w-full cursor-pointer items-start justify-between gap-6 p-7 text-left sm:p-8 md:p-9"
+                type="button"
+                aria-label={index === 0 ? `${item.title}已展开` : `查看${item.title}导学细节`}
+                aria-expanded={index === 0 ? "true" : "false"}
+                aria-controls={`method-panel-${index}`}
+                data-method-trigger
+              >
+                <div class="min-w-0">
+                  <div class="flex flex-wrap items-center gap-3">
+                    <span class="grid h-12 w-12 place-items-center border border-sea/[0.18] bg-sea/[0.08] text-sea transition group-hover:border-sea/[0.32] group-hover:bg-sea/[0.12]">
+                      <Icon name={item.icon} size={27} />
+                    </span>
+                    <span class="text-sm font-semibold text-sea">{item.number}</span>
+                    <span class="text-sm font-semibold text-muted">{item.ability}</span>
+                  </div>
+                  <h4 class="mt-6 text-3xl font-semibold text-ink md:text-4xl">{item.title}</h4>
+                  <p class="mt-4 max-w-xl text-base leading-7 text-muted">{item.lead}</p>
+                </div>
+                <span class="method-affordance mt-0.5 grid h-8 w-8 shrink-0 place-items-center border border-ink/12 text-sea transition" aria-hidden="true">
+                  <Icon name="Plus" class="method-plus transition" size={20} />
+                </span>
+              </button>
+
+              <div
+                id={`method-panel-${index}`}
+                class="method-panel"
+                data-method-panel
+                aria-hidden={index === 0 ? "false" : "true"}
+              >
+                <div class="method-panel-inner px-7 pb-7 sm:px-8 sm:pb-8 md:px-9 md:pb-9">
+                  <div class="flex flex-wrap items-center gap-x-2 gap-y-2 border-t border-ink/12 pt-6 text-sm font-semibold text-ink">
+                    {item.steps.map((step, stepIndex) => (
+                      <span class="inline-flex items-center gap-2">
+                        <span class="bg-mist px-3 py-1.5">{step}</span>
+                        {stepIndex < item.steps.length - 1 && <Icon name="ArrowRight" class="text-sea" size={15} />}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div class="mt-7 grid gap-5 md:grid-cols-2">
+                    <div class="border border-ink/12 bg-mist p-5">
+                      <p class="flex items-center gap-2 text-sm font-semibold text-sea">
+                        <Icon name="MessagesSquare" size={17} />
+                        导学如何发生
+                      </p>
+                      <p class="mt-3 text-base leading-7 text-ink">{item.method}</p>
+                    </div>
+
+                    <div class="border border-sea/[0.18] bg-white p-5">
+                      <p class="flex items-center gap-2 text-sm font-semibold text-sea">
+                        <Icon name="Sparkles" size={17} />
+                        帮助孩子形成
+                      </p>
+                      <p class="mt-3 text-base leading-7 text-muted">{item.growth}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-10 grid gap-5 border-y border-ink/12 py-8 lg:grid-cols-[0.42fr_1fr] lg:items-center" data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">From Guidance to Growth</p>
+          <p class="text-xl font-semibold leading-8 text-ink md:text-2xl md:leading-9">
+            方法不是讲给孩子听一次，而是在真实学习任务中循环使用，让“有人带着学”逐渐走向“孩子自己会学”。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+
+<script>
+  const methodCards = Array.from(document.querySelectorAll<HTMLElement>("[data-method-card]"));
+
+  methodCards.forEach((card) => {
+    const trigger = card.querySelector<HTMLButtonElement>("[data-method-trigger]");
+    const panel = card.querySelector<HTMLElement>("[data-method-panel]");
+    if (!trigger || !panel) return;
+
+    trigger.addEventListener("click", () => {
+      const isOpen = card.classList.toggle("is-open");
+      const title = card.querySelector("h4")?.textContent?.trim() || "导学方法";
+      trigger.setAttribute("aria-expanded", String(isOpen));
+      trigger.setAttribute("aria-label", isOpen ? `${title}已展开` : `查看${title}导学细节`);
+      panel.setAttribute("aria-hidden", String(!isOpen));
+    });
+  });
+</script>
+
+<style>
+  .method-card {
+    overflow: hidden;
+  }
+
+  .method-card::after {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(31, 97, 255, 0), rgba(31, 97, 255, 0.74), rgba(31, 97, 255, 0));
+    content: "";
+    opacity: 0;
+    transform: scaleX(0.54);
+    transition:
+      opacity 220ms ease,
+      transform 260ms ease;
+  }
+
+  .method-card:hover::after,
+  .method-card.is-open::after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+  .method-trigger {
+    position: relative;
+  }
+
+  .method-card:hover .method-affordance {
+    border-color: rgba(31, 97, 255, 0.40);
+  }
+
+  .method-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition:
+      grid-template-rows 340ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 240ms ease;
+  }
+
+  .method-panel-inner {
+    overflow: hidden;
+  }
+
+  .method-card.is-open {
+    border-color: rgba(31, 97, 255, 0.28);
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: 0 20px 58px rgba(6, 18, 74, 0.10);
+  }
+
+  .method-card.is-open .method-affordance {
+    background: #1f61ff;
+    border-color: #1f61ff;
+    color: #ffffff;
+  }
+
+  .method-card.is-open .method-panel {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+
+  .method-card.is-open .method-plus {
+    transform: rotate(45deg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .method-panel {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,271 @@
+---
+import BaseLayout from "@/components/BaseLayout.astro";
+import CtaBand from "@/components/CtaBand.astro";
+import FaqAccordion from "@/components/FaqAccordion.astro";
+import Icon from "@/components/Icon.astro";
+import SectionHeader from "@/components/SectionHeader.astro";
+import { selectFaqs } from "@/data/faqs";
+import { site } from "@/data/site";
+
+const readiness = [
+  {
+    icon: "PanelsTopLeft",
+    title: "有明确场景",
+    text: "有城市、校区、空间或现有业务切入点。"
+  },
+  {
+    icon: "UsersRound",
+    title: "有承接团队",
+    text: "有人负责咨询转化、学习服务和家长沟通。"
+  },
+  {
+    icon: "HeartHandshake",
+    title: "认可长期服务",
+    text: "愿意通过交付、复盘和口碑建立长期业务。"
+  }
+];
+
+const heroPoints = [
+  {
+    label: "适配评估",
+    text: "先看城市、场地、团队和用户基础。"
+  },
+  {
+    label: "运营启动",
+    text: "再确定产品导入、培训和试运行节奏。"
+  },
+  {
+    label: "合作资料",
+    text: "完成手机号验证后查看最新合作模式。"
+  }
+];
+
+const businessModels = [
+  {
+    icon: "Store",
+    number: "01",
+    title: "直营示范与运营验证",
+    text: "以真实门店验证产品体验、导学服务和运营流程，沉淀可参考实践。"
+  },
+  {
+    icon: "Handshake",
+    number: "02",
+    title: "联营合作与门店赋能",
+    text: "结合伙伴场地、团队和用户基础，提供导入、培训、市场与交付支持。"
+  },
+  {
+    icon: "RadioTower",
+    number: "03",
+    title: "全国线上统筹运营",
+    text: "围绕品牌、内容、区域触达和线索协同，连接线上推广与线下体验。"
+  }
+];
+
+const support = [
+  { number: "01", title: "产品导入", text: "产品演示、场景评估与启动建议。" },
+  { number: "02", title: "团队培训", text: "产品理解、导学方法与服务流程。" },
+  { number: "03", title: "市场运营", text: "品牌内容、合规素材、区域触达与家长沟通。" },
+  { number: "04", title: "持续复盘", text: "围绕数据、用户反馈与市场表现优化。" }
+];
+
+const cooperationSteps = [
+  "了解最新合作模式",
+  "预约合作沟通",
+  "评估场地团队",
+  "完成培训启动",
+  "持续复盘优化"
+];
+
+const cooperationFaqs = selectFaqs([
+  "become-partner",
+  "cooperation-cost",
+  "headquarters-support",
+  "student-resources"
+]);
+---
+
+<BaseLayout
+  title={`合作支持 | ${site.name}`}
+  description="逐鹿未来面向自主学习空间、教培机构、托管机构和区域渠道提供星鹿爱学运营落地支持。"
+>
+  <section class="flow-hero relative isolate -mt-[72px] min-h-[760px] overflow-hidden bg-ink text-white" data-nav-theme="dark">
+    <div class="flow-hero-field absolute inset-0"></div>
+    <div class="flow-hero-grid absolute inset-0"></div>
+    <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-ink/80 to-transparent"></div>
+    <div class="absolute inset-x-0 bottom-0 h-px bg-white/18"></div>
+    <div class="container-page relative flex min-h-[760px] items-center pb-20 pt-[160px]">
+      <div class="max-w-3xl" data-reveal="soft">
+        <p class="text-base font-semibold text-white/62">Partner Enablement · 合作支持</p>
+        <h1 class="mt-7 text-balance text-4xl font-semibold leading-[1.06] sm:text-5xl md:text-6xl">
+          把 AI 学习服务<br />落进你的真实场景
+        </h1>
+        <p class="mt-8 max-w-2xl text-lg leading-8 text-white/76 md:text-xl">
+          先判断适配度，再了解合作模式与启动路径。逐鹿未来提供产品导入、团队培训、运营复盘和授权资料支持。
+        </p>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a class="motion-link inline-flex items-center justify-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist" href="/cooperation/latest-model/">
+            <Icon name="ShieldCheck" size={19} />
+            了解最新合作模式
+            <Icon name="ArrowRight" size={19} />
+          </a>
+          <a class="inline-flex items-center justify-center gap-2 border border-white/32 bg-white/5 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/12" href="/contact/">
+            预约合作沟通
+          </a>
+        </div>
+        <div class="mt-14 grid border-y border-white/16 sm:grid-cols-3">
+          {heroPoints.map((item, index) => (
+            <div class:list={["py-5 sm:px-6", index > 0 && "border-t border-white/16 sm:border-l sm:border-t-0", index === 0 && "sm:pl-0"]}>
+              <p class="text-sm font-semibold text-white">{item.label}</p>
+              <p class="mt-2 text-sm leading-6 text-white/58">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Before We Start"
+        title="先看是否适合启动"
+        description="合作不是先谈费用，而是先看场景、团队和长期服务意愿。"
+      />
+      <div class="mt-14 grid border-y border-ink/12 md:grid-cols-3">
+        {readiness.map((item, index) => (
+          <article
+            class:list={["interactive-card py-9 md:px-9", index > 0 && "border-t border-ink/12 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}
+            data-reveal="soft"
+            style={`--reveal-delay: ${index * 65}ms`}
+          >
+            <Icon name={item.icon} class="text-sea" size={38} />
+            <h2 class="mt-8 text-3xl font-semibold text-ink">{item.title}</h2>
+            <p class="mt-4 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="business-collaboration" class="page-band scroll-mt-24 bg-ink py-20 text-white md:py-28" data-nav-theme="dark">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Business Collaboration"
+        title="从总部能力到本地交付"
+        description="逐鹿未来把产品、内容、培训和运营方法交给伙伴，再一起在本地场景验证。"
+        tone="dark"
+      />
+      <div class="mt-14 grid border-y border-white/16 md:grid-cols-3">
+        {businessModels.map((item, index) => (
+          <article
+            class:list={["interactive-card bg-white/[0.03] py-9 md:px-9", index > 0 && "border-t border-white/16 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}
+            data-reveal="soft"
+            style={`--reveal-delay: ${index * 60}ms`}
+          >
+            <div class="flex items-center justify-between gap-5">
+              <Icon name={item.icon} class="text-white" size={36} />
+              <span class="text-sm font-semibold text-white/42">{item.number}</span>
+            </div>
+            <h2 class="mt-8 text-2xl font-semibold leading-8 text-white">{item.title}</h2>
+            <p class="mt-4 text-base leading-7 text-white/64">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-20 md:py-28">
+    <div class="container-page grid gap-14 lg:grid-cols-[0.72fr_1.28fr]">
+      <SectionHeader
+        eyebrow="What You Get"
+        title="我们具体支持什么"
+        description="从产品理解到市场启动，减少伙伴从零摸索。"
+      />
+      <div class="border-t border-ink/12">
+        {support.map((item) => (
+          <article class="interactive-card grid gap-4 border-b border-ink/12 py-7 sm:grid-cols-[64px_0.7fr_1fr] sm:items-center" data-reveal="soft">
+            <p class="text-sm font-semibold text-sea">{item.number}</p>
+            <h3 class="text-2xl font-semibold text-ink">{item.title}</h3>
+            <p class="text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-ink py-20 text-white md:py-28" data-nav-theme="dark">
+    <div class="container-page">
+      <SectionHeader
+        eyebrow="Cooperation Path"
+        title="从了解模式到试运行"
+        description="先看合作资料，再预约沟通，确认适配后进入启动。"
+        tone="dark"
+      />
+      <div class="mt-14 grid border-y border-white/16 md:grid-cols-5">
+        {cooperationSteps.map((item, index) => (
+          <article
+            class:list={["interactive-card bg-white/[0.03] py-9 md:px-6", index > 0 && "border-t border-white/16 md:border-l md:border-t-0", index === 0 && "md:pl-0"]}
+            data-reveal="soft"
+            style={`--reveal-delay: ${index * 55}ms`}
+          >
+            <p class="text-sm font-semibold text-white/46">0{index + 1}</p>
+            <p class="mt-6 text-xl font-semibold leading-8 text-white">{item}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-20 md:py-24">
+    <div class="container-page grid gap-12 lg:grid-cols-[0.76fr_1.24fr] lg:items-center">
+      <div data-reveal="soft">
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Partner Workspace</p>
+        <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">合作之后进入统一商家工作台</h2>
+        <p class="mt-6 text-lg leading-8 text-muted">
+          业务协同、运营支持和授权资料将逐步统一承载；角色与权限由业务系统管理。
+        </p>
+        <a class="motion-link mt-8 inline-flex items-center gap-2 bg-ink px-6 py-3.5 text-base font-semibold text-white transition hover:bg-sea" href={site.businessLoginUrl} data-business-login>
+          商家登录
+          <Icon name="ArrowRight" size={18} />
+        </a>
+      </div>
+      <div class="grid border-y border-ink/12 sm:grid-cols-3" data-reveal="soft">
+        {[
+          { icon: "Workflow", title: "业务协同", text: "根据角色进入对应工作空间。" },
+          { icon: "Library", title: "授权资料", text: "按合作状态与权限查看资源。" },
+          { icon: "BellRing", title: "运营通知", text: "统一接收培训与服务信息。" }
+        ].map((item, index) => (
+          <article class:list={["interactive-card py-8 sm:px-7", index > 0 && "border-t border-ink/12 sm:border-l sm:border-t-0", index === 0 && "sm:pl-0"]}>
+            <Icon name={item.icon} class="text-sea" size={32} />
+            <h3 class="mt-6 text-xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-3 text-sm leading-6 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-20 md:py-28">
+    <div class="container-page grid gap-14 lg:grid-cols-[0.72fr_1.28fr]">
+      <SectionHeader
+        eyebrow="FAQ"
+        title="合作前先把关键问题说清楚"
+      />
+      <div>
+        <FaqAccordion items={cooperationFaqs} groupName="faq-cooperation" openFirst={true} />
+        <a class="motion-link mt-7 inline-flex items-center gap-2 text-base font-semibold text-sea" href="/faq/">
+          查看全部常见问题
+          <Icon name="ArrowRight" size={18} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    title="先了解最新合作模式"
+    description="完成手机号验证后，查看机构合作方案、套餐价格、分成场景与落地要求。"
+    href="/cooperation/latest-model/"
+    iconName="ShieldCheck"
+    label="查看合作模式"
+  />
+</BaseLayout>
