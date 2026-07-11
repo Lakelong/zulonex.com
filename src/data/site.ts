@@ -2,16 +2,16 @@ export const site = {
   name: "逐鹿未来",
   fullName: "安徽逐鹿未来智能科技有限公司",
   domain: "zulonex.com",
-  title: "逐鹿未来 | 星鹿爱学 AI教育运营服务",
+  title: "逐鹿未来 | 让 AI 学习服务在真实场景中落地",
   description:
-    "逐鹿未来连接星鹿爱学产品与国内市场，提供合作拓展、运营培训与落地支持。",
+    "逐鹿未来面向自主学习空间、教培机构与成长中心，提供星鹿爱学 AI 学习系统、真人导学方法与运营落地支持。",
   keywords:
     "逐鹿未来, 星鹿爱学, 小鹿爱学, 银河智学, AI智能伴学, AI教育运营, 自习室AI学习系统, AI原生学习系统",
   email: "contact@zulonex.com",
   phone: "",
   icp: "",
   address: "安徽省合肥市蜀山区中国声谷 5 号楼",
-  tagline: "重塑学习 逐鹿未来",
+  tagline: "让 AI 学习服务在真实场景中落地",
   businessLoginUrl: import.meta.env.PUBLIC_BUSINESS_LOGIN_URL ?? "https://boss.zulonex.com",
   nav: [
     { href: "/product/", label: "星鹿爱学" },

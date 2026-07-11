@@ -60,6 +60,7 @@ const currentPath = Astro.url.pathname;
       type="button"
       aria-label="打开导航"
       aria-expanded="false"
+      aria-controls="mobile-navigation"
       data-menu-button
     >
       <span data-menu-open><Icon name="Menu" size={22} /></span>
@@ -67,7 +68,7 @@ const currentPath = Astro.url.pathname;
     </button>
   </div>
 
-  <nav class="mobile-nav hidden max-h-[calc(100vh-72px)] overflow-y-auto border-t xl:hidden" aria-label="移动导航" data-mobile-menu>
+  <nav id="mobile-navigation" class="mobile-nav hidden max-h-[calc(100vh-72px)] overflow-y-auto border-t xl:hidden" aria-label="移动导航" data-mobile-menu>
     <div class="container-page grid gap-1 py-4">
       {site.nav.map((item) => (
         <a
@@ -98,13 +99,22 @@ const currentPath = Astro.url.pathname;
 <script>
   const header = document.querySelector<HTMLElement>("[data-site-header]");
   const businessLoginUrl = header instanceof HTMLElement ? header.dataset.businessLoginUrl || "" : "";
-  const button = document.querySelector("[data-menu-button]");
-  const menu = document.querySelector("[data-mobile-menu]");
+  const button = document.querySelector<HTMLButtonElement>("[data-menu-button]");
+  const menu = document.querySelector<HTMLElement>("[data-mobile-menu]");
   const openIcon = document.querySelector("[data-menu-open]");
   const closeIcon = document.querySelector("[data-menu-close]");
   const businessLoginLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>("[data-business-login]")).filter(
     (link) => link instanceof HTMLAnchorElement
   );
+
+  const closeMenu = () => {
+    button?.setAttribute("aria-expanded", "false");
+    button?.setAttribute("aria-label", "打开导航");
+    menu?.classList.add("hidden");
+    openIcon?.classList.remove("hidden");
+    closeIcon?.classList.add("hidden");
+    header?.removeAttribute("data-menu-open");
+  };
 
   const updateBusinessLoginLinks = () => {
     if (!businessLoginLinks.length) return;
@@ -165,6 +175,14 @@ const currentPath = Astro.url.pathname;
     openIcon?.classList.toggle("hidden", !expanded);
     closeIcon?.classList.toggle("hidden", expanded);
     header?.toggleAttribute("data-menu-open", !expanded);
+  });
+
+  menu?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMenu));
+  window.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && button?.getAttribute("aria-expanded") === "true") {
+      closeMenu();
+      button?.focus();
+    }
   });
 </script>
 

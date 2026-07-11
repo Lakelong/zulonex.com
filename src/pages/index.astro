@@ -4,7 +4,7 @@ import dashboard from "@/assets/learning-dashboard.png";
 import BaseLayout from "@/components/BaseLayout.astro";
 import CtaBand from "@/components/CtaBand.astro";
 import Icon from "@/components/Icon.astro";
-import { site, solutionAudiences } from "@/data/site";
+import { relationship, site, solutionAudiences } from "@/data/site";
 
 const productHighlights = [
   {
@@ -28,6 +28,24 @@ const productSignals = [
   { label: "学习路径", text: "知道学到哪里" },
   { label: "AI 问答", text: "问题当场讲清" },
   { label: "练习反馈", text: "下一步有依据" }
+];
+
+const decisionFramework = [
+  {
+    number: "01",
+    title: "先看场景是否成立",
+    text: "从用户需求、场地、团队与服务能力判断，避免只为工具而工具。"
+  },
+  {
+    number: "02",
+    title: "再配置学习与服务",
+    text: "让学习系统、真人导学与家长沟通围绕同一条学习路径协作。"
+  },
+  {
+    number: "03",
+    title: "最后用运营持续优化",
+    text: "根据学习过程、服务反馈和运营节奏，把每一次上线变成长期能力。"
+  }
 ];
 
 const brandPrinciples = [
@@ -112,20 +130,20 @@ const launchSteps = [
 
     <div class="container-page relative flex min-h-screen items-center pb-16 pt-[148px]">
       <div class="hero-copy max-w-4xl" data-reveal="soft">
-        <p class="text-base font-semibold text-white/70">Zulonex × AI Education</p>
+        <p class="text-base font-semibold text-white/70">Zulonex · AI Learning Operations</p>
         <h1 class="mt-6 max-w-4xl text-balance text-4xl font-semibold leading-[1.04] text-white sm:text-5xl md:text-7xl">
-          重塑学习<br />逐鹿未来
+          让 AI 学习服务<br />在真实场景中落地
         </h1>
         <p class="mt-7 max-w-2xl text-lg leading-8 text-white/78 md:text-xl md:leading-9">
-          逐鹿未来连接星鹿爱学与国内市场，把 AI 学习、真人导学和运营支持带入自主学习空间。
+          逐鹿未来面向自主学习空间、教培机构与成长中心，连接星鹿爱学 AI 学习系统、真人导学方法与可执行的运营支持。
         </p>
         <div class="mt-9 flex flex-col gap-3 sm:flex-row">
           <a class="motion-link inline-flex items-center justify-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-sea transition hover:bg-mist" href="/contact/">
-            预约演示
+            预约一对一演示
             <Icon name="ArrowRight" size={20} />
           </a>
-          <a class="inline-flex items-center justify-center gap-2 border border-white/35 bg-white/8 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/14" href="/product/">
-            查看产品
+          <a class="inline-flex items-center justify-center gap-2 border border-white/35 bg-white/8 px-6 py-3.5 text-base font-semibold text-white transition hover:bg-white/14" href="/cooperation/">
+            了解合作方式
           </a>
         </div>
       </div>
@@ -135,17 +153,17 @@ const launchSteps = [
   <section class="border-b border-ink/10 bg-white py-20 md:py-28">
     <div class="container-page">
       <div class="max-w-5xl" data-reveal="soft">
-        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Brand Proposition</p>
+        <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">A Clear Operating Model</p>
         <h2 class="mt-6 text-balance text-4xl font-semibold leading-tight text-ink md:text-6xl">
-          AI 讲清知识<br class="hidden lg:block" />真人陪孩子学会学习
+          不把 AI 当作卖点<br class="hidden lg:block" />而是把学习服务做成体系
         </h2>
       </div>
       <div class="mt-14 grid gap-10 border-t border-ink/12 pt-10 lg:grid-cols-[0.52fr_0.48fr] lg:items-start" data-reveal="soft" style="--reveal-delay: 80ms">
         <p class="max-w-2xl text-xl font-semibold leading-9 text-ink md:text-2xl md:leading-10">
-          星鹿爱学负责学习系统，导学老师负责陪伴和复盘，逐鹿未来帮助机构把这套服务落到每天的运营里。
+          星鹿爱学提供学习系统，导学老师负责陪伴与复盘，逐鹿未来帮助机构把这套服务落到每天的运营里。
         </p>
         <p class="max-w-xl text-lg leading-8 text-muted">
-          对机构来说，它不是多买一套工具，而是把 AI 学习、真人服务和日常运营组合成一套新的学习服务。
+          对机构来说，关键不是增加一套工具，而是让 AI 学习、真人服务和日常运营围绕同一件事持续发生：帮助孩子学会学习。
         </p>
       </div>
     </div>
@@ -161,6 +179,59 @@ const launchSteps = [
           <p class="mt-3 text-base leading-7 text-muted">{item.text}</p>
         </article>
       ))}
+    </div>
+  </section>
+
+  <section class="page-band bg-mist py-20 md:py-28">
+    <div class="container-page">
+      <div class="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+        <div data-reveal="soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Before We Start</p>
+          <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
+            先判断是否适合<br />再进入合作
+          </h2>
+        </div>
+        <p class="max-w-2xl text-lg leading-8 text-muted" data-reveal="soft">
+          成熟的合作不是把产品交付出去，而是确认它能否被团队真正使用、被用户清楚感知，并在运营中长期迭代。
+        </p>
+      </div>
+      <div class="mt-14 grid border-l border-t border-ink/12 md:grid-cols-3">
+        {decisionFramework.map((item, index) => (
+          <article class="border-b border-r border-ink/12 bg-white p-7 sm:p-8" data-reveal="soft" style={`--reveal-delay: ${index * 55}ms`}>
+            <p class="text-sm font-semibold text-sea">{item.number}</p>
+            <h3 class="mt-7 text-2xl font-semibold text-ink">{item.title}</h3>
+            <p class="mt-3 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
+      <a class="motion-link mt-8 inline-flex items-center gap-2 text-base font-semibold text-sea" href="/cooperation/">
+        查看合作支持与上线流程
+        <Icon name="ArrowRight" size={18} />
+      </a>
+    </div>
+  </section>
+
+  <section class="page-band bg-white py-16 md:py-20">
+    <div class="container-page">
+      <div class="flex flex-col gap-5 border-y border-ink/12 py-7 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">A Clear Relationship</p>
+          <h2 class="mt-2 text-2xl font-semibold text-ink">每个角色各自负责，合作关系清楚可见</h2>
+        </div>
+        <a class="motion-link inline-flex shrink-0 items-center gap-2 text-base font-semibold text-sea" href="/about/">
+          了解逐鹿未来
+          <Icon name="ArrowRight" size={18} />
+        </a>
+      </div>
+      <div class="grid border-l border-t border-ink/12 md:grid-cols-3">
+        {relationship.map((item, index) => (
+          <article class="border-b border-r border-ink/12 p-6 sm:p-7" data-reveal="soft" style={`--reveal-delay: ${index * 55}ms`}>
+            <p class="text-sm font-semibold text-sea">{item.role}</p>
+            <h3 class="mt-5 text-2xl font-semibold text-ink">{item.name}</h3>
+            <p class="mt-3 text-base leading-7 text-muted">{item.text}</p>
+          </article>
+        ))}
+      </div>
     </div>
   </section>
 
