@@ -188,10 +188,10 @@ const currentPath = Astro.url.pathname;
 
 <style>
   .site-header {
-    --header-text: #52646c;
-    --header-strong: #06124a;
-    --header-border: rgba(6, 18, 74, 0.1);
-    --header-panel: rgba(255, 255, 255, 0.94);
+    --header-text: color-mix(in srgb, var(--z-muted) 92%, transparent);
+    --header-strong: var(--z-ink);
+    --header-border: rgb(var(--z-line-rgb) / 0.76);
+    --header-panel: color-mix(in srgb, var(--z-surface) 94%, transparent);
     position: fixed;
     inset: 0 0 auto;
     z-index: 50;
@@ -210,20 +210,20 @@ const currentPath = Astro.url.pathname;
     --header-text: rgba(255, 255, 255, 0.76);
     --header-strong: #ffffff;
     --header-border: rgba(255, 255, 255, 0.14);
-    --header-panel: rgba(6, 18, 74, 0.08);
+    --header-panel: rgb(var(--z-ink-rgb) / 0.08);
     backdrop-filter: blur(8px) saturate(115%);
   }
 
   .site-header[data-theme="dark"][data-scrolled="true"],
   .site-header[data-theme="dark"][data-menu-open] {
-    --header-panel: rgba(6, 18, 74, 0.78);
+    --header-panel: rgb(var(--z-ink-rgb) / 0.78);
     backdrop-filter: blur(18px) saturate(125%);
-    box-shadow: 0 12px 40px rgba(3, 10, 42, 0.14);
+    box-shadow: var(--z-shadow-tight);
   }
 
   .site-header[data-theme="light"][data-scrolled="true"],
   .site-header[data-theme="light"][data-menu-open] {
-    box-shadow: 0 12px 40px rgba(6, 18, 74, 0.08);
+    box-shadow: var(--z-shadow-tight);
   }
 
   .brand-link {
@@ -284,8 +284,8 @@ const currentPath = Astro.url.pathname;
   }
 
   .nav-cta {
-    background: #06124a;
-    color: #ffffff;
+    background: var(--z-ink);
+    color: var(--z-surface);
     transition:
       background-color 180ms ease,
       color 180ms ease,
@@ -300,8 +300,8 @@ const currentPath = Astro.url.pathname;
   }
 
   .nav-login:hover {
-    background: rgba(31, 97, 255, 0.09);
-    color: #1f61ff;
+    background: rgb(var(--z-sea-rgb) / 0.09);
+    color: var(--z-sea);
   }
 
   .site-header[data-theme="dark"] .nav-login:hover {
@@ -310,17 +310,17 @@ const currentPath = Astro.url.pathname;
   }
 
   .nav-cta:hover {
-    background: #1f61ff;
+    background: var(--z-sea);
     transform: translateY(-1px);
   }
 
   .site-header[data-theme="dark"] .nav-cta {
-    background: #ffffff;
-    color: #1f61ff;
+    background: var(--z-surface);
+    color: var(--z-sea);
   }
 
   .site-header[data-theme="dark"] .nav-cta:hover {
-    background: #edf4ff;
+    background: var(--z-surface-soft);
   }
 
   .menu-button {
@@ -333,7 +333,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .menu-button:hover {
-    background: rgba(31, 97, 255, 0.08);
+    background: rgb(var(--z-sea-rgb) / 0.08);
   }
 
   .mobile-nav {
@@ -350,7 +350,7 @@ const currentPath = Astro.url.pathname;
 
   .mobile-nav-link:hover,
   .mobile-nav-link.is-active {
-    background: rgba(31, 97, 255, 0.1);
+    background: rgb(var(--z-sea-rgb) / 0.1);
     color: var(--header-strong);
   }
 
@@ -364,13 +364,13 @@ const currentPath = Astro.url.pathname;
 
   .mobile-action-primary {
     border-color: transparent;
-    background: #06124a;
-    color: #ffffff;
+    background: var(--z-ink);
+    color: var(--z-surface);
   }
 
   .site-header[data-theme="dark"] .mobile-action-primary {
-    background: #ffffff;
-    color: #1f61ff;
+    background: var(--z-surface);
+    color: var(--z-sea);
   }
 
   @media (max-width: 640px) {

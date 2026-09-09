@@ -1,0 +1,93 @@
+---
+import Icon from "@/components/Icon.astro";
+
+interface Props {
+  image: { src: string; width: number; height: number };
+  alt: string;
+  eyebrow: string;
+  titleLines: string[];
+  description: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+  objectPosition?: string;
+  badgeLabel?: string;
+  badgeTitle?: string;
+}
+
+const {
+  image,
+  alt,
+  eyebrow,
+  titleLines,
+  description,
+  primaryHref = "/contact/",
+  primaryLabel = "预约一对一演示",
+  secondaryHref,
+  secondaryLabel,
+  objectPosition = "58% center",
+  badgeLabel = "面向真实学习现场",
+  badgeTitle = "AI 系统 × 真人导学"
+} = Astro.props;
+---
+
+<section class="editorial-hero-shell -mt-[72px] lg:-mt-[88px]" data-nav-theme="dark">
+  <div class="editorial-hero">
+    <img
+      src={image.src}
+      width={image.width}
+      height={image.height}
+      alt={alt}
+      class="editorial-hero-media"
+      style={`object-position:${objectPosition}`}
+      data-parallax="0.032"
+      data-parallax-max="24"
+      loading="eager"
+    />
+    <div class="editorial-hero-shade" aria-hidden="true"></div>
+
+    <div class="editorial-hero-note" aria-label={`${badgeLabel}：${badgeTitle}`}>
+      <span aria-hidden="true"></span>
+      <div><small>{badgeLabel}</small><strong>{badgeTitle}</strong></div>
+    </div>
+
+    <div class="editorial-hero-notch" data-reveal="soft">
+      <p class="eyebrow">{eyebrow}</p>
+      <h1>{titleLines.map((line) => <span>{line}</span>)}</h1>
+      <div class="editorial-hero-actions">
+        <p class="hero-summary">{description}</p>
+        <a class="button-primary motion-link" href={primaryHref}>{primaryLabel}<Icon name="ArrowRight" size={18} /></a>
+        {secondaryHref && secondaryLabel && (
+          <a class="hero-text-link motion-link" href={secondaryHref}>{secondaryLabel}<Icon name="ArrowRight" size={16} /></a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .editorial-hero-note {
+    position: absolute;
+    top: 112px;
+    left: 42px;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(255,255,255,.30);
+    border-radius: 17px;
+    background: rgba(255,255,255,.15);
+    padding: 14px 17px;
+    color: #fff;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.28);
+    backdrop-filter: blur(18px) saturate(130%);
+  }
+  .editorial-hero-note > span { width: 9px; height: 9px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 5px rgba(255,255,255,.16), 0 0 0 10px rgba(255,255,255,.07); }
+  .editorial-hero-note small, .editorial-hero-note strong { display: block; }
+  .editorial-hero-note small { margin-bottom: 3px; opacity: .7; font-size: 11px; }
+  .editorial-hero-note strong { font-size: 14px; }
+  @media (max-width: 720px) {
+    .editorial-hero-note { top: 90px; left: 16px; padding: 11px 13px; }
+  }
+</style>

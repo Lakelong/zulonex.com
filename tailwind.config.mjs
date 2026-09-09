@@ -6,18 +6,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: "#06124a",
-        muted: "#5d6475",
-        line: "#dce8f6",
-        mist: "#f2f7fd",
-        sea: "#1f61ff",
-        ocean: "#4284f4",
-        leaf: "#90c0f8",
-        amber: "#ff6a2f"
+        ink: "rgb(var(--z-ink-rgb) / <alpha-value>)",
+        muted: "rgb(var(--z-muted-rgb) / <alpha-value>)",
+        line: "rgb(var(--z-line-rgb) / <alpha-value>)",
+        mist: "rgb(var(--z-mist-rgb) / <alpha-value>)",
+        sea: "rgb(var(--z-sea-rgb) / <alpha-value>)",
+        ocean: "rgb(var(--z-ocean-rgb) / <alpha-value>)",
+        leaf: "rgb(var(--z-leaf-rgb) / <alpha-value>)",
+        amber: "rgb(var(--z-amber-rgb) / <alpha-value>)"
       },
       boxShadow: {
-        soft: "0 18px 60px rgba(18, 54, 58, 0.12)",
-        tight: "0 10px 30px rgba(18, 54, 58, 0.10)"
+        soft: "var(--z-shadow-soft)",
+        tight: "var(--z-shadow-tight)"
       },
       fontFamily: {
         sans: [

@@ -11,6 +11,14 @@ tmp/
 docs/.DS_Store
 docs/*.pptx
 docs/微信图片_*.jpg
+audit-evidence/
+用户证明/
+public/assets/*.pptx
+src/assets/team/唐云.png
+src/assets/team/宣进梅.png
+src/assets/team/李媛媛.png
+src/assets/team/财务总监专业着装高管照.png
+src/assets/team/龙伟湖.png
 release/*
 !release/zulonex-website-2026-07-10-0835.zip
 !release/zulonex-website-2026-07-10-0835.zip.sha256

@@ -1,0 +1,15 @@
+---
+import zulo from "@/assets/brand/zulo.svg";
+
+interface Props {
+  tone?: "blue" | "light";
+  class?: string;
+  style?: string;
+}
+
+const { tone = "blue", class: className = "", style } = Astro.props;
+---
+
+<span class:list={["brand-symbol-crop", tone === "blue" && "brand-symbol-blue", className]} style={style} aria-hidden="true">
+  <img src={zulo.src} width="4329" height="1691" alt="" />
+</span>

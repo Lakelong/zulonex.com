@@ -5,6 +5,89 @@
 :root {
   color-scheme: light;
   --container: 1180px;
+
+  /* Zulonex Editorial System tokens. Keep component styles on these semantic values. */
+  --z-bg: #f6f9ff;
+  --z-surface: #ffffff;
+  --z-surface-soft: #f2f7fd;
+  --z-ink: #06124a;
+  --z-ink-rgb: 6 18 74;
+  --z-muted: #5d6475;
+  --z-muted-rgb: 93 100 117;
+  --z-line: #dce8f6;
+  --z-line-rgb: 220 232 246;
+  --z-mist: #f2f7fd;
+  --z-mist-rgb: 242 247 253;
+  --z-sea: #1f61ff;
+  --z-sea-rgb: 31 97 255;
+  --z-ocean: #4284f4;
+  --z-ocean-rgb: 66 132 244;
+  --z-leaf: #90c0f8;
+  --z-leaf-rgb: 144 192 248;
+  --z-amber: #ff6a2f;
+  --z-amber-rgb: 255 106 47;
+  --z-white-rgb: 255 255 255;
+  --z-radius-sm: 10px;
+  --z-radius-md: 16px;
+  --z-radius-lg: 24px;
+  --z-radius-xl: 32px;
+  --z-shadow-soft: 0 18px 60px rgb(6 18 74 / 0.1);
+  --z-shadow-tight: 0 10px 30px rgb(6 18 74 / 0.08);
+  --z-focus: 0 0 0 4px rgb(31 97 255 / 0.18);
+  --z-hero-start: #06124a;
+  --z-hero-mid: #0a2771;
+  --z-hero-end: #1f61ff;
+}
+
+:root[data-theme="classic"] {
+  --z-bg: #06124a;
+  --z-surface: #0a2771;
+  --z-surface-soft: #102e73;
+  --z-ink: #ffffff;
+  --z-ink-rgb: 255 255 255;
+  --z-muted: #c5d5f2;
+  --z-muted-rgb: 197 213 242;
+  --z-line: #3a5f9a;
+  --z-line-rgb: 58 95 154;
+  --z-mist: #102e73;
+  --z-mist-rgb: 16 46 115;
+  --z-sea: #73a8ff;
+  --z-sea-rgb: 115 168 255;
+  --z-ocean: #4284f4;
+  --z-ocean-rgb: 66 132 244;
+  --z-leaf: #90c0f8;
+  --z-leaf-rgb: 144 192 248;
+  --z-shadow-soft: 0 18px 60px rgb(0 0 0 / 0.22);
+  --z-shadow-tight: 0 10px 30px rgb(0 0 0 / 0.18);
+  --z-hero-start: #06124a;
+  --z-hero-mid: #0a2771;
+  --z-hero-end: #1f61ff;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --z-bg: #0d1424;
+  --z-surface: #151f33;
+  --z-surface-soft: #1b2941;
+  --z-ink: #f4f8ff;
+  --z-ink-rgb: 244 248 255;
+  --z-muted: #b5c0d3;
+  --z-muted-rgb: 181 192 211;
+  --z-line: #32435f;
+  --z-line-rgb: 50 67 95;
+  --z-mist: #18263d;
+  --z-mist-rgb: 24 38 61;
+  --z-sea: #79a7ff;
+  --z-sea-rgb: 121 167 255;
+  --z-ocean: #5f8fff;
+  --z-ocean-rgb: 95 143 255;
+  --z-leaf: #8fc3ff;
+  --z-leaf-rgb: 143 195 255;
+  --z-shadow-soft: 0 18px 60px rgb(0 0 0 / 0.3);
+  --z-shadow-tight: 0 10px 30px rgb(0 0 0 / 0.24);
+  --z-hero-start: #0d1424;
+  --z-hero-mid: #182b4d;
+  --z-hero-end: #4f83ff;
 }
 
 html {
@@ -13,8 +96,8 @@ html {
 
 body {
   margin: 0;
-  background: #f6f9ff;
-  color: #162126;
+  background: var(--z-bg);
+  color: var(--z-ink);
   font-family: Inter, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   letter-spacing: 0;
   text-rendering: optimizeLegibility;
@@ -22,8 +105,8 @@ body {
 }
 
 ::selection {
-  background: rgba(31, 97, 255, 0.2);
-  color: #06124a;
+  background: rgb(var(--z-sea-rgb) / 0.2);
+  color: var(--z-ink);
 }
 
 a {
@@ -36,7 +119,7 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid rgba(31, 97, 255, 0.48);
+  outline: 3px solid rgb(var(--z-sea-rgb) / 0.48);
   outline-offset: 3px;
 }
 
@@ -46,9 +129,9 @@ textarea:focus-visible {
   left: 50%;
   z-index: 100;
   transform: translate(-50%, -180%);
-  background: #ffffff;
-  box-shadow: 0 12px 30px rgba(6, 18, 74, 0.18);
-  color: #06124a;
+  background: var(--z-surface);
+  box-shadow: var(--z-shadow-tight);
+  color: var(--z-ink);
   padding: 11px 16px;
   font-size: 14px;
   font-weight: 700;
@@ -72,9 +155,10 @@ textarea {
 }
 
 .surface {
-  border: 1px solid rgba(6, 18, 74, 0.08);
-  background: rgba(255, 255, 255, 0.82);
-  box-shadow: 0 18px 60px rgba(6, 18, 74, 0.10);
+  border: 1px solid rgb(var(--z-line-rgb) / 0.76);
+  border-radius: var(--z-radius-lg);
+  background: color-mix(in srgb, var(--z-surface) 86%, transparent);
+  box-shadow: var(--z-shadow-soft);
 }
 
 .focus-ring {
@@ -82,7 +166,7 @@ textarea {
 }
 
 .focus-ring:focus-visible {
-  box-shadow: 0 0 0 4px rgba(31, 97, 255, 0.18);
+  box-shadow: var(--z-focus);
 }
 
 .text-balance {
@@ -90,7 +174,7 @@ textarea {
 }
 
 .page-band {
-  border-top: 1px solid rgba(6, 18, 74, 0.08);
+  border-top: 1px solid rgb(var(--z-line-rgb) / 0.72);
 }
 
 .no-scrollbar {
@@ -138,7 +222,7 @@ textarea {
 
 .flow-hero {
   background:
-    linear-gradient(125deg, #06124a 0%, #0a2771 43%, #1f61ff 100%);
+    linear-gradient(125deg, var(--z-hero-start) 0%, var(--z-hero-mid) 43%, var(--z-hero-end) 100%);
 }
 
 .flow-hero-field {
@@ -235,8 +319,8 @@ textarea {
 }
 
 .interactive-card:hover {
-  border-color: rgba(31, 97, 255, 0.24);
-  box-shadow: 0 18px 50px rgba(6, 18, 74, 0.10);
+  border-color: rgb(var(--z-sea-rgb) / 0.24);
+  box-shadow: var(--z-shadow-soft);
   transform: translateY(-4px);
 }
 
@@ -251,29 +335,53 @@ textarea {
 }
 
 .interactive-card:focus-within {
-  border-color: rgba(31, 97, 255, 0.34);
-  box-shadow: 0 0 0 4px rgba(31, 97, 255, 0.12);
+  border-color: rgb(var(--z-sea-rgb) / 0.34);
+  box-shadow: var(--z-focus);
+}
+
+/* Team portraits share one editorial crop: eye line stays high, shoulders remain visible. */
+.team-portrait {
+  object-position: 50% 18%;
+  transform: scale(1.1);
+  transform-origin: center 18%;
+}
+
+.group:hover .team-portrait {
+  transform: scale(1.14);
 }
 
 .field {
   width: 100%;
-  border: 1px solid rgba(6, 18, 74, 0.14);
-  border-radius: 2px;
-  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgb(var(--z-line-rgb) / 0.92);
+  border-radius: var(--z-radius-sm);
+  background: color-mix(in srgb, var(--z-surface) 94%, transparent);
   padding: 14px 15px;
-  color: #162126;
+  color: var(--z-ink);
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .field:focus {
-  border-color: #1f61ff;
-  box-shadow: 0 0 0 4px rgba(31, 97, 255, 0.12);
+  border-color: var(--z-sea);
+  box-shadow: var(--z-focus);
   outline: none;
 }
 
 .field::placeholder {
-  color: #7e8d93;
+  color: color-mix(in srgb, var(--z-muted) 72%, transparent);
 }
+
+/* Shared primitives: rounded, quiet surfaces are the default language. */
+.rounded-sm { border-radius: var(--z-radius-sm); }
+.rounded-md { border-radius: var(--z-radius-md); }
+.rounded-lg { border-radius: var(--z-radius-lg); }
+.rounded-xl { border-radius: var(--z-radius-xl); }
+
+/* Theme-aware utility surfaces. Dark/classic modes intentionally preserve hero sections. */
+:root[data-theme="dark"] .bg-white,
+:root[data-theme="classic"] .bg-white { background-color: var(--z-surface) !important; }
+:root[data-theme="dark"] .bg-\[\#f5f5f7\],
+:root[data-theme="classic"] .bg-\[\#f5f5f7\] { background-color: var(--z-surface-soft) !important; }
+:root[data-theme="dark"] .text-\[\#162126\] { color: var(--z-ink) !important; }
 
 @media (max-width: 720px) {
   .container-page {

@@ -46,11 +46,11 @@ const jsonLd = {
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-theme="v2">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="color-scheme" content="light" />
+    <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={site.keywords} />
@@ -68,6 +68,13 @@ const jsonLd = {
     <meta name="twitter:card" content="summary_large_image" />
     {noindex && <meta name="robots" content="noindex,nofollow" />}
     <meta name="theme-color" content="#f6f9ff" />
+    <script is:inline>
+      (() => {
+        const allowed = new Set(["v2", "classic", "dark"]);
+        const saved = window.localStorage.getItem("zulonex-theme");
+        document.documentElement.dataset.theme = saved && allowed.has(saved) ? saved : "v2";
+      })();
+    </script>
     <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
@@ -78,6 +85,23 @@ const jsonLd = {
     </main>
     <SiteFooter />
     <script>
+      const themeWindow = window as Window & {
+        ZulonexTheme?: {
+          get: () => string;
+          apply: (theme?: string) => string;
+        };
+      };
+
+      themeWindow.ZulonexTheme = {
+        get: () => document.documentElement.dataset.theme || "v2",
+        apply: (theme = "v2") => {
+          const next = ["v2", "classic", "dark"].includes(theme) ? theme : "v2";
+          document.documentElement.dataset.theme = next;
+          window.localStorage.setItem("zulonex-theme", next);
+          return next;
+        }
+      };
+
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       if (!reduceMotion) {
