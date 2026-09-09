@@ -8,6 +8,11 @@ import BaseLayout from "@/components/BaseLayout.astro";
 import Icon from "@/components/Icon.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 import { site } from "@/data/site";
+import { getGeoContext } from "@/lib/geoContext";
+
+const geoContext = getGeoContext(Astro.url);
+const currentCity = geoContext.currentCity;
+const currentCityFeedbackLabel = currentCity.cityName === "全国" ? "全国各地" : currentCity.cityName;
 import { cooperationAccessCookie, verifyCooperationAccessToken } from "@/lib/cooperationAccess";
 
 export const prerender = false;
@@ -506,7 +511,7 @@ const fitInstitutions = ["书房/阅读馆", "传统教培转型", "素质类机
         <div data-reveal="soft">
           <p class="text-sm font-semibold uppercase tracking-[0.16em] text-sea">Feedback</p>
           <h3 class="mt-5 text-balance text-4xl font-semibold leading-tight text-ink md:text-5xl">
-            来自全国各地校长的反馈
+            来自{currentCityFeedbackLabel}校长的反馈
           </h3>
         </div>
         <div class="border-t border-ink/12">
@@ -595,7 +600,7 @@ const fitInstitutions = ["书房/阅读馆", "传统教培转型", "素质类机
       <div data-reveal="soft">
         <p class="text-sm font-semibold uppercase tracking-[0.16em] text-white/52">Start Together</p>
         <h2 class="mt-5 text-balance text-4xl font-semibold leading-tight md:text-6xl">
-          全国甄选1万家联营合作校
+          {currentCity.cityName}甄选1万家联营合作校
         </h2>
         <p class="mt-6 max-w-xl text-lg leading-8 text-white/68">
           抢占AI教育新赛道，共赢千亿蓝海市场。先机就是利润，合作就是未来。

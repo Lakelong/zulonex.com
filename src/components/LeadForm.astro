@@ -1,11 +1,20 @@
 ---
 import Icon from "@/components/Icon.astro";
+import { getGeoContext, type GeoContext } from "@/lib/geoContext";
+
+interface Props {
+  geoContext?: GeoContext;
+}
+
+const { geoContext = getGeoContext(Astro.url) } = Astro.props;
+const sourceCity = geoContext.currentCity.cityName;
 
 const roles = ["机构负责人", "区域渠道", "校区运营", "投资/创业者", "其他"];
 const cooperationTypes = ["产品演示", "机构合作", "区域合作", "运营咨询", "资料索取"];
 ---
 
 <form class="lead-form grid gap-6 border border-ink/10 bg-white p-6 shadow-tight md:p-9" data-lead-form novalidate>
+  <input type="hidden" name="source_city" value={sourceCity} />
   <div class="lead-success" data-success-panel hidden tabindex="-1">
     <div class="grid h-12 w-12 shrink-0 place-items-center bg-sea text-white">
       <Icon name="Check" size={25} />

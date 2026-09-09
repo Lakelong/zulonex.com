@@ -146,3 +146,14 @@ export const cooperationModel = {
   notice:
     "本页为合作资料展示，价格、保证金、权益、结算比例与扶持政策以双方正式协议及最新授权文件为准；测算内容仅用于理解模型，不构成收益承诺。"
 };
+
+export function getCooperationModel(cityName: string) {
+  return {
+    ...cooperationModel,
+    overview: cooperationModel.overview.map((item) =>
+      item.title === "产品定位"
+        ? { ...item, text: item.text.replace("全国", cityName) }
+        : item
+    )
+  };
+}

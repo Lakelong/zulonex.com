@@ -6,6 +6,10 @@ import Icon from "@/components/Icon.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 import { selectFaqs } from "@/data/faqs";
 import { site } from "@/data/site";
+import { getGeoContext } from "@/lib/geoContext";
+
+const geoContext = getGeoContext(Astro.url);
+const currentCity = geoContext.currentCity;
 
 const readiness = [
   {
@@ -56,7 +60,7 @@ const businessModels = [
   {
     icon: "RadioTower",
     number: "03",
-    title: "全国线上统筹运营",
+    title: `${currentCity.cityName}线上统筹运营`,
     text: "围绕品牌、内容、区域触达和线索协同，连接线上推广与线下体验。"
   }
 ];

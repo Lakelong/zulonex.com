@@ -2,14 +2,17 @@
 import brandBg from "@/assets/brand/brand-bg-blue.webp";
 import BaseLayout from "@/components/BaseLayout.astro";
 import Icon from "@/components/Icon.astro";
-import { cooperationModel as model } from "@/data/cooperationModel";
+import { getCooperationModel } from "@/data/cooperationModel";
 import { site } from "@/data/site";
 import { cooperationAccessCookie, verifyCooperationAccessToken } from "@/lib/cooperationAccess";
+import { getGeoContext } from "@/lib/geoContext";
 
 export const prerender = false;
 
 const accessToken = Astro.cookies.get(cooperationAccessCookie)?.value;
 const unlocked = Boolean(verifyCooperationAccessToken(accessToken));
+const geoContext = getGeoContext(Astro.url);
+const model = getCooperationModel(geoContext.currentCity.cityName);
 const tableHead = ["套餐", "套餐售价", "机构收入", "总部收入", "机构比例/说明"];
 const annualTotal = model.annualModel.reduce((sum, item) => {
   const numeric = Number(item.partnerIncome.replace(/[^\d.]/g, ""));

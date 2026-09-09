@@ -20,6 +20,10 @@ import BaseLayout from "@/components/BaseLayout.astro";
 import Icon from "@/components/Icon.astro";
 import SectionHeader from "@/components/SectionHeader.astro";
 import { relationship, site } from "@/data/site";
+import { getGeoContext } from "@/lib/geoContext";
+
+const geoContext = getGeoContext(Astro.url);
+const currentCity = geoContext.currentCity;
 
 const purpose = [
   {
@@ -73,7 +77,7 @@ const teamMembers = [
     number: "01",
     name: "鲍娜娜",
     role: "创始人、董事长",
-    text: "负责公司战略、合作布局与全国运营体系。",
+    text: `负责公司战略、合作布局与${currentCity.cityName}运营体系。`,
     image: portraitBaoNana
   },
   {

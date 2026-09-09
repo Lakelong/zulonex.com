@@ -12,10 +12,11 @@ type LeadPayload = {
   role?: string;
   cooperationType?: string;
   message?: string;
+  source_city?: string;
   privacy?: string | boolean;
 };
 
-type LeadRecord = Required<Pick<LeadPayload, "name" | "phone" | "organization" | "city" | "role" | "cooperationType" | "message">> & {
+type LeadRecord = Required<Pick<LeadPayload, "name" | "phone" | "organization" | "city" | "role" | "cooperationType" | "message" | "source_city">> & {
   privacy: true;
   source: string;
   ip?: string;
@@ -53,6 +54,7 @@ function markdown(payload: LeadRecord) {
     `手机号：${payload.phone}`,
     `机构：${payload.organization}`,
     `城市：${payload.city}`,
+    `来源城市：${payload.source_city}`,
     `身份：${payload.role}`,
     `合作类型：${payload.cooperationType}`,
     `需求：${payload.message}`,
@@ -129,6 +131,7 @@ async function syncFeishuBitable(lead: LeadRecord) {
     [feishuField("FEISHU_LEADS_FIELD_PHONE", "手机号")]: lead.phone,
     [feishuField("FEISHU_LEADS_FIELD_ORGANIZATION", "机构名称")]: lead.organization,
     [feishuField("FEISHU_LEADS_FIELD_CITY", "所在城市")]: lead.city,
+    [feishuField("FEISHU_LEADS_FIELD_SOURCE_CITY", "来源城市")]: lead.source_city,
     [feishuField("FEISHU_LEADS_FIELD_ROLE", "身份角色")]: lead.role,
     [feishuField("FEISHU_LEADS_FIELD_COOPERATION_TYPE", "合作类型")]: lead.cooperationType,
     [feishuField("FEISHU_LEADS_FIELD_MESSAGE", "需求描述")]: lead.message,
@@ -199,6 +202,7 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     ...payload,
     privacy: true,
     source: "website",
+    source_city: sanitize(payload.source_city || "全国"),
     ip: getIp(request, clientAddress),
     userAgent: sanitize(request.headers.get("user-agent")),
     referer: sanitize(request.headers.get("referer")),

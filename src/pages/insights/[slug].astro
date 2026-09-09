@@ -7,17 +7,15 @@ import Icon from "@/components/Icon.astro";
 import { site } from "@/data/site";
 import { getCollection, render } from "astro:content";
 
-export async function getStaticPaths() {
-  const articles = await getCollection("insights");
-  return articles
-    .filter((article) => article.data.published)
-    .map((article) => ({
-      params: { slug: article.id.replace(/\.md$/, "") },
-      props: { article }
-    }));
+const articles = await getCollection("insights");
+const article = articles.find(
+  (item) => item.data.published && item.id.replace(/\.md$/, "") === Astro.params.slug
+);
+
+if (!article) {
+  return Astro.redirect("/404/");
 }
 
-const { article } = Astro.props;
 const { Content } = await render(article);
 const images: Record<string, typeof heroStudent> = {
   "xinglu-product-overview.md": heroStudent,

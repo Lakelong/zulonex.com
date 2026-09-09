@@ -4,6 +4,9 @@ import BaseLayout from "@/components/BaseLayout.astro";
 import Icon from "@/components/Icon.astro";
 import LeadForm from "@/components/LeadForm.astro";
 import { site } from "@/data/site";
+import { getGeoContext } from "@/lib/geoContext";
+
+const geoContext = getGeoContext(Astro.url);
 
 const nextSteps = [
   { icon: "MessageSquareText", title: "了解场景", text: "确认机构类型、城市与合作诉求。" },
@@ -15,6 +18,7 @@ const nextSteps = [
 <BaseLayout
   title={`预约演示 | ${site.name}`}
   description="预约星鹿爱学产品演示，了解逐鹿未来面向自主学习空间的 AI 教育运营合作方案。"
+  geoContext={geoContext}
 >
   <section
     class="-mt-[72px] bg-sea pb-20 pt-[152px] text-white md:pb-28 md:pt-[184px]"
@@ -55,7 +59,7 @@ const nextSteps = [
           <p class="mt-2 flex items-center gap-3"><Icon name="MapPin" size={19} /> {site.address}</p>
         </div>
       </div>
-      <LeadForm />
+      <LeadForm geoContext={geoContext} />
     </div>
   </section>
 </BaseLayout>

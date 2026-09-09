@@ -5,27 +5,36 @@ import logoBlue from "@/assets/brand/logo-blue.svg";
 import SiteFooter from "@/components/SiteFooter.astro";
 import SiteHeader from "@/components/SiteHeader.astro";
 import { site } from "@/data/site";
+import { getGeoContext, getGeoSeoTitle, type GeoContext } from "@/lib/geoContext";
 
 interface Props {
   title?: string;
   description?: string;
   path?: string;
   noindex?: boolean;
+  geoContext?: GeoContext;
 }
 
 const {
   title = site.title,
   description = site.description,
   path = Astro.url.pathname,
-  noindex = false
+  noindex = false,
+  geoContext = getGeoContext(Astro.url)
 } = Astro.props;
 
-const canonical = new URL(path, Astro.site ?? "https://zulonex.com").toString();
+const seoTitle = getGeoSeoTitle(geoContext);
+const canonicalPath =
+  geoContext.currentCity.cityName === "全国"
+    ? path
+    : `${path}?city=${encodeURIComponent(geoContext.currentCity.cityName)}`;
+const canonical = new URL(canonicalPath, Astro.site ?? "https://zulonex.com").toString();
 const socialImage = new URL(brandBg.src, Astro.site ?? "https://zulonex.com").toString();
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: site.name,
+  alternateName: title,
   url: "https://zulonex.com",
   logo: new URL(logoBlue.src, Astro.site ?? "https://zulonex.com").toString(),
   description: site.description,
@@ -46,11 +55,11 @@ const jsonLd = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="color-scheme" content="light" />
-    <title>{title}</title>
+    <title>{seoTitle}</title>
     <meta name="description" content={description} />
     <meta name="keywords" content={site.keywords} />
     <link rel="canonical" href={canonical} />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={seoTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
