@@ -13,8 +13,8 @@ Use this project for:
 
 For project-level coordination, read:
 
-- `/Users/longwei/Documents/GitHub/Airething/AI Business OS/项目管理/Project Control Center/config/repositories.json`
-- `/Users/longwei/Documents/GitHub/Airething/AI Business OS/项目管理/Project Control Center/docs/GIT_SOURCE_OF_TRUTH.md`
+- `/Users/longwei/Documents/GitHub/Airething/AI Business OS/config/repositories.json`
+- `/Users/longwei/Documents/GitHub/Airething/AI Business OS/docs/GIT_SOURCE_OF_TRUTH.md`
 
 ## Tech Stack
 
@@ -98,7 +98,7 @@ When changing visual pages:
 When a task changes project direction, creates a new deliverable, or completes a significant milestone, update or propose an update to:
 
 ```text
-/Users/longwei/Documents/GitHub/Airething/AI Business OS/项目管理/Project Control Center/PROJECT_STATUS.md
+/Users/longwei/Documents/GitHub/Airething/AI Business OS/PROJECT_STATUS.md
 ```
 
 Record:
