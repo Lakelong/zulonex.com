@@ -114,3 +114,18 @@ Record:
 The `geo/` directory appears to be a separate project with its own `package.json` and `.git` directory.
 
 When working inside `geo/`, inspect its local README, package scripts, and Git status separately. Add a `geo/AGENTS.md` if that subproject becomes active enough to need its own rules.
+
+<!-- AIOS-INDUSTRIAL-CONTRACT:BEGIN -->
+# AI Business OS｜工业级开发默认契约
+
+适用于所有现有及新建 AI Native 项目的编程与修复，遵守系统/平台权限和项目有效授权。
+
+- 长任务先读取/维护项目根 `PROGRESS.md`，记录尝试、证据、失败次数与已知死胡同；不把聊天当唯一记忆。
+- 最小权限：只改授权任务必要内容，不擅动无关核心配置、migrations 或生产敏感代码。
+- 改实现前取得稳定复现且实际失败的 RED 测试；新行为先用可执行验收用例证明缺口。不得以环境/依赖故障冒充目标 Bug。
+- 修改后运行确定性测试，只有实际 `exit 0` 才能报告该测试阶段 GREEN；不推测通过，不以局部 GREEN 替代真实使用流程、Review 和 Owner 验收。纯文档使用对应检查，不虚构 RED。
+- 失败先比较预期与实际代码报错/日志，再基于证据调整。
+- 相同/高度相似方案连续失败两次立即熔断；记录两次证据与盲点，向 Owner 报告并等待人工纠偏，禁止第三次等价重试。仅继续不依赖此路线的已授权独立工作。
+
+详细规范唯一维护于设备登记的 AI Business OS 仓库 `docs/design/architecture/agent-operating-model.md`。开工先读取该规范和本项目最近的 AGENTS.md；不要复制另一套详细规则。
+<!-- AIOS-INDUSTRIAL-CONTRACT:END -->
